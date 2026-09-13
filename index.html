@@ -1,620 +1,2410 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<!doctype html>
+<html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Cup And Go POS Pro</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#071f36">
+  <title>হাইমচর নিউজ24BD</title>
+  <meta name="description" content="হাইমচর ও চাঁদপুরের সর্বশেষ সংবাদ">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="হাইমচর নিউজ24BD">
+  <meta property="og:description" content="হাইমচর ও চাঁদপুরের সর্বশেষ সংবাদ">
+  <meta property="og:image" content="">
+  <meta name="twitter:card" content="summary_large_image">
+  <link id="canonicalLink" rel="canonical" href="">
+  <link rel="sitemap" type="application/xml" href="sitemap.xml">
+  <meta property="og:url" content="">
+  <meta property="article:published_time" content="">
+  <meta property="article:modified_time" content="">
+  <script id="newsArticleSchema" type="application/ld+json">{}</script>
+  <script id="breadcrumbSchema" type="application/ld+json">{}</script>
+  <link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700;800&family=Baloo+Da+2:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&family=Noto+Serif+Bengali:wght@600;700;800;900&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root{--red:#d7192d;--navy:#071f36;--blue:#0b416e;--paper:#f3f6f8;--line:#dde5eb;--muted:#6d7b87;--card:#fff;--shadow:0 12px 30px rgba(3,20,32,.09)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:#152335;font-family:Arial,"Noto Sans Bengali",sans-serif;line-height:1.55}
+    a{text-decoration:none;color:inherit}
+    button,input{font:inherit}
+    .wrap{width:min(1180px,calc(100% - 28px));margin:auto}
+    .top{background:var(--navy);color:#dbe8f2;font-size:13px}.top .wrap{min-height:38px;display:flex;align-items:center;gap:12px}.top .right{margin-left:auto;display:flex;align-items:center;gap:12px}
+    .langSwitch{display:flex;background:#ffffff12;border:1px solid #ffffff20;border-radius:999px;padding:3px}.langSwitch button{border:0;background:transparent;color:#cfe0ec;border-radius:999px;padding:6px 9px;font-weight:800}.langSwitch button.active{background:#fff;color:var(--navy)}
+    .mast{min-height:112px;background:#fff;display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .brand{display:flex;gap:13px;align-items:center;color:var(--blue)}.mark,.logo{width:64px;height:64px;border-radius:16px;object-fit:contain}.mark{display:grid;place-items:center;background:var(--red);color:#fff;font-size:28px;font-weight:900}.brand b{font-size:31px;display:block;line-height:1.05}.brand small{color:var(--red);font-weight:900;letter-spacing:3px}
+    .live{border:1px solid #ffcbd2;color:var(--red);padding:9px 14px;border-radius:999px;font-weight:800}
+    .nav{background:#fff;border-top:1px solid var(--line);border-bottom:3px solid var(--red);position:sticky;top:0;z-index:30}.nav .wrap{display:flex;overflow:auto}.nav a{padding:13px 15px;white-space:nowrap;font-weight:800}.nav a:first-child{background:var(--red);color:#fff}
+    .breaking{background:#fff;border-bottom:1px solid var(--line)}.breaking .wrap{height:50px;display:flex;align-items:center;gap:14px;overflow:hidden}.breaking strong{background:var(--red);color:#fff;padding:13px 18px;align-self:stretch;display:flex;align-items:center}.ticker{white-space:nowrap;animation:move 18s linear infinite;font-weight:800}@keyframes move{from{transform:translateX(70vw)}to{transform:translateX(-100%)}}
+    .layout{display:grid;grid-template-columns:1fr 320px;gap:26px;padding:28px 0 56px}
+    .lead{position:relative;height:450px;border-radius:20px;overflow:hidden;background:linear-gradient(145deg,#4ba7c8,#073758);color:#fff;box-shadow:var(--shadow);cursor:pointer}.lead img{width:100%;height:100%;object-fit:cover}.lead:after{content:"";position:absolute;inset:20% 0 0;background:linear-gradient(transparent,#031522f2)}.leadText{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:30px}.tag{display:inline-block;background:var(--red);color:#fff;padding:5px 10px;border-radius:7px;font-size:13px;font-weight:800}.lead h1{font-size:37px;line-height:1.18;margin:10px 0}.lead p{margin:0;color:#deebf2;font-size:16px}
+    .heading{display:flex;justify-content:space-between;align-items:end;border-bottom:2px solid var(--navy);margin:34px 0 17px}.heading h2{margin:0;border-bottom:5px solid var(--red);padding:0 0 9px}.heading span{color:var(--muted);padding-bottom:9px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 4px 20px #0a20300a;cursor:pointer;transition:.18s}.card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.photo,.visual{width:100%;height:190px;object-fit:cover}.visual{display:grid;place-items:center;background:linear-gradient(145deg,#1681a9,#092f51);font-size:56px;color:#fff}.body{padding:16px}.body em{color:var(--red);font-style:normal;font-weight:900;font-size:13px}.body h3{margin:6px 0;font-size:19px;line-height:1.35}.body p{color:var(--muted);font-size:14px;margin:7px 0}.body small{color:#8a97a1}
+    .sidebar{display:grid;align-content:start;gap:18px}.search{display:flex;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}.search input{flex:1;min-width:0;border:0;padding:13px;outline:0}.search button{border:0;background:var(--red);color:#fff;padding:0 18px;font-weight:800}
+    .box{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}.box h2{margin:0 0 10px}.rank{display:flex;gap:12px;padding:13px 0;border-top:1px solid var(--line);cursor:pointer}.rank:first-of-type{border-top:0}.rank>strong{font-size:24px;color:#c3ccd5}.rank small{display:block;color:var(--muted)}.ad{min-height:190px;display:grid;place-items:center;text-align:center;background:#e8edf1;border:1px dashed #aab7c2;border-radius:16px;color:#506174}
+    .empty{background:#fff;padding:48px;text-align:center;border-radius:16px;color:var(--muted);grid-column:1/-1}
+    footer{background:#041522;color:#b9c7d2;padding:40px 0;text-align:center}footer b{color:#fff;font-size:23px}
+    .loading{position:fixed;inset:0;background:#fff;display:grid;place-items:center;z-index:100;font-weight:900;color:var(--blue)}
 
-<style>
-:root {
-  --brand-bg: #2D0C13; --brand-red: #4A121A; --orange: #D4AF37; --orange2: #F3E5AB; 
-  --green: #00C853; --red: #FF3B30; --blue: #007AFF;
-  --bg-gradient: linear-gradient(135deg, #2D0C13 0%, #1A070B 100%);
-  --glass-bg: rgba(74, 18, 26, 0.85); --glass-border: rgba(212, 175, 55, 0.35);
-  --text: #F9F9F9; --muted: #C5B3B6; --shadow: 0 10px 35px rgba(0,0,0,0.5);
-}
-body.theme-orange {
-  --brand-bg: #1C1C1E; --brand-red: #FF7043; --orange: #FF7043; --orange2: #FF9800;
-  --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-  --glass-bg: rgba(255, 255, 255, 0.85); --glass-border: rgba(255, 255, 255, 0.8);
-  --text: #1C1C1E; --muted: #8E8E93; --shadow: 0 10px 35px rgba(0,0,0,0.1);
-}
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
-body { background: var(--bg-gradient); background-attachment: fixed; color: var(--text); min-height: 100vh; overflow-x: hidden; }
+    .articleModal{position:fixed;inset:0;background:rgba(3,20,32,.75);z-index:80;display:grid;place-items:center;padding:18px}
+    .articleSheet{width:min(860px,100%);max-height:94vh;overflow:auto;background:#fff;border-radius:22px;box-shadow:0 30px 90px rgba(0,0,0,.35)}
+    .articleTop{position:sticky;top:0;display:flex;justify-content:flex-end;padding:12px;background:linear-gradient(#fff,#fffffff0);z-index:3}.articleTop button{width:44px;height:44px;border:0;border-radius:50%;background:#eef2f5;font-size:24px}
+    .articleHero{width:100%;max-height:430px;object-fit:cover}.articleBody{padding:12px 28px 32px}.articleBody h1{font-size:34px;line-height:1.25;margin:10px 0}.articleMeta{color:var(--muted);margin-bottom:20px}.articleContent{white-space:pre-wrap;font-size:18px;line-height:1.8}.shareRow{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}.shareRow button{border:1px solid var(--line);background:#fff;padding:10px 13px;border-radius:10px;font-weight:800}
+    .hide{display:none!important}
 
-button, input, select { font: inherit; outline: none; border: none; }
-button { cursor: pointer; transition: transform 0.1s ease; } button:active { transform: scale(0.95); }
-.hidden { display: none !important; }
-
-#intro-screen { position: fixed; inset: 0; background: var(--brand-bg); color: var(--orange); z-index: 999999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.3s ease; }
-.intro-logo { width: 90px; height: 90px; border-radius: 28px; background: rgba(212,175,55,0.1); border: 1px solid var(--orange); color: var(--orange); display: flex; align-items: center; justify-content: center; font-size: 45px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-
-#lock-screen { 
-  position: fixed; inset: 0; 
-  background: linear-gradient(135deg, #2D0C13 0%, #1A070B 100%), repeating-linear-gradient(0deg, rgba(212,175,55,0.03), rgba(212,175,55,0.03) 2px, transparent 2px, transparent 4px);
-  z-index: 100000; display: flex; flex-direction: column; align-items: center; justify-content: center; 
-}
-.lock-glass-box {
-  background: rgba(45, 12, 19, 0.75); backdrop-filter: blur(25px);
-  border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 35px;
-  padding: 35px 20px; width: 90%; max-width: 360px; text-align: center;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.7);
-}
-.pin-display { font-size: 32px; font-weight: 900; letter-spacing: 12px; margin: 15px 0 30px; color: var(--orange); height: 40px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-.dial-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 300px; width: 100%; margin: auto; }
-.dial-btn { width: 68px; height: 68px; border-radius: 50%; background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.3); font-size: 24px; font-weight: 800; color: var(--text); display: flex; align-items: center; justify-content: center; margin: auto; backdrop-filter: blur(10px); box-shadow: var(--shadow); }
-.dial-btn:active { background: var(--orange); color: var(--brand-bg); }
-
-#app-content { display: none; opacity: 0; transition: opacity 0.2s; padding-bottom: 110px; }
-#app-content.show { display: block; opacity: 1; }
-
-.top-header { background: linear-gradient(135deg, var(--brand-red), var(--brand-bg)); padding: 25px 20px 35px 20px; border-radius: 0 0 35px 35px; color: white; box-shadow: var(--shadow); position: relative; z-index: 2; border-bottom: 1px solid var(--glass-border); }
-.header-row { display: flex; justify-content: space-between; align-items: center; }
-.brand-badge { width: 48px; height: 48px; background: rgba(212,175,55,0.15); backdrop-filter: blur(10px); border-radius: 16px; border: 1px solid var(--orange); display: flex; align-items: center; justify-content: center; font-size: 24px; }
-.top-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; }
-.stat-box { background: rgba(255,255,255,0.07); backdrop-filter: blur(15px); padding: 12px 8px; border-radius: 18px; text-align: center; border: 1px solid var(--glass-border); }
-.stat-box h3 { font-size: 15px; font-weight: 800; color: var(--orange); } .stat-box span { font-size: 9px; opacity: 0.9; text-transform: uppercase; color: var(--muted); }
-
-.container { padding: 15px 20px; max-width: 600px; margin: -20px auto 0; position: relative; z-index: 10; }
-.section-title { font-size: 15px; font-weight: 800; margin: 10px 0 12px 5px; display: flex; align-items: center; gap: 8px; color: var(--orange); }
-.section-title::before { content: ""; width: 5px; height: 16px; background: var(--orange); border-radius: 10px; }
-.card, .quick-card, .product-card { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); box-shadow: var(--shadow); }
-.card { border-radius: 24px; padding: 20px; margin-bottom: 15px; }
-.quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.quick-card { border-radius: 20px; padding: 15px 10px; text-align: center; }
-.quick-icon { width: 45px; height: 45px; border-radius: 14px; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; background: rgba(212,175,55,0.1); }
-
-.bottom-nav { position: fixed; bottom: 20px; left: 20px; right: 20px; height: 75px; background: var(--glass-bg); backdrop-filter: blur(20px); border-radius: 35px; display: flex; justify-content: space-around; align-items: center; z-index: 1000; box-shadow: var(--shadow); border: 1px solid var(--glass-border); max-width: 560px; margin: auto; }
-.nav-item { flex: 1; text-align: center; background: none; color: var(--muted); font-size: 10px; font-weight: 700; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.nav-item i { font-size: 20px; } .nav-item.active { color: var(--orange); }
-.nav-scan { width: 58px; height: 58px; background: linear-gradient(135deg, var(--orange), #B38F27); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--brand-bg); font-size: 26px; box-shadow: 0 8px 20px rgba(212,175,55,0.3); transform: translateY(-15px); border: 4px solid var(--brand-bg); }
-
-body.cashier-mode .admin-only { display: none !important; }
-
-.page { display: none; } .page.active { display: block; }
-.products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 10px; }
-.product-card { border-radius: 22px; padding: 15px; text-align: center; position: relative; }
-.p-icon { width: 55px; height: 55px; margin: 0 auto 10px; background: rgba(212,175,55,0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 30px; }
-.p-price { color: var(--orange); font-weight: 800; font-size: 14px; margin-top: 5px; background: rgba(212, 175, 55, 0.15); padding: 4px 8px; border-radius: 10px; display: inline-block; }
-
-table { width: 100%; border-collapse: collapse; } th, td { padding: 14px 10px; text-align: left; border-bottom: 1px solid rgba(212,175,55,0.15); font-size: 13px; color: var(--text); } th { color: var(--orange); font-size: 10px; text-transform: uppercase; font-weight: 800; }
-.btn { border-radius: 16px; padding: 12px 16px; font-weight: 700; font-size: 13px; color: var(--text); background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); }
-.btn-primary { background: linear-gradient(135deg, var(--orange), #B38F27); color: var(--brand-bg); box-shadow: 0 6px 15px rgba(212, 175, 55, 0.25); border: none; font-weight: 800; }
-.btn-success { background: linear-gradient(135deg, #00C853, #69F0AE); color: #000; border: none; font-weight: 800; }
-.btn-delete { background: rgba(255,59,48,0.2); color: var(--red); padding: 6px 10px; border-radius: 10px; font-size: 14px; }
-
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 99999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.2s; } .modal.show { opacity: 1; pointer-events: auto; }
-.modal-box { width: 90%; max-width: 360px; background: var(--brand-bg); backdrop-filter: blur(20px); border: 1px solid var(--orange); border-radius: 28px; padding: 25px; box-shadow: 0 25px 50px rgba(0,0,0,0.5); transform: translateY(15px); transition: 0.2s; color: var(--text); } .modal.show .modal-box { transform: translateY(0); }
-.field { margin-bottom: 12px; } .field label { font-size: 12px; font-weight: 700; color: var(--orange); margin-bottom: 6px; display: block; } .field input, .field select { width: 100%; border: 1.5px solid var(--glass-border); background: rgba(255,255,255,0.05); color: var(--text); border-radius: 14px; padding: 12px; font-weight: 600; }
-
-#toast-msg { position: fixed; top: 30px; left: 50%; transform: translateX(-50%) translateY(-20px); background: var(--brand-bg); border: 1px solid var(--orange); color: var(--text); font-weight: 800; font-size: 13px; padding: 12px 24px; border-radius: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); opacity: 0; transition: 0.2s; z-index: 999999; border-left: 5px solid var(--orange); pointer-events: none; } #toast-msg.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-.invoice-wrap { background: #fff; color: #000; font-family: monospace; padding: 20px 15px; border-radius: 12px; position: relative; }
-</style><body>
-
-<div id="intro-screen">
-  <div class="intro-logo">☕</div>
-  <h2 class="dyn-shopname" style="font-size:26px;font-weight:900;margin-top:15px;letter-spacing:1px;color:var(--orange);">Cup And Go</h2>
-  <p style="opacity:0.9;font-size:12px;font-weight:700;margin-top:5px;letter-spacing:2px;color:var(--muted);">PRO EDITION v3.5</p>
-</div>
-
-<div id="toast-msg">Success!</div>
-
-<div id="custom-confirm-modal" class="modal">
-  <div class="modal-box" style="text-align:center;">
-    <div style="font-size:35px;margin-bottom:10px;">⚠️</div>
-    <h3 id="confirm-title" style="font-size:18px;font-weight:800;color:var(--orange);margin-bottom:8px;">Are you sure?</h3>
-    <p id="confirm-text" style="font-size:13px;color:var(--muted);margin-bottom:20px;"></p>
-    <div style="display:flex;gap:10px;">
-      <button class="btn" style="flex:1;border-radius:16px;" onclick="closeConfirm(false)">Cancel</button>
-      <button class="btn btn-primary" style="flex:1;border-radius:16px;" id="confirm-ok-btn">OK</button>
-    </div>
-  </div>
-</div>
-
-<div id="lock-screen" style="opacity: 0; display: none;">
-  <div class="lock-glass-box">
-    <div class="intro-logo" style="margin:auto; width:70px;height:70px;font-size:35px;border-radius:20px;animation:none;">☕</div>
-    <h2 class="dyn-shopname" style="font-size:22px;font-weight:900;margin-top:15px;color:var(--orange);">Cup And Go</h2>
-    <div class="pin-display" id="pin-dots">_ _ _ _</div>
-    <div class="dial-pad">
-      <button class="dial-btn" onclick="typePin(1)">1</button><button class="dial-btn" onclick="typePin(2)">2</button><button class="dial-btn" onclick="typePin(3)">3</button>
-      <button class="dial-btn" onclick="typePin(4)">4</button><button class="dial-btn" onclick="typePin(5)">5</button><button class="dial-btn" onclick="typePin(6)">6</button>
-      <button class="dial-btn" onclick="typePin(7)">7</button><button class="dial-btn" onclick="typePin(8)">8</button><button class="dial-btn" onclick="typePin(9)">9</button>
-      <button class="dial-btn" onclick="clearPin()" style="background:rgba(255,59,48,0.2);color:var(--red);">⌫</button>
-      <button class="dial-btn" onclick="typePin(0)">0</button>
-      <button class="dial-btn" onclick="submitPin()" style="background:linear-gradient(135deg, var(--orange), #B38F27);color:var(--brand-bg);border:none;">→</button>
-    </div>
-  </div>
-</div>
-
-<div id="app-content">
-  <div class="top-header">
-    <div class="header-row">
-      <div style="display:flex;align-items:center;gap:12px;">
-        <div class="brand-badge">☕</div>
-        <div>
-          <h4 id="live-date" style="font-size:11px;opacity:0.9;font-weight:600;color:var(--muted);"></h4>
-          <h2 class="dyn-shopname" style="font-size:18px;font-weight:900;letter-spacing:0.5px;color:var(--orange);">Cup And Go</h2>
-        </div>
-      </div>
-      <div style="display:flex;gap:8px;">
-        <span id="live-clock" style="font-size:12px;font-weight:800;background:rgba(212,175,55,0.15);padding:8px 12px;border-radius:12px;color:var(--orange);border:1px solid var(--glass-border);"></span>
-        <button class="btn" style="background:rgba(255,255,255,0.1);color:#fff;padding:8px 14px;border-radius:12px;font-weight:800;" onclick="logout()">Exit</button>
-      </div>
-    </div>
-    <div class="top-stats admin-only">
-      <div class="stat-box"><h3 id="stat-cust">0</h3><span data-i18n="cust">Customers</span></div>
-      <div class="stat-box"><h3 id="stat-active">0</h3><span data-i18n="prod">Products</span></div>
-      <div class="stat-box"><h3><span id="stat-sales">0</span> <span class="dyn-currency" style="font-size:10px;">SR</span></h3><span data-i18n="rev">Revenue</span></div>
-    </div>
-  </div>
-
-  <div class="container">
-    <section id="page-home" class="page admin-only active">
-      <div class="section-title" data-i18n="dash">Dashboard</div>
-      <div class="quick-grid">
-        <div class="quick-card" onclick="showPage('sales')"><div class="quick-icon" style="color:var(--orange);">🛒</div><span style="font-size:11px;font-weight:700;" data-i18n="menu">Menu</span></div>
-        <div class="quick-card" onclick="showPage('orders')"><div class="quick-icon" style="color:var(--blue);">🧾</div><span style="font-size:11px;font-weight:700;" data-i18n="orders">Orders</span></div>
-        <div class="quick-card" onclick="showPage('products')"><div class="quick-icon" style="color:var(--green);">📦</div><span style="font-size:11px;font-weight:700;" data-i18n="items">Items</span></div>
-        <div class="quick-card" onclick="showPage('admin')"><div class="quick-icon" style="color:var(--orange);">⚙️</div><span style="font-size:11px;font-weight:700;" data-i18n="admin">Admin</span></div>
-      </div>
-    </section>
-
-    <section id="page-sales" class="page">
-      <h3 style="margin-bottom:12px;font-size:16px;font-weight:800;color:var(--orange);" data-i18n="pos_title">Point of Sale <span id="cashier-indicator" style="font-size:11px;color:var(--muted);float:right;margin-top:4px;"></span></h3>
-      <div class="products-grid" id="pos-products"></div>
-      <div class="card" style="margin-top:20px;border:2px solid var(--orange);">
-        <h4 style="margin-bottom:10px;font-size:14px;color:var(--orange);" data-i18n="cart">🛒 Current Cart</h4>
-        <div id="cart-list" style="max-height:180px;overflow:auto;margin-bottom:15px;padding-right:5px;" data-i18n="cart_empty">Cart is empty</div>
-        
-        <div style="display:flex;gap:10px;align-items:center;margin-bottom:15px;background:rgba(212,175,55,0.05);padding:8px 12px;border-radius:12px;border:1px solid var(--glass-border);">
-          <span style="font-size:12px;font-weight:700;color:var(--orange);">🏷️ Discount (%):</span>
-          <input type="number" id="cart-discount" value="0" min="0" max="100" oninput="updateCart()" style="width:70px;padding:6px;border-radius:8px;background:rgba(255,255,255,0.1);color:var(--text);text-align:center;font-weight:bold;">
-        </div>
-
-        <div style="display:flex;justify-content:space-between;font-weight:900;font-size:18px;margin-bottom:15px;border-top:1px dashed rgba(212,175,55,0.3);padding-top:10px;">
-          <span data-i18n="total_vat">Total (+VAT):</span>
-          <span><span id="cart-total" style="color:var(--orange);">0.00</span> <span class="dyn-currency" style="font-size:12px;">SR</span></span>
-        </div>
-        <div style="display:flex;gap:10px;margin-bottom:10px;">
-          <button class="btn btn-primary" style="flex:1;border-radius:20px;font-size:14px;" onclick="completeSale('Cash')" data-i18n="cash">💵 Cash</button>
-          <button class="btn btn-success" style="flex:1;border-radius:20px;font-size:14px;" onclick="completeSale('Card')" data-i18n="card">💳 Card</button>
-        </div>
-        <button class="btn" style="width:100%;background:rgba(255,59,48,0.2);color:var(--red);border-radius:20px;font-size:13px;" onclick="confirmAction('Clear Cart?', 'Are you sure you want to empty the cart?', ()=> { cart = []; updateCart(); showToast('Cart cleared!'); })" data-i18n="clear_cart">Clear Cart</button>
-      </div>
-    </section>
-
-    <section id="page-orders" class="page">
-      <h3 style="margin-bottom:12px;font-size:16px;font-weight:800;color:var(--orange);" data-i18n="trans">Transactions</h3>
-      <div class="card" style="padding:0;overflow:hidden;">
-        <table><thead><tr><th data-i18n="th_inv">Inv No</th><th data-i18n="th_time">Time</th><th data-i18n="th_total">Total</th><th style="text-align:right;" data-i18n="th_act">Action</th></tr></thead><tbody id="orders-table"></tbody></table>
-      </div>
-    </section>
-
-    <section id="page-products" class="page admin-only">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <h3 style="font-size:16px;font-weight:800;color:var(--orange);" data-i18n="item_mgmt">Item Management</h3>
-        <button class="btn btn-primary" style="padding:8px 16px;border-radius:50px;" onclick="openModal('p-modal')" data-i18n="new_item">+ New Item</button>
-      </div>
-      <div class="card" style="padding:0;overflow:hidden;">
-        <table><thead><tr><th data-i18n="th_name">Item Name</th><th data-i18n="th_price">Price</th><th style="text-align:right;" data-i18n="th_act">Action</th></tr></thead><tbody id="products-table"></tbody></table>
-      </div>
-    </section>
-
-    <section id="page-admin" class="page admin-only">
-      <h3 style="margin-bottom:12px;font-size:16px;font-weight:800;color:var(--orange);" data-i18n="admin_dash">Admin Dashboard</h3>
-      
-      <div class="card" style="border-left: 4px solid var(--orange);">
-        <h4 style="font-size:14px;font-weight:800;margin-bottom:10px;color:var(--orange);" data-i18n="sec_set">⚙️ Security & Customization</h4>
-        <div class="field"><label data-i18n="lbl_shop">Shop Name</label><input type="text" id="set-name"></div>
-        <div style="display:flex;gap:10px;">
-          <div class="field" style="flex:1;"><label data-i18n="lbl_curr">Currency</label><input type="text" id="set-curr"></div>
-          <div class="field" style="flex:1;"><label data-i18n="lbl_vat">VAT (%)</label><input type="number" id="set-vat"></div>
-        </div>
-        <div style="display:flex;gap:10px;">
-          <div class="field" style="flex:1;">
-            <label data-i18n="lbl_theme">🎨 Theme Style</label>
-            <select id="set-theme" onchange="changeThemeLive(this.value)">
-              <option value="maroon">Poster Maroon & Gold</option>
-              <option value="orange">Classic Orange & Glass</option>
-            </select>
-          </div>
-          <div class="field" style="flex:1;">
-            <label data-i18n="lbl_lang">🌐 Language / اللغة</label>
-            <select id="set-lang" onchange="changeLangLive(this.value)">
-              <option value="en">English</option>
-              <option value="ar">العربية (Arabic)</option>
-            </select>
-          </div>
-        </div>
-        <div style="border-top:1px dashed var(--glass-border); padding-top:10px; margin-top:5px;">
-          <div style="display:flex;gap:10px;">
-            <div class="field" style="flex:1;"><label data-i18n="lbl_apin">Admin PIN</label><input type="number" id="set-admin-pin" placeholder="1234"></div>
-            <div class="field" style="flex:1;"><label data-i18n="lbl_cpin">Cashier PIN</label><input type="number" id="set-cashier-pin" placeholder="0000"></div>
-          </div>
-          <div class="field"><label data-i18n="lbl_cname">Active Cashier Name (Duty Staff)</label><input type="text" id="set-cashier-name" placeholder="Enter Cashier Name"></div>
-        </div>
-        <button class="btn btn-primary" style="width:100%;border-radius:15px;margin-top:5px;" onclick="saveSettings()" data-i18n="btn_save">💾 Save Settings</button>
-      </div>
-
-      <div class="card" style="border-left: 4px solid var(--blue);">
-        <h4 style="font-size:14px;font-weight:800;margin-bottom:8px;color:var(--orange);">ℹ️ About Cup And Go POS Pro</h4>
-        <p style="font-size:12px;color:var(--muted);line-height:1.6;">
-          Cup And Go POS Pro is an advanced point of sale system designed specifically for premium coffee shops and cafes. Built for fast billing, instant barcode receipt generation, and multi-staff cashier control.<br>
-          <b>Version:</b> 3.5 Pro Edition | <b>Lead Developer:</b> Mohammed Ashik (Cup & Go Tech Team).
-        </p>
-      </div>
-
-      <div class="card" style="background:linear-gradient(135deg, rgba(212,175,55,0.08), transparent);">
-        <h4 style="color:var(--orange);font-size:14px;margin-bottom:10px;font-weight:800;" data-i18n="tod_rev">🔥 Today's Overview</h4>
-        <div style="display:flex;justify-content:space-between;margin-bottom:15px;">
-          <div><span style="font-size:11px;color:var(--muted);" data-i18n="tot_ord">Total Orders</span><br><b id="admin-orders-rpt" style="font-size:18px;">0</b></div>
-          <div style="text-align:right;"><span style="font-size:11px;color:var(--muted);" data-i18n="gross_rev">Gross Revenue</span><br><b style="font-size:18px;color:var(--orange);"><span id="admin-rev">0.00</span> <span class="dyn-currency" style="font-size:12px;">SR</span></b></div>
-        </div>
-        <button class="btn btn-primary" style="width:100%;border-radius:20px;" onclick="generateDayClosePDF()" data-i18n="dl_rep">📥 Download Daily Report</button>
-      </div>
-
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
-          <h4 style="font-size:14px;font-weight:800;color:var(--orange);" data-i18n="hist_title">📅 Sales History & Reports</h4>
-          <input type="text" id="date-search" placeholder="Search Date" oninput="filterHistory()" style="padding:8px 12px;font-size:12px;width:120px;background:rgba(255,255,255,0.05);border-radius:50px;border:1px solid var(--glass-border);color:var(--text);">
-        </div>
-        <div style="max-height:220px;overflow:auto;">
-          <table><thead><tr><th data-i18n="th_date">Date</th><th data-i18n="th_orders">Orders</th><th data-i18n="th_rev">Revenue</th></tr></thead><tbody id="history-table"></tbody></table>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <nav class="bottom-nav">
-    <button class="nav-item admin-only active" onclick="showPage('home')"><i>🏠</i><span data-i18n="nav_home">Home</span></button>
-    <button class="nav-item" onclick="showPage('sales')"><i>🛒</i><span data-i18n="nav_menu">Menu</span></button>
-    <button class="nav-scan" onclick="showPage('sales')">☕</button>
-    <button class="nav-item" onclick="showPage('orders')"><i>🧾</i><span data-i18n="nav_orders">Orders</span></button>
-    <button class="nav-item admin-only" onclick="showPage('products')"><i>📦</i><span data-i18n="nav_items">Items</span></button>
-    <button class="nav-item admin-only" onclick="showPage('admin')"><i>⚙️</i><span data-i18n="nav_admin">Admin</span></button>
-  </nav>
-</div>
+    @media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{grid-template-columns:1fr 1fr}.box{grid-row:span 2}}
+    @media(max-width:620px){
+      .wrap{width:min(100% - 20px,1180px)}.top .wrap{font-size:11px}.mast{min-height:86px}.mark,.logo{width:48px;height:48px;border-radius:13px}.brand b{font-size:21px}.brand small{font-size:9px}.live{display:none}
+      .lead{height:395px;border-radius:16px}.lead h1{font-size:27px}.leadText{padding:22px}
+      .grid{grid-template-columns:1fr}.card{display:grid;grid-template-columns:125px 1fr}.photo,.visual{height:100%;min-height:150px}.body p{display:none}.body h3{font-size:17px}
+      .sidebar{display:grid;grid-template-columns:1fr}.box{grid-row:auto}.articleModal{padding:7px}.articleSheet{max-height:98vh;border-radius:17px}.articleBody{padding:8px 18px 26px}.articleBody h1{font-size:27px}.articleContent{font-size:17px}
+    }
   
-</head><div id="p-modal" class="modal">
-  <div class="modal-box">
-    <h3 style="margin-bottom:15px;font-size:18px;font-weight:800;color:var(--orange);" data-i18n="create_item">Create Item</h3>
-    <div class="field"><label data-i18n="lbl_iname">Item Name</label><input type="text" id="inp-name" placeholder="e.g. Spanish Latte"></div>
-    <div class="field"><label data-i18n="lbl_iprice">Price (<span class="dyn-currency">SR</span>)</label><input type="number" id="inp-price" placeholder="18"></div>
-    <div class="field"><label data-i18n="lbl_iicon">Emoji or Image Link</label><input type="text" id="inp-icon" value="☕"></div>
-    <div style="display:flex;justify-content:space-between;gap:10px;margin-top:20px;">
-      <button class="btn" style="flex:1;" onclick="closeModal('p-modal')" data-i18n="btn_can">Cancel</button>
-      <button class="btn btn-primary" style="flex:1;" onclick="saveProduct()" data-i18n="btn_sav">Save</button>
-    </div>
-  </div>
-</div>
-
-<div id="order-detail-modal" class="modal">
-  <div class="modal-box" style="background:#fff;padding:15px;color:#000;">
-    <div class="invoice-wrap" id="receipt-content">
-      <div style="text-align:center;margin-bottom:12px;">
-        <h3 class="dyn-shopname" style="font-size:18px;font-weight:900;text-transform:uppercase;">Cup And Go</h3>
-        <p style="font-size:10px;line-height:1.4;">حفرالباطن - حي المحمدية<br>Saudi Arabia<br>0554998306</p>
-        <p style="font-size:12px;font-weight:bold;margin-top:8px;border-top:1px solid #000;padding-top:5px;">فاتورة ضريبية مبسطة<br>Simplified Tax Invoice</p>
-      </div>
-      <div style="border-bottom:1px dashed #000;padding-bottom:8px;margin-bottom:10px;font-size:11px;line-height:1.6;">
-        <div style="display:flex;justify-content:space-between;"><span>Inv No: <b id="rcpt-inv"></b></span><span>رقم الفاتورة</span></div>
-        <div style="display:flex;justify-content:space-between;"><span>Date: <span id="rcpt-date"></span></span><span>تاريخ الفاتورة</span></div>
-        <div style="display:flex;justify-content:space-between;"><span>Cashier: <span id="rcpt-cashier-print">Ashiq</span></span><span>أمين الصندوق</span></div>
-      </div>
-      <table style="width:100%;font-size:11px;margin-bottom:10px;border-bottom:1px solid #000;">
-        <thead><tr style="border-bottom:1px solid #000;"><th style="padding:4px 0;color:#000;">Item</th><th style="text-align:center;color:#000;">Qty</th><th style="text-align:right;color:#000;">Amt</th></tr></thead>
-        <tbody id="rcpt-items"></tbody>
-      </table>
-      <div style="font-size:11px;font-weight:bold;display:flex;justify-content:space-between;padding:5px 0;"><span>Total Due:</span><span><span id="rcpt-due" style="font-size:14px;"></span> <span class="dyn-currency" style="font-size:9px;">SR</span></span></div>
-      <div style="font-size:10px;display:flex;justify-content:space-between;margin-bottom:10px;color:#333;"><span id="rcpt-method">CARD</span><span id="rcpt-paid">PAID</span></div>
-      <div style="text-align:center; margin-top:10px; font-family:monospace; font-size:16px; letter-spacing:3px;">|||||| ||||| |||||||</div>
-      <div style="text-align:center; margin-top:15px; padding-top:10px; border-top:1px dashed #000;">
-        <p style="font-size:12px; font-weight:bold; margin-bottom:4px;">Thank you for your visit!</p>
-        <p style="font-size:14px; font-weight:bold;">شكراً لزيارتكم!</p>
-      </div>
-    </div>
-    <div style="display:flex;gap:10px;margin-top:15px;">
-      <button class="btn btn-primary" style="flex:1;border-radius:16px;" onclick="downloadReceiptPDF()" data-i18n="btn_dl">📥 Download</button>
-      <button class="btn" style="background:var(--border);color:var(--text);flex:1;border-radius:16px;" onclick="closeModal('order-detail-modal')" data-i18n="btn_close">Close</button>
-    </div>
-  </div>
-</div>
-
-<div id="pdf-container" class="hidden">
-  <div id="pdf-report" style="width:3.15in; padding:15px; background:#fff; color:#000; font-family:monospace; font-size:11px;">
-    <h2 class="dyn-shopname" style="text-align:center; font-size:16px; font-weight:900; margin-bottom:4px; text-transform:uppercase;">Cup And Go</h2>
-    <p style="text-align:center; font-size:10px; color:#555; margin-bottom:15px;">Daily Sales Report & Summary</p>
-    <div style="border-bottom:1px dashed #000; margin-bottom:10px; padding-bottom:5px;">
-      <span>Date: <span id="pdf-date-print"></span></span>
-    </div>
-    <table style="width:100%; border-collapse:collapse; margin-bottom:15px;">
-      <thead>
-        <tr style="border-bottom:1px solid #000;">
-          <th style="padding:4px 0; color:#000; text-align:left;">Item</th>
-          <th style="padding:4px 0; color:#000; text-align:center;">Qty</th>
-          <th style="padding:4px 0; color:#000; text-align:right;">Amt</th>
-        </tr>
-      </thead>
-      <tbody id="pdf-items"></tbody>
-    </table>
-    <div style="border-top:1px solid #000; padding-top:8px; text-align:right; font-weight:bold; font-size:13px;">
-      <span id="pdf-total"></span> <span class="dyn-currency">SR</span>
-    </div>
-  </div>
-</div>
-
-<script>
-  const translations = {
-    en: {
-      cust: "Customers", prod: "Products", rev: "Revenue", dash: "Dashboard",
-      menu: "Menu", orders: "Orders", items: "Items", admin: "Admin",
-      pos_title: "Point of Sale", cart: "🛒 Current Cart", cart_empty: "Cart is empty",
-      total_vat: "Total (+VAT):", cash: "💵 Cash", card: "💳 Card", clear_cart: "Clear Cart",
-      trans: "Transactions", item_mgmt: "Item Management", new_item: "+ New Item",
-      admin_dash: "Admin Dashboard", sec_set: "⚙️ Security & Customization",
-      lbl_shop: "Shop Name", lbl_curr: "Currency", lbl_vat: "VAT (%)", lbl_theme: "🎨 Theme Style",
-      lbl_lang: "🌐 Language / اللغة", lbl_apin: "Admin PIN", lbl_cpin: "Cashier PIN", lbl_cname: "Active Cashier Name (Duty Staff)",
-      btn_save: "💾 Save Settings", tod_rev: "🔥 Today's Overview", tot_ord: "Total Orders", gross_rev: "Gross Revenue", dl_rep: "📥 Download Daily Report",
-      hist_title: "📅 Sales History & Reports", th_date: "Date", th_orders: "Orders", th_rev: "Revenue",
-      nav_home: "Home", nav_menu: "Menu", nav_orders: "Orders", nav_items: "Items", nav_admin: "Admin",
-      create_item: "Create Item", lbl_iname: "Item Name", lbl_iprice: "Price", lbl_iicon: "Emoji or Image Link",
-      btn_can: "Cancel", btn_sav: "Save", btn_dl: "📥 Download", btn_close: "Close",
-      th_inv: "Inv No", th_time: "Time", th_total: "Total", th_act: "Action", th_name: "Item Name", th_price: "Price"
-    },
-    ar: {
-      cust: "العملاء", prod: "المنتجات", rev: "الإيرادات", dash: "لوحة القيادة",
-      menu: "القائمة", orders: "الطلبات", items: "الأصناف", admin: "الإدارة",
-      pos_title: "نقطة البيع", cart: "🛒 السلة الحالية", cart_empty: "السلة فارغة",
-      total_vat: "الإجمالي (شامل الضريبة):", cash: "💵 نقداً", card: "💳 شبكة", clear_cart: "إفراغ السلة",
-      trans: "المعاملات", item_mgmt: "إدارة الأصناف", new_item: "+ صنف جديد",
-      admin_dash: "لوحة تحكم المشرف", sec_set: "⚙️ الأمان والتخصيص",
-      lbl_shop: "اسم المحل", lbl_curr: "العملة", lbl_vat: "ضريبة القيمة المضافة (%)", lbl_theme: "🎨 تصميم الثيم",
-      lbl_lang: "🌐 اللغة / Language", lbl_apin: "رقم المشرف السري", lbl_cpin: "رقم الكاشير السري", lbl_cname: "اسم الكاشير المناوب",
-      btn_save: "💾 حفظ الإعدادات", tod_rev: "🔥 ملخص اليوم", tot_ord: "إجمالي الطلبات", gross_rev: "إجمالي الإيرادات", dl_rep: "📥 تحميل التقرير اليومي",
-      hist_title: "📅 سجل المبيعات والتقارير", th_date: "التاريخ", th_orders: "الطلبات", th_rev: "الإيرادات",
-      nav_home: "الرئيسية", nav_menu: "القائمة", nav_orders: "الطلبات", nav_items: "الأصناف", nav_admin: "الإدارة",
-      create_item: "إنشاء صنف", lbl_iname: "اسم الصنف", lbl_iprice: "السعر", lbl_iicon: "رمز تعبيري أو رابط",
-      btn_can: "إلغاء", btn_sav: "حفظ", btn_dl: "📥 تحميل", btn_close: "إغلاق",
-      th_inv: "رقم الفاتورة", th_time: "الوقت", th_total: "الإجمالي", th_act: "الإجراء", th_name: "اسم الصنف", th_price: "السعر"
+    /* v3: mobile polish + stable ticker */
+    .tickerWindow{flex:1;min-width:0;overflow:hidden}
+    .tickerWindow .ticker{display:inline-block;animation:move 18s linear infinite}
+    .brokenImage{display:none!important}
+    @media(max-width:620px){
+      .top .wrap{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:8px!important}
+      .top .right{margin-left:0!important;gap:7px!important}
+      .top .langSwitch{display:flex!important;flex-shrink:0}
+      .top .langSwitch button{padding:5px 7px!important;font-size:10px}
+      .top .right>a{font-size:11px;white-space:nowrap}
+      .brand{min-width:0}.brand b{white-space:nowrap}
+      .nav .wrap{scrollbar-width:none}.nav .wrap::-webkit-scrollbar{display:none}
+      .nav a{font-size:16px!important;padding:12px 14px!important}
+      .breaking .wrap{height:46px!important;gap:0!important}
+      .breaking strong{flex:0 0 auto;padding:0 13px!important;font-size:13px!important;z-index:2}
+      .tickerWindow{padding-left:12px}
+      .tickerWindow .ticker{font-size:14px}
+      .lead{margin-top:18px}
     }
-  };
 
-  let appSettings = JSON.parse(localStorage.getItem('cng_settings')) || { shopName: "Cup And Go", currency: "SR", vatRate: 15, cashierName: "Ashiq", adminPin: "1234", cashierPin: "0000", theme: "maroon", lang: "en" };
-  let products = JSON.parse(localStorage.getItem('cng_products')) || [{id:1, name:'Ice V60', price:15, icon:'☕'},{id:2, name:'Matcha Latte', price:18, icon:'🍵'}];
-  let orders = JSON.parse(localStorage.getItem('cng_orders')) || [];
-  let totalSales = parseFloat(localStorage.getItem('cng_totalSales')) || 0;
-  let history30Days = JSON.parse(localStorage.getItem('cng_history')) || [];
-  let cart = []; let currentLoginRole = null; 
-  let pendingAction = null;
+    /* v4 professional portal sections */
+    .dateLine{color:#dbe8f2;font-weight:700}
+    .categorySection{margin-top:34px}
+    .categoryHead{display:flex;align-items:end;justify-content:space-between;border-bottom:2px solid var(--navy);margin-bottom:15px}
+    .categoryHead h2{margin:0;border-bottom:5px solid var(--red);padding-bottom:8px}
+    .categoryGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+    .miniCard{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer}
+    .miniCard img{width:100%;height:140px;object-fit:cover}.miniCard .miniBody{padding:12px}.miniCard h3{margin:4px 0;font-size:17px;line-height:1.35}
+    footer{text-align:left!important}.footerGrid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:28px}.footerGrid h3{color:#fff;margin-top:0}.footerGrid p{margin:6px 0}.footerLinks a{display:block;color:#d5e1e8;margin:7px 0}.copyright{border-top:1px solid #ffffff18;margin-top:25px;padding-top:18px;text-align:center}
+    .footerMeta b{font-size:inherit;color:#fff}
+    @media(max-width:850px){.categoryGrid{grid-template-columns:1fr 1fr}.footerGrid{grid-template-columns:1fr 1fr}}
+    @media(max-width:620px){.categoryGrid{grid-template-columns:1fr}.footerGrid{grid-template-columns:1fr}.top .wrap{align-items:center}.dateLine{font-size:10px}}
 
-  function applySettingsToUI() {
-    document.querySelectorAll('.dyn-shopname').forEach(el => el.innerText = appSettings.shopName);
-    document.querySelectorAll('.dyn-currency').forEach(el => el.innerText = appSettings.currency);
-    safeSet('cart-vat-label', 'innerText', appSettings.vatRate);
-    safeSet('set-name', 'value', appSettings.shopName); safeSet('set-curr', 'value', appSettings.currency);
-    safeSet('set-vat', 'value', appSettings.vatRate); safeSet('set-cashier-name', 'value', appSettings.cashierName);
-    safeSet('set-admin-pin', 'value', appSettings.adminPin); safeSet('set-cashier-pin', 'value', appSettings.cashierPin);
-    safeSet('set-theme', 'value', appSettings.theme || 'maroon');
-    safeSet('set-lang', 'value', appSettings.lang || 'en');
-    changeThemeLive(appSettings.theme || 'maroon');
-    changeLangLive(appSettings.lang || 'en');
-  }
+    /* v5 — intro, 3-image article gallery, ad banner, related news */
+    .introSplash{position:fixed;inset:0;background:linear-gradient(145deg,#03131f,#0b416e);z-index:300;display:grid;place-items:center;color:#fff;transition:.5s}
+    .introSplash.hideIntro{opacity:0;pointer-events:none}
+    .introInner{text-align:center;padding:24px}.introLogo{width:86px;height:86px;margin:auto;border-radius:22px;display:grid;place-items:center;background:var(--red);font-size:36px;font-weight:900;overflow:hidden}
+    .introLogo img{width:100%;height:100%;object-fit:contain}.introInner h1{margin:18px 0 5px;font-size:32px}.introInner p{margin:0;color:#d6e2ea}
+    .adBanner{display:block;margin:22px auto 0;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);background:#fff;border:1px solid var(--line)}
+    .adBanner img{display:block;width:100%;max-height:210px;object-fit:cover}.adLabel{font-size:11px;color:var(--muted);padding:5px 9px;background:#fff}
+    .articleGallery{display:grid;gap:14px;margin:18px 0}.articleGallery img{width:100%;height:auto;max-height:none;border-radius:14px;display:block}
+    .relatedBox{margin-top:30px;padding-top:20px;border-top:2px solid var(--line)}.relatedBox h3{font-size:22px}.relatedList{display:grid;gap:10px}.relatedItem{padding:12px;border:1px solid var(--line);border-radius:12px;cursor:pointer;background:#fff}
+    @media(max-width:620px){.introInner h1{font-size:27px}.adBanner{border-radius:12px}.articleGallery{gap:10px}}
 
-  function changeThemeLive(theme) {
-    if(theme === 'orange') { document.body.classList.add('theme-orange'); } else { document.body.classList.remove('theme-orange'); }
-  }
+    /* v6 — premium Bengali editorial theme */
+    :root{--headline:"Noto Serif Bengali","Hind Siliguri",serif}
+    body{font-family:"Hind Siliguri",Arial,sans-serif}
+    .brand b,.lead h1,.heading h2,.categoryHead h2,.articleBody h1,.box h2{font-family:var(--headline);font-weight:800}
+    .headlineBoard{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#b80f22,#e21b32);color:#fff;padding:8px 13px;border-radius:10px;box-shadow:0 8px 20px rgba(215,25,45,.22);font-weight:900;letter-spacing:.2px}
+    .lead .headlineBoard{margin-bottom:10px}
+    .themePublic{width:36px;height:36px;border-radius:50%;border:1px solid #ffffff25;background:#ffffff12;color:#fff;display:grid;place-items:center}
+    [data-theme="dark"]{--paper:#0b131a;--card:#111c25;--line:#263643;--muted:#99a9b6}
+    [data-theme="dark"] body{background:var(--paper);color:#e8eef3}
+    [data-theme="dark"] .mast,[data-theme="dark"] .nav,[data-theme="dark"] .breaking,[data-theme="dark"] .card,[data-theme="dark"] .box,[data-theme="dark"] .search,[data-theme="dark"] .miniCard,[data-theme="dark"] .articleSheet{background:var(--card);color:#e8eef3}
+    [data-theme="dark"] .search input{background:var(--card);color:#e8eef3}
+    [data-theme="dark"] .articleTop{background:linear-gradient(var(--card),rgba(17,28,37,.94))}
+    [data-theme="dark"] .articleTop button{background:#1d2a34;color:#fff}
+    .lead h1{font-size:39px}
+    .body h3,.miniCard h3{font-family:var(--headline);font-weight:800}
+    .introSplash{background:
+      radial-gradient(circle at 20% 20%,rgba(31,109,161,.45),transparent 34%),
+      linear-gradient(145deg,#02111d,#0b3558)}
+    .introInner h1{font-family:var(--headline);font-weight:800}
+    .introKicker{display:inline-block;margin-top:12px;padding:6px 10px;border:1px solid #ffffff25;border-radius:999px;font-size:12px;color:#d8e7f1}
+    @media(max-width:620px){
+      .lead h1{font-size:29px}
+      .headlineBoard{padding:7px 10px;border-radius:8px;font-size:13px}
+      .brand b{font-size:23px!important}
+    }
 
-  function changeLangLive(lang) {
-    appSettings.lang = lang;
-    let dict = translations[lang] || translations.en;
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      let key = el.getAttribute('data-i18n');
-      if(dict[key]) { el.innerHTML = dict[key]; }
-    });
-    if(lang === 'ar') { document.documentElement.setAttribute('dir', 'rtl'); } else { document.documentElement.setAttribute('dir', 'ltr'); }
-  }
+    /* v7 — automatic lead-news carousel */
+    .leadCarousel{position:relative;height:450px;border-radius:20px;overflow:hidden;background:#073758;box-shadow:var(--shadow)}
+    .leadTrack{display:flex;height:100%;transition:transform .65s cubic-bezier(.22,.61,.36,1);will-change:transform}
+    .leadSlide{position:relative;min-width:100%;height:100%;color:#fff;cursor:pointer;background:linear-gradient(145deg,#4ba7c8,#073758)}
+    .leadSlide img{width:100%;height:100%;object-fit:cover;display:block}
+    .leadSlide:after{content:"";position:absolute;inset:22% 0 0;background:linear-gradient(transparent,#031522ef)}
+    .leadSlide .leadText{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:30px}
+    .leadSlide h1{font-family:var(--headline);font-size:39px;line-height:1.18;margin:10px 0;font-weight:800}
+    .leadSlide p{margin:0;color:#deebf2;font-size:16px}
+    .carouselDots{position:absolute;z-index:4;right:20px;bottom:18px;display:flex;gap:7px}
+    .carouselDots button{width:9px;height:9px;border:0;border-radius:999px;background:#ffffff7a;padding:0;transition:.25s}
+    .carouselDots button.active{width:26px;background:#fff}
+    .carouselArrow{position:absolute;z-index:4;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid #ffffff44;border-radius:50%;background:#06192788;color:#fff;font-size:24px;display:grid;place-items:center;backdrop-filter:blur(4px)}
+    .carouselArrow.prev{left:14px}.carouselArrow.next{right:14px}
+    @media(max-width:620px){
+      .leadCarousel{height:395px;border-radius:16px;margin-top:18px}
+      .leadSlide .leadText{padding:22px}
+      .leadSlide h1{font-size:29px}
+      .carouselArrow{width:38px;height:38px;font-size:21px}
+      .carouselDots{right:15px;bottom:13px}
+    }
 
-  function saveData() { 
-    localStorage.setItem('cng_settings', JSON.stringify(appSettings));
-    localStorage.setItem('cng_products', JSON.stringify(products)); 
-    localStorage.setItem('cng_orders', JSON.stringify(orders)); 
-    localStorage.setItem('cng_totalSales', totalSales); 
-    localStorage.setItem('cng_history', JSON.stringify(history30Days));
-  }
+    /* v8 — direct article page + centered masthead + SutonnyMJ-first */
+    html,body,button,input,select,textarea{
+      font-family:"Hind Siliguri","Noto Sans Bengali",Arial,sans-serif!important;
+    }
+    .brand b,.leadSlide h1,.heading h2,.categoryHead h2,.articleBody h1,.box h2,
+    .body h3,.miniCard h3,.headlineBoard{
+      font-family:"Hind Siliguri","Noto Sans Bengali",Arial,sans-serif!important;
+    }
+    .brand b,.leadSlide h1,.heading h2,.categoryHead h2,.articleBody h1,
+    .body h3,.miniCard h3,.headlineBoard{font-weight:900!important}
 
-  window.onload = function() {
-    applySettingsToUI(); 
-    initUI(); 
-    updateHistory();
-    
-    setTimeout(() => {
-      let intro = document.getElementById('intro-screen');
-      let lock = document.getElementById('lock-screen');
-      if(intro) {
-        intro.style.display = 'none';
+    .mast{position:relative;justify-content:center!important}
+    .mast .brand{position:absolute;left:50%;transform:translateX(-50%);justify-content:center;text-align:center}
+    .mast .live{position:absolute;right:0}
+    .brand span:last-child{display:block;text-align:center}
+    .brand b{white-space:nowrap}
+
+    .articlePage{display:none}
+    .articlePage.active{display:block}
+    .articlePageWrap{width:min(920px,calc(100% - 28px));margin:28px auto 60px}
+    .articlePageCard{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
+    [data-theme="dark"] .articlePageCard{background:var(--card);color:#e8eef3}
+    .articlePageTop{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:inherit;z-index:5}
+    .backBtn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 14px;font-weight:900}
+    [data-theme="dark"] .backBtn{background:#18242e;color:#fff}
+    .articlePageBody{padding:24px 28px 34px}
+    .articlePageBody h1{font-size:38px;line-height:1.28;margin:12px 0;font-weight:900}
+    .articlePageBody .articleMeta{font-size:15px}
+    .articlePageBody .articleContent{font-size:19px;line-height:1.9;white-space:pre-wrap}
+    .articlePageBody .articleGallery{margin:22px 0}
+    .headlineBoard{font-weight:900!important}
+
+    @media(max-width:620px){
+      .mast{min-height:90px}
+      .mast .brand{max-width:72%;left:50%;transform:translateX(-50%)}
+      .mast .live{display:none}
+      .brand b{font-size:22px!important}
+      .articlePageWrap{width:min(100% - 14px,920px);margin:10px auto 30px}
+      .articlePageCard{border-radius:16px}
+      .articlePageBody{padding:18px}
+      .articlePageBody h1{font-size:30px}
+      .articlePageBody .articleContent{font-size:18px;line-height:1.85}
+    }
+
+    /* v9 — professional news-photo hierarchy */
+    .grid{align-items:stretch}
+    .card{min-width:0}
+    .card.heroLatest{
+      grid-column:1/-1;
+      display:grid;
+      grid-template-columns:minmax(0,1.35fr) minmax(260px,.85fr);
+      min-height:310px;
+    }
+    .card.heroLatest .photo,.card.heroLatest .visual{
+      height:100%;
+      min-height:310px;
+    }
+    .card.heroLatest .body{
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .card.heroLatest .body h3{
+      font-size:28px;
+      line-height:1.3;
+      margin:10px 0;
+    }
+    .card.heroLatest .body p{
+      font-size:16px;
+      display:block;
+    }
+
+    .card.compactLatest{
+      display:grid;
+      grid-template-columns:145px 1fr;
+      min-height:145px;
+    }
+    .card.compactLatest .photo,.card.compactLatest .visual{
+      height:100%;
+      min-height:145px;
+    }
+    .card.compactLatest .body{padding:13px}
+    .card.compactLatest .body h3{font-size:17px}
+    .card.compactLatest .body p{display:none}
+
+    .categoryGrid{
+      grid-template-columns:minmax(0,1.45fr) minmax(230px,.85fr)!important;
+      grid-auto-rows:minmax(145px,auto);
+      align-items:stretch;
+    }
+    .miniCard.categoryMain{
+      grid-row:span 2;
+      display:flex;
+      flex-direction:column;
+    }
+    .miniCard.categoryMain img{
+      height:300px;
+      object-fit:cover;
+    }
+    .miniCard.categoryMain .miniBody{padding:16px}
+    .miniCard.categoryMain h3{
+      font-size:23px;
+      line-height:1.35;
+      font-weight:900;
+    }
+    .miniCard.categorySmall{
+      display:grid;
+      grid-template-columns:120px 1fr;
+      min-height:145px;
+    }
+    .miniCard.categorySmall img{
+      width:120px;
+      height:100%;
+      min-height:145px;
+      object-fit:cover;
+    }
+    .miniCard.categorySmall .miniBody{
+      padding:12px;
+      align-self:center;
+    }
+    .miniCard.categorySmall h3{
+      font-size:16px;
+      line-height:1.35;
+    }
+
+    /* Keep every crop clean without stretching */
+    .photo,.miniCard img,.leadSlide img{
+      object-fit:cover;
+      object-position:center;
+    }
+
+    @media(max-width:850px){
+      .card.heroLatest{
+        grid-template-columns:minmax(0,1.2fr) minmax(230px,.8fr);
       }
-      if(lock) {
-        lock.style.display = 'flex';
-        lock.style.opacity = '1';
+      .categoryGrid{
+        grid-template-columns:minmax(0,1.25fr) minmax(210px,.75fr)!important;
       }
-    }, 800);
-  };
+    }
 
-  function safeSet(id, prop, val) { let el = document.getElementById(id); if(el) el[prop] = val; }
-  function showToast(msg) { let t = document.getElementById('toast-msg'); if(!t) return; t.innerText=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 1500); }
-  function openModal(id) { let m = document.getElementById(id); if(!m) return; m.classList.remove('hidden'); setTimeout(()=>m.classList.add('show'), 10); }
-  function closeModal(id) { let m = document.getElementById(id); if(!m) return; m.classList.remove('show'); setTimeout(()=>m.classList.add('hidden'), 200); }
+    @media(max-width:620px){
+      .card.heroLatest{
+        display:block;
+        grid-column:auto;
+        min-height:0;
+      }
+      .card.heroLatest .photo,.card.heroLatest .visual{
+        height:235px;
+        min-height:235px;
+      }
+      .card.heroLatest .body{padding:16px}
+      .card.heroLatest .body h3{font-size:22px}
+      .card.heroLatest .body p{font-size:14px}
 
-  function confirmAction(title, text, callback) {
-    safeSet('confirm-title', 'innerText', title);
-    safeSet('confirm-text', 'innerText', text);
-    pendingAction = callback;
-    openModal('custom-confirm-modal');
+      .card.compactLatest{
+        grid-template-columns:120px 1fr;
+        min-height:125px;
+      }
+      .card.compactLatest .photo,.card.compactLatest .visual{
+        min-height:125px;
+      }
+
+      .categoryGrid{
+        grid-template-columns:1fr!important;
+        grid-auto-rows:auto;
+      }
+      .miniCard.categoryMain{
+        grid-row:auto;
+      }
+      .miniCard.categoryMain img{
+        height:220px;
+      }
+      .miniCard.categoryMain h3{font-size:21px}
+      .miniCard.categorySmall{
+        grid-template-columns:115px 1fr;
+        min-height:120px;
+      }
+      .miniCard.categorySmall img{
+        width:115px;
+        min-height:120px;
+      }
+    }
+
+    /* v10 — fixed newsroom masthead, wordmark logo, article routing fix */
+    :root{
+      --mast-h:94px;
+      --nav-h:52px;
+    }
+    .mast{
+      position:sticky!important;
+      top:0!important;
+      z-index:70!important;
+      min-height:var(--mast-h)!important;
+      background:#fff!important;
+      border-bottom:1px solid var(--line);
+      width:100%!important;
+      max-width:none!important;
+      padding-left:max(14px,calc((100vw - 1180px)/2))!important;
+      padding-right:max(14px,calc((100vw - 1180px)/2))!important;
+    }
+    [data-theme="dark"] .mast{background:var(--card)!important}
+    .nav{
+      position:sticky!important;
+      top:var(--mast-h)!important;
+      z-index:69!important;
+    }
+    .brandTextOnly{position:static!important;transform:none!important;left:auto!important;gap:0!important}
+    .siteWordmark{
+      display:flex;
+      align-items:baseline;
+      justify-content:center;
+      gap:8px;
+      white-space:nowrap;
+      line-height:1;
+      text-align:center;
+      font-family:"Hind Siliguri","Noto Sans Bengali",Arial,sans-serif!important;
+      font-weight:900!important;
+      letter-spacing:-.4px;
+    }
+    .siteNamePrimary{
+      color:var(--red);
+      font-size:34px;
+      font-weight:900!important;
+    }
+    .siteNameSecondary{
+      color:var(--navy);
+      font-size:34px;
+      font-weight:900!important;
+    }
+    [data-theme="dark"] .siteNameSecondary{color:#f3f7fa}
+    .mast .brand{
+      position:absolute!important;
+      left:50%!important;
+      transform:translateX(-50%)!important;
+      margin:0!important;
+    }
+
+    /* article page must replace the homepage area, never appear below footer */
+    body.article-open .layout,
+    body.article-open #adCarousel,
+    body.article-open footer{
+      display:none!important;
+    }
+    body.article-open #articlePage{
+      display:block!important;
+    }
+    body.article-open .breaking{
+      display:none!important;
+    }
+    .articlePage{
+      display:none;
+      background:var(--paper);
+      min-height:calc(100vh - var(--mast-h) - var(--nav-h));
+      padding:18px 0 50px;
+    }
+    .articlePage.active{display:block!important}
+    .articlePageWrap{margin-top:0!important}
+    .articlePageTop{
+      position:sticky!important;
+      top:calc(var(--mast-h) + var(--nav-h))!important;
+      z-index:20!important;
+    }
+
+    .headlineBoard,
+    .leadSlide h1,
+    .body h3,
+    .miniCard h3,
+    .articlePageBody h1,
+    .heading h2,
+    .categoryHead h2{
+      font-weight:900!important;
+    }
+
+    @media(max-width:620px){
+      :root{--mast-h:82px;--nav-h:48px}
+      .mast{min-height:var(--mast-h)!important}
+      .siteNamePrimary,.siteNameSecondary{font-size:25px}
+      .siteWordmark{gap:6px}
+      .mast .brand{max-width:82%!important}
+      .nav{top:var(--mast-h)!important}
+      .articlePageTop{top:calc(var(--mast-h) + var(--nav-h))!important}
+    }
+
+    /* v11 — intro cleanup + one-line wordmark + 4-ad carousel */
+    .introInner{max-width:680px}
+    .introWordmark{
+      font-family:"Hind Siliguri","Noto Sans Bengali",Arial,sans-serif!important;
+      font-size:42px!important;
+      font-weight:900!important;
+      margin:0 0 10px!important;
+      white-space:nowrap;
+      letter-spacing:-.5px;
+    }
+    .siteWordmark{white-space:nowrap!important;flex-wrap:nowrap!important}
+    .siteNamePrimary,.siteNameSecondary{display:inline-block!important}
+    .brandTextOnly{white-space:nowrap!important}
+
+    .adCarousel{
+      position:relative;
+      margin:22px auto 0;
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      background:#fff;
+      border:1px solid var(--line);
+      min-height:120px;
+    }
+    [data-theme="dark"] .adCarousel{background:var(--card)}
+    .adTrack{display:flex;transition:transform .55s ease;will-change:transform}
+    .adSlide{min-width:100%;display:block;position:relative;background:#fff}
+    .adSlide img{display:block;width:100%;height:180px;object-fit:cover}
+    .adSlideLabel{position:absolute;left:9px;top:9px;background:#071f36cc;color:#fff;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800}
+    .adArrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:38px;height:38px;border:0;border-radius:50%;background:#071f3690;color:#fff;font-size:22px}
+    .adPrev{left:10px}.adNext{right:10px}
+    .adDots{position:absolute;left:50%;bottom:9px;transform:translateX(-50%);display:flex;gap:6px;z-index:3}
+    .adDots button{width:8px;height:8px;padding:0;border:0;border-radius:999px;background:#ffffff80}
+    .adDots button.active{width:22px;background:#fff}
+    @media(max-width:620px){
+      .introWordmark{font-size:31px!important}
+      .siteNamePrimary,.siteNameSecondary{font-size:24px!important}
+      .adSlide img{height:130px}
+      .adArrow{width:34px;height:34px}
+    }
+
+    /* v12 typography/logo/footer */
+    :root{--site-font:"Hind Siliguri","Noto Sans Bengali",Arial,sans-serif;--headline-weight:900}
+    body,button,input,select,textarea{font-family:var(--site-font)!important}
+    .brand b,.leadSlide h1,.heading h2,.categoryHead h2,.articlePageBody h1,.box h2,.body h3,.miniCard h3,.headlineBoard,.siteWordmark{font-family:var(--site-font)!important;font-weight:var(--headline-weight)!important}
+    .headerLogo{width:42px;height:42px;object-fit:contain;border-radius:9px;flex:0 0 auto}
+    .brandTextOnly{display:flex!important;align-items:center!important;gap:9px!important}
+    footer .footerGrid{grid-template-columns:1.2fr 1fr!important}
+    footer .footerMeta{display:none!important}
+    @media(max-width:620px){.headerLogo{width:34px;height:34px}footer .footerGrid{grid-template-columns:1fr!important}}
+
+    /* v13 — show running ads inside every article */
+    .articlePageTop{
+      position:sticky!important;
+      top:calc(var(--mast-h) + var(--nav-h))!important;
+      background:var(--card)!important;
+      z-index:25!important;
+    }
+    .articleAdCarousel{
+      position:relative;
+      margin:16px 18px 0;
+      border-radius:15px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:var(--card);
+      box-shadow:0 8px 22px rgba(0,0,0,.08);
+    }
+    .articleAdTrack{display:flex;transition:transform .5s ease;will-change:transform}
+    .articleAdSlide{min-width:100%;display:block;position:relative}
+    .articleAdSlide img{display:block;width:100%;height:170px;object-fit:cover}
+    .articleAdLabel{
+      position:absolute;left:9px;top:9px;background:#071f36cc;color:#fff;
+      border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800
+    }
+    .articleAdArrow{
+      position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:36px;height:36px;
+      border:0;border-radius:50%;background:#071f3690;color:#fff;font-size:21px
+    }
+    .articleAdArrow.prev{left:9px}.articleAdArrow.next{right:9px}
+    .articleAdDots{
+      position:absolute;left:50%;bottom:8px;transform:translateX(-50%);
+      display:flex;gap:6px;z-index:3
+    }
+    .articleAdDots button{width:8px;height:8px;padding:0;border:0;border-radius:999px;background:#ffffff80}
+    .articleAdDots button.active{width:22px;background:#fff}
+
+    /* Keep the article compact instead of leaving a large empty white area */
+    .articlePageBody{padding-top:18px!important}
+    .articlePageCard{overflow:visible!important}
+    body.article-open #adCarousel{display:none!important}
+
+    @media(max-width:620px){
+      .articleAdCarousel{margin:12px 14px 0;border-radius:12px}
+      .articleAdSlide img{height:125px}
+      .articlePageBody{padding-top:15px!important}
+    }
+
+
+    /* v17.2 — compact tagline directly under the header name/logo */
+    .mast .brand.brandTextOnly{
+      flex-direction:column!important;
+      align-items:center!important;
+      justify-content:center!important;
+      gap:7px!important;
+      max-width:78vw;
+      text-decoration:none;
+    }
+    .headerBrandMain{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      min-width:0;
+    }
+    .headerTagline{
+      display:block;
+      max-width:72vw;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      color:#6f7b87!important;
+      font-family:"Hind Siliguri","Noto Sans Bengali",sans-serif!important;
+      font-size:12px!important;
+      line-height:1.15;
+      font-weight:500!important;
+      letter-spacing:.05px!important;
+      text-align:center;
+    }
+    [data-theme="dark"] .headerTagline{color:#b9c4ce!important}
+    @media(max-width:620px){
+      .mast .brand.brandTextOnly{gap:5px!important;max-width:82vw}
+      .headerTagline{font-size:11px!important;max-width:78vw}
+    }
+
+
+/* v17.3 — Unicode-safe Bangla dates and stable header brand */
+.dateLine,.newsMeta,.articleMeta,.card time,.card .date,.rank small,.meta,[class*="date"],time{
+  font-family:"Noto Sans Bengali","Hind Siliguri",Arial,sans-serif!important;
+  font-variant-numeric:normal!important;font-weight:400!important;
+}
+.siteWordmark,.siteNamePrimary,.siteNameSecondary{
+  font-family:"Noto Serif Bengali","Hind Siliguri",serif!important;
+}
+.headerTagline{
+  font-family:"Noto Sans Bengali","Hind Siliguri",Arial,sans-serif!important;font-weight:500!important;
+}
+
+</style>
+
+<style id="v15-premium">
+.introSplash{
+  background:
+    radial-gradient(circle at 18% 18%,rgba(32,123,183,.34),transparent 35%),
+    radial-gradient(circle at 84% 78%,rgba(220,18,42,.18),transparent 30%),
+    linear-gradient(145deg,#020d16 0%,#062d4c 55%,#071b2a 100%)!important;
+}
+.introInner{position:relative;width:min(620px,92vw);padding:44px 28px!important;isolation:isolate}
+.introInner:before{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.09);border-radius:28px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.015));backdrop-filter:blur(8px);z-index:-1;box-shadow:0 30px 80px rgba(0,0,0,.22)}
+.introWordmark{font-family:"Noto Serif Bengali","Hind Siliguri",serif!important;font-size:clamp(37px,8vw,58px)!important;font-weight:900!important;line-height:1.12!important;background:linear-gradient(100deg,#fff 0%,#fff 58%,#ff6675 80%,#e3132b 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 8px 24px rgba(0,0,0,.25))}
+.introWordmark:after{content:"";display:block;width:76px;height:3px;border-radius:99px;margin:17px auto 13px;background:linear-gradient(90deg,#e3132b,#ff8793)}
+.introInner p{font-size:17px!important;font-weight:600!important;color:#dce8ef!important}
+.introKicker{margin-top:16px!important;padding:8px 14px!important;background:rgba(255,255,255,.045);backdrop-filter:blur(6px);letter-spacing:.2px}
+.articleVideo{margin:22px 0;border-radius:16px;overflow:hidden;background:#000;aspect-ratio:16/9;box-shadow:0 14px 36px rgba(0,0,0,.15)}
+.articleVideo iframe{width:100%;height:100%;border:0;display:block}
+.socialSharePremium{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.socialSharePremium a,.socialSharePremium button{border:0;border-radius:12px;padding:11px 15px;font:inherit;font-weight:800;cursor:pointer;text-decoration:none}
+.fbShare{background:#1877f2;color:#fff}.waShare{background:#128c7e;color:#fff}.ytWatch{background:#ff0033;color:#fff}.fbPost{background:#e8f1ff;color:#1257a6}
+.footerSocialPremium{display:flex!important;gap:10px;flex-wrap:wrap;margin-top:10px}
+.footerSocialPremium a{display:inline-flex!important;padding:8px 12px;border:1px solid #ffffff28;border-radius:10px}
+</style>
+
+
+<style id="v15-1-mobile-polish">
+/* Premium mobile homepage polish */
+@media(max-width:620px){
+  .mast{padding:22px 14px!important}
+  .brand{justify-content:center}
+  .brand b{font-size:27px!important;letter-spacing:-.6px}
+  .nav{border-bottom:3px solid #d7192d!important}
+  .navInner{gap:0!important}
+  .nav a{padding:14px 18px!important;white-space:nowrap}
+  .breaking{min-height:54px!important}
+  .leadCarousel{height:360px!important;border-radius:18px!important}
+  .mainGrid{gap:22px!important}
+  .card,.miniCard,.box{border-radius:17px!important}
+  footer{margin-top:34px!important}
+}
+.brand #siteNamePrimary{color:#cf1f2f}
+.brand #siteNameSecondary{color:#071b31}
+[data-theme="dark"] .brand #siteNameSecondary{color:#f4f7fa}
+.legacyAdPlaceholder:empty{display:none!important}
+</style>
+
+
+<style id="v15-2-compact-intro">
+/* Compact, centered, identical brand intro */
+.adminIntroCard,.introInner{
+  width:min(520px,88vw)!important;
+  padding:30px 22px!important;
+  border-radius:24px!important;
+}
+.adminIntroCard:before,.introInner:before{border-radius:24px!important}
+.adminIntroCard h1,.introWordmark{
+  font-family:"Noto Serif Bengali","Hind Siliguri",serif!important;
+  font-size:clamp(31px,7vw,46px)!important;
+  line-height:1.08!important;
+  letter-spacing:-.7px!important;
+  margin:0!important;
+}
+.adminIntroCard h1:after,.introWordmark:after{
+  width:58px!important;height:3px!important;margin:13px auto 10px!important;
+}
+.adminIntroCard p,.introInner p{
+  font-family:"Hind Siliguri","Noto Sans Bengali",sans-serif!important;
+  text-transform:none!important;letter-spacing:0!important;
+  font-size:15px!important;font-weight:700!important;
+  margin:0!important;color:#dce8ef!important;
+}
+.adminIntroCard .introKicker,.introInner .introKicker{
+  display:inline-block!important;margin-top:13px!important;
+  padding:7px 12px!important;font-size:12px!important;font-weight:600!important;
+  color:#d4e0e8!important;border:1px solid rgba(255,255,255,.14)!important;
+  border-radius:999px!important;background:rgba(255,255,255,.035)!important;
+}
+@media(max-width:620px){
+  .adminIntroCard,.introInner{width:86vw!important;padding:26px 18px!important}
+  .adminIntroCard h1,.introWordmark{font-size:35px!important}
+}
+</style>
+
+
+<style id="v15-3-brand-fix">
+/* Admin page title: readable in both light and dark modes */
+.topbarTitle h1{
+  background:none!important;
+  -webkit-background-clip:initial!important;
+  background-clip:initial!important;
+  color:var(--text)!important;
+  -webkit-text-fill-color:var(--text)!important;
+  text-shadow:none!important;
+  filter:none!important;
+}
+[data-theme="dark"] .topbarTitle h1{
+  color:#f5f7fa!important;
+  -webkit-text-fill-color:#f5f7fa!important;
+}
+
+/* Splash wordmark uses the SAME clean sans Bengali family as the site header */
+.adminIntroCard h1,.introWordmark{
+  font-family:"Hind Siliguri","Noto Sans Bengali",sans-serif!important;
+  font-weight:900!important;
+  font-style:normal!important;
+  font-synthesis:none!important;
+  letter-spacing:-1px!important;
+  background:none!important;
+  -webkit-background-clip:initial!important;
+  background-clip:initial!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  text-shadow:0 8px 25px rgba(0,0,0,.24)!important;
+  filter:none!important;
+}
+/* 24BD gets the exact news red accent */
+.adminIntroCard h1 .brandAccent,.introWordmark .brandAccent{
+  color:#df1d31!important;
+  -webkit-text-fill-color:#df1d31!important;
+}
+.adminIntroCard h1:after,.introWordmark:after{
+  background:#df1d31!important;
+}
+</style>
+
+
+<style id="v15-3-public-wordmark">
+#introWordmark,.introWordmark{
+  font-family:"Hind Siliguri","Noto Sans Bengali",sans-serif!important;
+  font-weight:900!important;font-style:normal!important;font-synthesis:none!important;
+  color:#fff!important;-webkit-text-fill-color:#fff!important;
+}
+#introWordmark .intro24,.introWordmark .intro24{color:#df1d31!important;-webkit-text-fill-color:#df1d31!important}
+</style>
+
+
+<style id="v15-4-public-fixes">
+/* Public intro: exactly the same red + navy/white brand language as the header */
+#introName{
+  font-family:"Hind Siliguri","Noto Sans Bengali",sans-serif!important;
+  font-weight:900!important;
+  letter-spacing:-1px!important;
+}
+#introName .introMain{color:#fff!important;-webkit-text-fill-color:#fff!important}
+#introName .introAccent{color:#df1d31!important;-webkit-text-fill-color:#df1d31!important}
+
+/* Real sidebar ad — no placeholder */
+.sidebarRealAd{margin-top:18px;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);background:var(--card);border:1px solid var(--line)}
+.sidebarRealAd a{display:block;position:relative;text-decoration:none}
+.sidebarRealAd img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#eef2f6}
+.sidebarRealAd span{position:absolute;left:10px;top:10px;background:#071f36d9;color:#fff;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800}
+.sidebarRealAd.hide{display:none!important}
+@media(max-width:900px){.sidebarRealAd{margin:18px 0 0}}
+</style>
+
+
+<style id="v15-5-stable-intro">
+/* Stable splash: identical geometry on Admin/Public, no font-load reflow */
+#adminIntro,#siteIntro{
+  min-height:100svh!important;
+  height:100svh!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:20px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+}
+.adminIntroCard,.introInner{
+  width:min(500px,88vw)!important;
+  min-height:270px!important;
+  height:auto!important;
+  padding:28px 20px!important;
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border-radius:24px!important;
+}
+.adminIntroCard h1,#introName,.introWordmark{
+  width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+  word-break:keep-all!important;
+  overflow-wrap:normal!important;
+  font-family:"Hind Siliguri","Noto Sans Bengali",Arial,sans-serif!important;
+  font-size:clamp(29px,7.1vw,43px)!important;
+  line-height:1.12!important;
+  font-weight:900!important;
+  letter-spacing:-1px!important;
+  font-style:normal!important;
+  font-synthesis:none!important;
+}
+.adminIntroCard h1:after,#introName:after,.introWordmark:after{
+  content:""!important;display:block!important;
+  width:58px!important;height:3px!important;
+  margin:13px auto 10px!important;border-radius:99px!important;
+  background:#df1d31!important;
+}
+.adminIntroCard p,.introInner p{
+  margin:0!important;white-space:nowrap!important;
+  font-size:15px!important;line-height:1.35!important;
+}
+.adminIntroCard .introKicker,.introInner .introKicker{
+  margin-top:13px!important;white-space:nowrap!important;
+  font-size:12px!important;line-height:1.25!important;
+}
+@media(max-width:380px){
+  .adminIntroCard,.introInner{width:90vw!important;padding:24px 14px!important;min-height:250px!important}
+  .adminIntroCard h1,#introName,.introWordmark{font-size:28px!important;letter-spacing:-1.2px!important}
+  .adminIntroCard p,.introInner p{font-size:14px!important}
+  .adminIntroCard .introKicker,.introInner .introKicker{font-size:11px!important;padding:7px 9px!important}
+}
+</style>
+
+<style id="v15-6-ad-rotation">
+#adTrack,.articleAdTrack{will-change:transform}
+.sidebarRealAd img{transition:opacity .2s ease}
+</style>
+
+<style id="v15-7-font-transition-fix">
+/* Normal public text stays fixed; Admin font choice no longer changes the whole site */
+body,button,input,textarea,select,.nav,.breaking,.card,.box,.articleContent,footer{
+  font-family:"SolaimanLipi","Noto Sans Bengali","Hind Siliguri",sans-serif!important;
+}
+/* Only the top logo/brand uses the font selected from Admin */
+.brand,.brand b,#siteNamePrimary,#siteNameSecondary{
+  font-family:var(--brand-font,"Hind Siliguri","Noto Sans Bengali",sans-serif)!important;
+}
+/* smoother advertising cross-fade */
+.sidebarRealAd{position:relative;background:#eef2f6}
+.sidebarRealAd img{
+  opacity:1;
+  transform:scale(1);
+  transition:opacity .55s ease,transform 1.1s ease!important;
+}
+.sidebarRealAd.isChanging img{opacity:.18;transform:scale(1.018)}
+#adTrack,.articleAdTrack{transition:transform .7s cubic-bezier(.22,.61,.36,1)!important}
+</style>
+
+
+<style id="v15-8-final-typography-startup">
+/* Only the premium intro is visible at startup; suppress legacy white loading screens */
+#loadingScreen,#loadingOverlay,#appLoader,.loadingScreen,.loadingOverlay,.appLoader{display:none!important}
+
+/* Requested Bengali typography.
+   SutonnyMJ is used when the device/site has it; universal web fallback prevents broken Bengali. */
+:root{--body-bn-font:"Hind Siliguri","Noto Sans Bengali",sans-serif}
+body,button,input,textarea,select,.nav,.breaking,.card,.box,.articleContent,footer{
+  font-family:var(--body-bn-font)!important;
+  font-weight:400;
+}
+/* Headlines/labels remain bold */
+h1,h2,h3,h4,h5,h6,.headline,.sectionTitle,.cardTitle,.nav a,.breakingLabel,
+.boxTitle,.articleTitle,strong,b,.btn,button,label,.footerTitle{
+  font-family:var(--body-bn-font)!important;
+  font-weight:700!important;
+}
+/* Top masthead remains separately controllable from Admin */
+.brand,.brand b,#siteNamePrimary,#siteNameSecondary{
+  font-family:var(--brand-font,"Hind Siliguri","Noto Sans Bengali",sans-serif)!important;
+  font-weight:900!important;
+}
+</style>
+
+
+<style id="v15-9-logo-mode">
+.brand{display:flex!important;align-items:center;justify-content:center;min-height:92px}
+.brand.hasSiteLogo #siteNamePrimary,.brand.hasSiteLogo #siteNameSecondary,
+.brand.hasSiteLogo .brandText,.brand.hasSiteLogo .siteNameText{display:none!important}
+.brand.hasSiteLogo img,.brand.hasSiteLogo #siteLogo{
+  display:block!important;
+  width:auto!important;
+  max-width:min(78vw,420px)!important;
+  max-height:76px!important;
+  object-fit:contain!important;
+  margin:0 auto!important;
+}
+</style>
+
+
+<style id="v16-sidebar-carousel">
+.sidebarRealAd{overflow:hidden!important;background:transparent!important}
+.sidebarAdViewport{position:relative;overflow:hidden;border-radius:24px;background:#071f35}
+.sidebarAdTrack{display:flex;width:100%;transition:transform .7s cubic-bezier(.22,.61,.36,1);will-change:transform}
+.sidebarAdSlide{display:block;flex:0 0 100%;min-width:100%;text-decoration:none}
+.sidebarAdSlide img{display:block;width:100%;height:235px;object-fit:cover}
+.sidebarAdBadge{position:absolute;left:16px;top:16px;z-index:3;background:#082844;color:#fff;border-radius:999px;padding:8px 15px;font:700 14px/1 "Hind Siliguri",sans-serif}
+.sidebarAdPrev,.sidebarAdNext{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:46px;height:46px;border:0;border-radius:50%;background:rgba(3,24,43,.72);color:#fff;font-size:34px;line-height:40px;padding:0;display:grid;place-items:center}
+.sidebarAdPrev{left:12px}.sidebarAdNext{right:12px}
+.sidebarAdDots{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:4;display:flex;gap:7px}
+.sidebarAdDots button{width:8px;height:8px;border:0;border-radius:999px;padding:0;background:rgba(255,255,255,.5)}
+.sidebarAdDots button.active{width:28px;background:#fff}
+@media(max-width:600px){.sidebarAdSlide img{height:220px}.sidebarAdViewport{border-radius:22px}}
+</style>
+
+<style id="v17-placement-public">
+.placementAd{margin:26px auto;overflow:hidden;border-radius:22px;background:#071f35;box-shadow:var(--shadow);position:relative}
+.placementAd.hide{display:none!important}.placementAdViewport{position:relative;overflow:hidden;border-radius:22px}
+.placementAdTrack{display:flex;transition:transform .65s cubic-bezier(.22,.61,.36,1);will-change:transform}
+.placementAdSlide{flex:0 0 100%;min-width:100%;display:block;position:relative;text-decoration:none}
+.placementAdSlide img{display:block;width:100%;height:230px;object-fit:cover}
+.placementAdLabel{position:absolute;left:15px;top:14px;background:rgba(5,31,54,.88);color:#fff;padding:7px 12px;border-radius:999px;font-weight:800;font-size:13px}
+.placementAdDots{position:absolute;left:50%;bottom:11px;transform:translateX(-50%);display:flex;gap:6px}
+.placementAdDots i{display:block;width:8px;height:8px;border-radius:20px;background:rgba(255,255,255,.5)}
+.placementAdDots i.active{width:25px;background:#fff}.placementFooter{margin-top:34px;margin-bottom:34px}
+.articleInlineAd{margin:24px 0}
+@media(max-width:620px){.placementAdSlide img{height:205px}.placementAd{border-radius:18px;margin:22px auto}}
+</style><style id="v17-1-header-animation">
+.siteWordmark.headerAnim-float{animation:brandFloat 3.2s ease-in-out infinite}
+.siteWordmark.headerAnim-pulse{animation:brandPulse 2.8s ease-in-out infinite}
+.siteWordmark.headerAnim-tilt{animation:brandTilt 4s ease-in-out infinite;transform-origin:center}
+.siteWordmark.headerAnim-shine{position:relative;overflow:hidden}
+.siteWordmark.headerAnim-shine:after{content:"";position:absolute;inset:-20% auto -20% -35%;width:24%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.72),transparent);transform:skewX(-18deg);animation:brandShine 3.4s ease-in-out infinite;pointer-events:none}
+@keyframes brandFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes brandPulse{0%,100%{transform:scale(1);filter:none}50%{transform:scale(1.025);filter:drop-shadow(0 5px 8px rgba(223,29,49,.16))}}
+@keyframes brandTilt{0%,100%{transform:rotate(0)}25%{transform:rotate(-1.2deg)}75%{transform:rotate(1.2deg)}}
+@keyframes brandShine{0%,55%{left:-35%}100%{left:125%}}
+@media(prefers-reduced-motion:reduce){.siteWordmark[class*="headerAnim-"]{animation:none!important}.siteWordmark.headerAnim-shine:after{display:none!important}}
+</style>
+<style id="v17-4-simple-intro">
+/* Simple fast intro: no card/box, no secondary white loading screen */
+#loading{display:none!important}
+#introSplash{
+  background:linear-gradient(145deg,#031b2b,#063b60)!important;
+  transition:opacity .28s ease!important;
+}
+#introSplash .introInner{
+  width:auto!important;max-width:92vw!important;
+  min-height:0!important;padding:0 18px!important;
+  border:0!important;border-radius:0!important;
+  background:transparent!important;box-shadow:none!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+#introSplash .introWordmark{
+  margin:0!important;font-size:clamp(32px,8vw,46px)!important;
+  line-height:1.12!important;white-space:nowrap!important;
+}
+#introSplash #introTag{
+  margin:12px 0 0!important;font-size:15px!important;font-weight:500!important;
+}
+#introSplash .introKicker{
+  display:block!important;margin-top:12px!important;
+  padding:0!important;border:0!important;background:transparent!important;
+  font-size:12px!important;font-weight:400!important;
+}
+</style>
+
+
+<style id="v17-5-universal-bangla-font">
+/* Universal Bengali web typography: downloaded web fonts first, then device fallbacks */
+:root{
+  --body-bn-font:"Hind Siliguri","Noto Sans Bengali",Arial,sans-serif;
+  --headline-bn-font:"Hind Siliguri","Noto Sans Bengali",Arial,sans-serif;
+}
+html,body,button,input,textarea,select,
+.nav,.breaking,.card,.box,.articleContent,footer,
+.dateLine,.newsMeta,.articleMeta,.meta,time,[class*="date"],.rank small{
+  font-family:var(--body-bn-font)!important;
+}
+h1,h2,h3,h4,h5,h6,.headline,.sectionTitle,.cardTitle,
+.leadSlide h1,.heading h2,.categoryHead h2,.articlePageBody h1,
+.body h3,.miniCard h3,.headlineBoard,.box h2,
+.nav a,.breaking strong,strong,b,.btn,button,label{
+  font-family:var(--headline-bn-font)!important;
+  font-weight:700!important;
+}
+.siteWordmark,#siteNamePrimary,#siteNameSecondary,.headerTagline{
+  font-family:"Hind Siliguri","Noto Sans Bengali",Arial,sans-serif!important;
+}
+.siteWordmark,#siteNamePrimary,#siteNameSecondary{font-weight:700!important}
+.headerTagline{font-weight:400!important}
+
+/* Intro stays fast, clean and box-free */
+#introSplash .introInner:before{display:none!important}
+#introSplash .introInner{
+  background:transparent!important;border:0!important;box-shadow:none!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+#introSplash .introWordmark{font-family:"Hind Siliguri","Noto Sans Bengali",Arial,sans-serif!important;font-weight:700!important}
+#introSplash #introTag{font-family:"Hind Siliguri","Noto Sans Bengali",Arial,sans-serif!important;font-weight:400!important}
+#introSplash .introKicker{font-family:"Hind Siliguri","Noto Sans Bengali",Arial,sans-serif!important;font-weight:400!important}
+</style>
+
+
+<style id="v17-6-date-font-fix">
+/* Dates/numbers: Noto Sans Bengali avoids the malformed Bengali digit ১ seen in some Hind Siliguri weights */
+.dateLine,.newsMeta,.articleMeta,.meta,time,[class*="date"],.rank small,
+.body small,.articlePageBody .articleMeta{
+  font-family:"Noto Sans Bengali","Hind Siliguri",Arial,sans-serif!important;
+  font-weight:400!important;
+  font-style:normal!important;
+  font-synthesis:none!important;
+  font-variant-numeric:normal!important;
+  letter-spacing:0!important;
+}
+</style>
+
+<style id="v17-7-date-safe">
+.dateLine,.newsMeta,.articleMeta,.meta,time,[class*="date"],.rank small,.body small{
+font-family:Arial,"Noto Sans Bengali","Hind Siliguri",sans-serif!important;font-weight:400!important}
+</style>
+<style id="v18-top-date-font-only">
+.top .dateLine{
+  font-family:"Noto Sans Bengali","Hind Siliguri",Arial,sans-serif!important;
+  font-weight:500!important;
+  font-style:normal!important;
+  font-synthesis:none!important;
+  letter-spacing:.1px!important;
+}
+</style>
+
+
+<style id="v18-1-minimal-footer-social">
+/* Minimal footer social links — functionality/hrefs unchanged */
+footer .footerSocialPremium{
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+  margin-top:9px!important;
+}
+footer .footerSocialPremium a{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:auto!important;
+  min-width:0!important;
+  min-height:0!important;
+  padding:4px 8px!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  border-radius:7px!important;
+  background:transparent!important;
+  color:#c8d4dc!important;
+  font-size:12px!important;
+  line-height:1.2!important;
+  font-weight:500!important;
+  box-shadow:none!important;
+  opacity:.92;
+}
+footer .footerSocialPremium a:hover,
+footer .footerSocialPremium a:active{
+  color:#fff!important;
+  border-color:rgba(255,255,255,.32)!important;
+  background:rgba(255,255,255,.05)!important;
+}
+@media(max-width:620px){
+  footer .footerSocialPremium{gap:7px!important}
+  footer .footerSocialPremium a{
+    padding:4px 7px!important;
+    font-size:11.5px!important;
   }
-  document.getElementById('confirm-ok-btn').addEventListener('click', () => {
-    closeModal('custom-confirm-modal');
-    if(pendingAction) pendingAction();
+}
+</style>
+
+
+<style id="v18-2-compact-article-share">
+/* Compact article sharing controls — links/actions unchanged */
+.articlePageBody .shareRow,
+.articlePageBody .socialSharePremium{
+  display:flex!important;
+  align-items:center!important;
+  gap:7px!important;
+  flex-wrap:wrap!important;
+  margin:12px 0!important;
+}
+.articlePageBody .shareRow button,
+.articlePageBody .socialSharePremium a,
+.articlePageBody .socialSharePremium button{
+  width:auto!important;
+  min-width:0!important;
+  min-height:0!important;
+  padding:6px 10px!important;
+  border-radius:8px!important;
+  font-size:13px!important;
+  line-height:1.25!important;
+  font-weight:600!important;
+  box-shadow:none!important;
+}
+.articlePageBody .shareRow button{
+  border:1px solid var(--line)!important;
+}
+.articlePageBody .fbShare,
+.articlePageBody .waShare{
+  padding:6px 10px!important;
+}
+@media(max-width:620px){
+  .articlePageBody .shareRow,
+  .articlePageBody .socialSharePremium{gap:6px!important;margin:10px 0!important}
+  .articlePageBody .shareRow button,
+  .articlePageBody .socialSharePremium a,
+  .articlePageBody .socialSharePremium button{
+    padding:5px 8px!important;
+    border-radius:7px!important;
+    font-size:12px!important;
+  }
+}
+</style>
+
+<style id="v18-3-tv-brand-system">
+.mast .siteWordmark,.mast .siteNamePrimary,.mast .siteNameSecondary{font-family:var(--site-font)!important;font-weight:var(--headline-weight)!important}
+.mast .headerBrandMain{perspective:900px}.mast #headerLogo{transform-origin:center;will-change:transform,opacity,filter}
+.siteWordmark.headerAnim-tvFlip,#headerLogo.headerAnim-tvFlip{animation:tvBrandFlip 7s cubic-bezier(.2,.7,.2,1) infinite}
+.siteWordmark.headerAnim-tvReveal,#headerLogo.headerAnim-tvReveal{animation:tvBrandReveal 7s cubic-bezier(.2,.75,.2,1) infinite}
+.siteWordmark.headerAnim-tvZoom,#headerLogo.headerAnim-tvZoom{animation:tvBrandZoom 7s cubic-bezier(.2,.75,.2,1) infinite}
+.siteWordmark.headerAnim-tvSweep{position:relative;overflow:hidden}
+.siteWordmark.headerAnim-tvSweep:after{content:"";position:absolute;top:-35%;bottom:-35%;left:-35%;width:20%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent);transform:skewX(-18deg);animation:tvBrandSweep 7s ease-in-out infinite;pointer-events:none}
+#headerLogo.headerAnim-tvSweep{animation:tvLogoSweep 7s ease-in-out infinite}
+@keyframes tvBrandFlip{0%,4%,100%{transform:rotateY(0) scale(1);opacity:1}9%{transform:rotateY(90deg) scale(.94);opacity:.35}14%{transform:rotateY(180deg) scale(.96);opacity:.7}20%{transform:rotateY(360deg) scale(1);opacity:1}21%,100%{transform:rotateY(360deg) scale(1);opacity:1}}
+@keyframes tvBrandReveal{0%,3%,100%{transform:translateX(0);opacity:1;filter:none}7%{transform:translateX(-12px);opacity:.15;filter:blur(3px)}14%{transform:translateX(7px);opacity:.85;filter:blur(.5px)}20%,100%{transform:translateX(0);opacity:1;filter:none}}
+@keyframes tvBrandZoom{0%,4%,100%{transform:scale(1);opacity:1}9%{transform:scale(.78);opacity:.25}15%{transform:scale(1.08);opacity:1}20%,100%{transform:scale(1);opacity:1}}
+@keyframes tvBrandSweep{0%,5%{left:-35%;opacity:0}7%{opacity:1}19%{left:125%;opacity:1}20%,100%{left:125%;opacity:0}}
+@keyframes tvLogoSweep{0%,5%,20%,100%{filter:none;transform:scale(1)}10%{filter:brightness(1.35) drop-shadow(0 0 8px rgba(255,255,255,.35));transform:scale(1.025)}}
+@media(prefers-reduced-motion:reduce){.siteWordmark[class*="headerAnim-tv"],#headerLogo[class*="headerAnim-tv"]{animation:none!important}.siteWordmark.headerAnim-tvSweep:after{display:none!important}}
+</style>
+
+<style id="v18-4-brand-effect-safe">
+/* Keep TV effects fully inside the brand area without clipping letters. */
+.mast .brand,.mast .headerBrandMain{
+  overflow:visible!important;
+}
+.mast .siteWordmark{
+  display:inline-flex!important;
+  align-items:center!important;
+  overflow:visible!important;
+  padding:7px 9px!important;
+  margin:-7px -9px!important;
+  transform-origin:center center!important;
+  backface-visibility:visible!important;
+  -webkit-backface-visibility:visible!important;
+}
+.mast #headerLogo{
+  display:block;
+  max-width:min(76vw,360px)!important;
+  max-height:82px!important;
+  object-fit:contain!important;
+  overflow:visible!important;
+  transform-origin:center center!important;
+  backface-visibility:visible!important;
+  -webkit-backface-visibility:visible!important;
+}
+/* Sweep no longer clips the text itself. */
+.siteWordmark.headerAnim-tvSweep{overflow:visible!important}
+.siteWordmark.headerAnim-tvSweep:after{
+  top:-10px!important;
+  bottom:-10px!important;
+  border-radius:20px;
+}
+/* Uploaded transparent PNG logos receive the same TV effects. */
+#headerLogo.headerAnim-tvFlip{animation:tvLogoFlip 7s cubic-bezier(.2,.7,.2,1) infinite!important}
+#headerLogo.headerAnim-tvReveal{animation:tvLogoReveal 7s cubic-bezier(.2,.75,.2,1) infinite!important}
+#headerLogo.headerAnim-tvZoom{animation:tvLogoZoom 7s cubic-bezier(.2,.75,.2,1) infinite!important}
+@keyframes tvLogoFlip{
+  0%,4%,100%{transform:rotateY(0) scale(1);opacity:1}
+  9%{transform:rotateY(75deg) scale(.96);opacity:.45}
+  15%{transform:rotateY(0) scale(1.03);opacity:1}
+  20%,100%{transform:rotateY(0) scale(1);opacity:1}
+}
+@keyframes tvLogoReveal{
+  0%,4%,100%{transform:translateX(0);opacity:1;filter:none}
+  8%{transform:translateX(-8px);opacity:.3;filter:blur(2px)}
+  15%{transform:translateX(5px);opacity:1;filter:none}
+  20%,100%{transform:translateX(0);opacity:1;filter:none}
+}
+@keyframes tvLogoZoom{
+  0%,4%,100%{transform:scale(1);opacity:1}
+  9%{transform:scale(.88);opacity:.45}
+  15%{transform:scale(1.04);opacity:1}
+  20%,100%{transform:scale(1);opacity:1}
+}
+</style>
+
+
+<style id="v18-5-reader-tools">
+#readingProgress{position:fixed;left:0;top:0;height:3px;width:0;background:var(--red);z-index:99999;transition:width .08s linear;pointer-events:none}
+.readerTools{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:12px 0 16px}
+.readerTools button,.extraShares a{border:1px solid var(--line);background:transparent;color:inherit;border-radius:7px;padding:5px 8px;font-size:12px;font-weight:600;line-height:1.2;box-shadow:none}
+.readerTools button.active{background:var(--navy);color:#fff}
+.extraShares{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.articlePageBody .articleContent.readerSmall{font-size:16px!important}.articlePageBody .articleContent.readerNormal{font-size:19px!important}.articlePageBody .articleContent.readerLarge{font-size:22px!important}
+.savedNewsBox{margin-top:18px}.savedNewsBox .relatedItem{cursor:pointer}
+@media(max-width:620px){.readerTools button,.extraShares a{font-size:11.5px;padding:5px 7px}.articlePageBody .articleContent.readerNormal{font-size:18px!important}.articlePageBody .articleContent.readerLarge{font-size:20.5px!important}}
+@media print{header,.top,.nav,.breaking,.articlePageTop,.readerTools,.shareRow,.socialSharePremium,.relatedBox,footer,#readingProgress,.placementAd,.articleAdCarousel{display:none!important}.articlePage,.articlePageCard{display:block!important;box-shadow:none!important;border:0!important}.articlePageWrap{width:100%!important;margin:0!important}.articlePageBody{padding:0!important;color:#000!important}.articleContent{font-size:12pt!important;line-height:1.65!important}}
+</style>
+
+
+<style id="v18-6-two-ad-sizes">
+/* Two independent ad sizes */
+.adCarousel[data-ad-format="wide"] .adSlide img{aspect-ratio:3/1!important;height:auto!important;object-fit:cover!important}
+.placementAd[data-ad-format="wide"] .placementAdSlide img{aspect-ratio:3/1!important;height:auto!important;object-fit:cover!important}
+.placementAd[data-ad-format="large"] .placementAdSlide img{aspect-ratio:16/9!important;height:auto!important;object-fit:cover!important}
+.sidebarRealAd[data-ad-format="large"] .sidebarAdSlide img{aspect-ratio:16/9!important;height:auto!important;object-fit:cover!important}
+@media(max-width:620px){
+ .adCarousel[data-ad-format="wide"] .adSlide img,.placementAd[data-ad-format="wide"] .placementAdSlide img{aspect-ratio:3/1!important;height:auto!important}
+ .placementAd[data-ad-format="large"] .placementAdSlide img,.sidebarRealAd[data-ad-format="large"] .sidebarAdSlide img{aspect-ratio:16/9!important;height:auto!important}
+}
+</style>
+
+
+<style id="v18-9-ad-no-crop">
+/* Advertisement artwork must always remain fully visible. */
+.adCarousel[data-ad-format="wide"] .adSlide,
+.placementAd[data-ad-format="wide"] .placementAdSlide,
+.placementAd[data-ad-format="large"] .placementAdSlide,
+.sidebarRealAd[data-ad-format="large"] .sidebarAdSlide,
+#articleAdCarousel .adSlide{
+  background:#fff!important;
+  overflow:hidden!important;
+}
+.adCarousel[data-ad-format="wide"] .adSlide img,
+.placementAd[data-ad-format="wide"] .placementAdSlide img,
+.placementAd[data-ad-format="large"] .placementAdSlide img,
+.sidebarRealAd[data-ad-format="large"] .sidebarAdSlide img,
+#articleAdCarousel .adSlide img{
+  width:100%!important;
+  max-width:100%!important;
+  height:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  display:block!important;
+}
+.adCarousel[data-ad-format="wide"] .adSlide img,
+.placementAd[data-ad-format="wide"] .placementAdSlide img{
+  aspect-ratio:3/1!important;
+}
+.placementAd[data-ad-format="large"] .placementAdSlide img,
+.sidebarRealAd[data-ad-format="large"] .sidebarAdSlide img,
+#articleAdCarousel .adSlide img{
+  aspect-ratio:16/9!important;
+}
+</style>
+
+
+<style id="v19-0-ad-integrity">
+/* Final ad integrity rules: preserve every pixel of Wide and Large artwork. */
+#adCarousel .adSlide img,
+#feedAdPlacement .placementAdSlide img,
+#footerAdPlacement .placementAdSlide img{
+  width:100%!important;height:auto!important;aspect-ratio:3/1!important;
+  object-fit:contain!important;object-position:center!important;display:block!important;
+}
+#articleAdCarousel .articleAdSlide img,
+#articleMiddleAdPlacement .placementAdSlide img,
+#articleBottomAdPlacement .placementAdSlide img,
+#sidebarRealAd .sidebarAdSlide img{
+  width:100%!important;height:auto!important;aspect-ratio:16/9!important;
+  object-fit:contain!important;object-position:center!important;display:block!important;
+}
+#adCarousel .adSlide,#feedAdPlacement .placementAdSlide,#footerAdPlacement .placementAdSlide,
+#articleAdCarousel .articleAdSlide,#articleMiddleAdPlacement .placementAdSlide,
+#articleBottomAdPlacement .placementAdSlide,#sidebarRealAd .sidebarAdSlide{
+  overflow:hidden!important;background:#fff!important;
+}
+</style>
+
+
+<style id="v19-4-no-intro">
+#intro,#introSplash,#splash,#splashScreen,.introSplash,.intro-screen,.splash-screen,.splashScreen{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+</style>
+
+
+<style id="v19-5-bangla-reading-fix">
+/* পরিষ্কার ও আরামদায়ক বাংলা পাঠ্য — শিরোনাম/লোগো/নেভিগেশন অপরিবর্তিত */
+.articleBody,
+.article-body,
+#articleBody,
+#articleContent,
+.articleContent,
+.news-body,
+.newsBody,
+.fullArticle,
+.full-article,
+.article-text,
+.articleText {
+  font-family:"Noto Sans Bengali","Hind Siliguri",system-ui,sans-serif !important;
+  font-weight:400 !important;
+  font-style:normal !important;
+  font-stretch:normal !important;
+  letter-spacing:0 !important;
+  word-spacing:normal !important;
+  line-height:1.82 !important;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+}
+.articleBody p,
+.article-body p,
+#articleBody p,
+#articleContent p,
+.articleContent p,
+.news-body p,
+.newsBody p,
+.fullArticle p,
+.full-article p,
+.article-text p,
+.articleText p {
+  margin:0 0 1em !important;
+  font:inherit !important;
+  line-height:inherit !important;
+}
+.articleMeta,.newsMeta,.dateLine,time {
+  font-family:"Noto Sans Bengali","Hind Siliguri",system-ui,sans-serif !important;
+  font-weight:400 !important;
+  letter-spacing:0 !important;
+}
+@media(max-width:600px){
+  .articleBody,.article-body,#articleBody,#articleContent,.articleContent,
+  .news-body,.newsBody,.fullArticle,.full-article,.article-text,.articleText{
+    font-size:19px !important;
+    line-height:1.78 !important;
+  }
+}
+</style>
+
+
+<style id="v19-1-logo-size-control">
+:root{--header-logo-size:80%}
+.mast .brand.hasSiteLogo img,.mast .brand.hasSiteLogo #siteLogo,.mast #headerLogo{
+  width:var(--header-logo-size)!important;
+  max-width:min(92vw,620px)!important;
+  height:auto!important;
+  max-height:118px!important;
+  object-fit:contain!important;
+  margin:0 auto!important;
+}
+@media(max-width:620px){
+  .mast .brand.hasSiteLogo img,.mast .brand.hasSiteLogo #siteLogo,.mast #headerLogo{
+    max-width:92vw!important;
+    max-height:104px!important;
+  }
+}
+</style>
+
+<style id="v19-2-top-date-full">
+.topDateClock{min-width:0!important}
+.topDateClock .dateLine{overflow:visible!important;text-overflow:clip!important;white-space:nowrap!important}
+@media(max-width:620px){
+  .top .wrap{grid-template-columns:minmax(0,1fr) auto!important}
+  .topDateClock{gap:5px!important}
+  .topDateClock .dateLine{font-size:9.5px!important;overflow:visible!important;text-overflow:clip!important;white-space:nowrap!important}
+  .liveClock{font-size:9.5px!important;padding:3px 6px!important}
+}
+</style>
+
+<link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://i.ibb.co" crossorigin>
+<link rel="dns-prefetch" href="//i.ibb.co">
+
+<style id="article-bottom-ad-spacing-fix">
+/* Only fix the extra space below the large ad at the bottom of an article. */
+#articleBottomAdPlacement{margin-bottom:0!important;}
+#articleBottomAdPlacement .placementAdViewport,
+#articleBottomAdPlacement .placementAdTrack,
+#articleBottomAdPlacement .placementAdSlide{margin-bottom:0!important;padding-bottom:0!important;}
+</style>
+<style id="v15-2-ad-placeholder-fix">
+#legacyAdPlaceholder,.legacyAdPlaceholder{display:none!important}
+</style>
+
+<style id="v18-8-logo-size">
+/* Larger newsroom logo while preserving PNG transparency and aspect ratio */
+.mast .brand{min-height:128px!important}
+.mast .headerBrandMain{width:100%!important;justify-content:center!important}
+.mast #headerLogo{
+  width:auto!important;
+  height:auto!important;
+  max-width:min(88vw,520px)!important;
+  max-height:112px!important;
+  object-fit:contain!important;
+  margin:0 auto!important;
+}
+@media(max-width:620px){
+  .mast .brand{min-height:118px!important}
+  .mast #headerLogo{max-width:86vw!important;max-height:96px!important}
+}
+</style>
+
+
+<style id="v19-3-logo-size-final-fix">
+/* Final authoritative logo sizing: Admin logoSize (35–100) controls the public masthead. */
+:root{--header-logo-size-pct:80;--header-logo-max-px:496px}
+.mast .brand.hasSiteLogo #headerLogo,
+.mast #headerLogo{
+  display:block!important;
+  width:min(calc(var(--header-logo-size-pct) * 1vw),var(--header-logo-max-px))!important;
+  max-width:calc(100vw - 28px)!important;
+  height:auto!important;
+  max-height:118px!important;
+  object-fit:contain!important;
+  margin:0 auto!important;
+}
+@media(max-width:620px){
+  .mast .brand.hasSiteLogo #headerLogo,
+  .mast #headerLogo{
+    width:min(calc(var(--header-logo-size-pct) * 1vw),var(--header-logo-max-px))!important;
+    max-width:calc(100vw - 24px)!important;
+    max-height:104px!important;
+  }
+}
+</style>
+
+
+<style id="v19-4-header-load-fix">
+html:not(.site-settings-ready) .mast .brand #siteWordmark,
+html:not(.site-settings-ready) .mast .brand #siteNamePrimary,
+html:not(.site-settings-ready) .mast .brand #siteNameSecondary,
+html:not(.site-settings-ready) .mast .brand .brandText,
+html:not(.site-settings-ready) .mast .brand .siteNameText,
+html:not(.site-settings-ready) .mast .brand #headerLogo{
+  visibility:hidden!important;
+}
+</style>
+
+<style id="v19-5-date-clock-final">
+.topDateClock .dateLine{overflow:visible!important;text-overflow:clip!important;white-space:nowrap!important}
+@media(max-width:620px){.topDateClock .dateLine,.topDateClock .liveClock{font-size:9.5px!important}}
+</style>
+
+<style id="v19-6-breaking-all">
+.tickerWindow{min-width:0;overflow:hidden;flex:1}
+#breakingTicker{display:inline-block;width:max-content;white-space:nowrap;animation:breakingAllMove var(--breaking-duration,18s) linear infinite!important}
+#breakingTicker a{color:inherit;text-decoration:none;font-weight:800}
+#breakingTicker a:hover{text-decoration:underline}
+#breakingTicker .breakingSep{display:inline-block;padding:0 14px;color:#d7192d;font-weight:900}
+@keyframes breakingAllMove{from{transform:translateX(70vw)}to{transform:translateX(-100%)}}
+
+</style>
+<style id="v20-cross-browser-layout-fix">
+html{width:100%;max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{width:100%;max-width:100%;min-width:0;overflow-x:hidden}
+img,video,iframe,svg{max-width:100%}
+.wrap,.mast,.nav,.breaking,.layout,footer{box-sizing:border-box}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+@media(max-width:620px){
+  .wrap{width:calc(100% - 20px)!important;max-width:1180px!important;margin-left:auto!important;margin-right:auto!important}
+  .layout{width:calc(100% - 20px)!important;max-width:1180px!important;margin-left:auto!important;margin-right:auto!important}
+  .mast{width:100%!important;max-width:100%!important}
+}
+</style>
+</head>
+<body><div id="readingProgress" aria-hidden="true"></div>
+</div>
+
+
+<div class="top">
+  <div class="wrap">
+    <div class="topDateClock"><span class="dateLine" id="todayLine"></span><span class="liveClock" id="liveClock" aria-live="off">--:--:--</span></div>
+    <div class="right">
+      <button id="publicThemeBtn" class="themePublic" type="button" aria-label="Theme">◐</button>
+      <div class="langSwitch">
+        <button id="bnBtn" class="active" type="button">বাংলা</button>
+        <button id="enBtn" type="button">EN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header id="mastHeader" class="mast wrap">
+  <a class="brand brandTextOnly" href="#">
+    <span class="headerBrandMain">
+      <img id="headerLogo" class="headerLogo hide" alt="Logo">
+      <span class="siteWordmark" id="siteWordmark">
+        <span id="siteNamePrimary" class="siteNamePrimary">হাইমচর</span>
+        <span id="siteNameSecondary" class="siteNameSecondary">নিউজ24BD</span>
+      </span>
+    </span>
+    <small id="headerTagline" class="headerTagline">হাইমচরের কথা, মানুষের কণ্ঠে</small>
+  </a>
+  <span class="live" data-i18n="live">● লাইভ আপডেট</span>
+</header>
+
+<nav class="nav">
+  <div class="wrap" id="navLinks">
+    <a href="#" data-i18n="home">হোম</a>
+    <a href="#latest" data-cat="" data-i18n="latest">সর্বশেষ</a>
+  </div>
+</nav>
+
+<div class="breaking">
+  <div class="wrap">
+    <strong data-i18n="breaking">ব্রেকিং</strong>
+    <div class="tickerWindow"><span id="breakingTicker" class="ticker">হাইমচরের সর্বশেষ সংবাদ—দ্রুত ও নির্ভুল</span></div>
+  </div>
+</div>
+
+<section id="adCarousel" class="adCarousel wrap hide" aria-label="Advertisement">
+  <div id="adTrack" class="adTrack"></div>
+  <button id="adPrev" class="adArrow adPrev" type="button" aria-label="Previous ad">‹</button>
+  <button id="adNext" class="adArrow adNext" type="button" aria-label="Next ad">›</button>
+  <div id="adDots" class="adDots"></div>
+</section>
+
+<main class="wrap layout">
+  <section>
+    <section id="leadCarousel" class="leadCarousel" aria-label="Top news">
+      <div id="leadTrack" class="leadTrack">
+        <article class="leadSlide">
+          <div class="leadText">
+            <span class="headlineBoard">প্রধান সংবাদ</span>
+            <h1 data-i18n="welcomeTitle">হাইমচর নিউজ24BD-তে স্বাগতম</h1>
+            <p data-i18n="welcomeSub">আপনার এলাকার নির্ভরযোগ্য সংবাদমাধ্যম</p>
+          </div>
+        </article>
+      </div>
+      <button id="leadPrev" class="carouselArrow prev" type="button" aria-label="Previous">‹</button>
+      <button id="leadNext" class="carouselArrow next" type="button" aria-label="Next">›</button>
+      <div id="leadDots" class="carouselDots"></div>
+    </section>
+
+    <div class="heading" id="latest">
+      <h2 data-i18n="latestNews">সর্বশেষ সংবাদ</h2>
+      <span data-i18n="realTime">রিয়েল-টাইম</span>
+    </div>
+    <div id="newsGrid" class="grid"></div>
+    <div id="feedAdPlacement" class="placementAd hide" aria-label="Advertisement"></div>
+    <div id="categorySections"></div>
+  </section>
+
+  <aside class="sidebar">
+    <form class="search" id="searchForm">
+      <input id="searchInput" data-ph="search" placeholder="সংবাদ খুঁজুন…">
+      <button data-i18n="searchBtn">খুঁজুন</button>
+    </form>
+
+    <div class="box">
+      <h2 data-i18n="popular">সর্বাধিক পঠিত</h2>
+      <div id="popular"></div>
+    </div>
+
+    <div id="sidebarAd" class="sidebarRealAd hide" aria-label="Advertisement">
+      <a id="sidebarAdLink" href="#" target="_blank" rel="noopener noreferrer">
+        <img id="sidebarAdImage" alt="Advertisement">
+        <span id="sidebarAdLabel">বিজ্ঞাপন</span>
+      </a>
+    </div>
+  </aside>
+</main>
+
+<section id="articlePage" class="articlePage">
+  <div class="articlePageWrap">
+    <article class="articlePageCard">
+      <div class="articlePageTop">
+        <button id="backArticleBtn" class="backBtn" type="button">← ফিরে যান</button>
+      </div>
+
+      <section id="articleAdCarousel" class="articleAdCarousel hide" aria-label="Advertisement">
+        <div id="articleAdTrack" class="articleAdTrack"></div>
+        <button id="articleAdPrev" class="articleAdArrow prev" type="button" aria-label="Previous ad">‹</button>
+        <button id="articleAdNext" class="articleAdArrow next" type="button" aria-label="Next ad">›</button>
+        <div id="articleAdDots" class="articleAdDots"></div>
+      </section>
+
+      <div id="articleInner" class="articlePageBody"></div>
+      <div id="articleBottomAdPlacement" class="placementAd hide" aria-label="Advertisement"></div>
+    </article>
+  </div>
+</section>
+
+<section id="footerAdPlacement" class="placementAd placementFooter wrap hide" aria-label="Advertisement"></section>
+<footer>
+  <div class="wrap">
+    <div class="footerGrid">
+      <div>
+        <h3 id="footerName">হাইমচর নিউজ24BD</h3>
+        <p id="footerTag">হাইমচর ও চাঁদপুরের মানুষের নির্ভরযোগ্য ডিজিটাল সংবাদমাধ্যম</p>
+        <p id="footerAbout"></p>
+      </div>
+      <div class="footerMeta">
+        <h3 data-i18n="management">সম্পাদনা ও প্রকাশনা</h3>
+        <p><b data-i18n="editor">সম্পাদক:</b> <span id="footerEditor">—</span></p>
+        <p><b data-i18n="publisher">প্রকাশক:</b> <span id="footerPublisher">—</span></p>
+        <p><b data-i18n="owner">স্বত্বাধিকারী:</b> <span id="footerOwner">—</span></p>
+      </div>
+      <div class="footerLinks">
+        <h3 data-i18n="contact">যোগাযোগ</h3>
+        <p id="footerAddress"></p>
+        <a id="footerPhone" href="#"></a>
+        <a id="footerEmail" href="#"></a>
+        <div class="footerSocialPremium">
+          <a id="footerFacebook" href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
+          <a id="footerYoutube" href="#" target="_blank" rel="noopener noreferrer">YouTube</a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">© <span id="copyYear">2026</span> <span id="copyName">হাইমচর নিউজ24BD</span> — <span data-i18n="rights">সর্বস্বত্ব সংরক্ষিত</span><span id="copyOwner"></span></div>
+  </div>
+</footer>
+
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import {
+  getFirestore, collection, doc, onSnapshot, query, where, setDoc, increment, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAkAPHDwoG7iFc6rx-ujdVhl_DxF8lY_eA",
+  authDomain: "news-22d62.firebaseapp.com",
+  projectId: "news-22d62",
+  storageBucket: "news-22d62.firebasestorage.app",
+  messagingSenderId: "1087654881721",
+  appId: "1:1087654881721:web:0aeb2fb96dd269edba2e68"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const $ = id => document.getElementById(id);
+
+let lang = localStorage.getItem("site_lang") || "bn";
+let all = [];
+let currentFilter = "";
+let categories = [];
+let siteSettings = {};
+let leadIndex = 0;
+let leadTimer = null;
+let leadSlides = [];
+let touchStartX = 0;
+let publicAds = [];
+let sidebarAdIndex = 0;
+let adIndex = 0;
+let adTimer = null;
+let articleAdIndex = 0;
+let articleAdTimer = null;
+let viewStats = {};
+let adDocs = [];
+let lastArticleId = null;
+
+const i18n={
+  bn:{location:"",live:"● লাইভ আপডেট",home:"হোম",latest:"সর্বশেষ",breaking:"ব্রেকিং",management:"সম্পাদনা ও প্রকাশনা",editor:"সম্পাদক:",publisher:"প্রকাশক:",owner:"স্বত্বাধিকারী:",contact:"যোগাযোগ",
+      welcomeTitle:"হাইমচর নিউজ24BD-তে স্বাগতম",welcomeSub:"আপনার এলাকার নির্ভরযোগ্য সংবাদমাধ্যম",latestNews:"সর্বশেষ সংবাদ",
+      search:"সংবাদ খুঁজুন…",searchBtn:"খুঁজুন",popular:"সর্বাধিক পঠিত",ad:"আপনার বিজ্ঞাপন\nএখানে প্রকাশ করুন",rights:"সর্বস্বত্ব সংরক্ষিত",
+      empty:"এখনো কোনো সংবাদ প্রকাশ করা হয়নি",justNow:"এইমাত্র",share:"শেয়ার",copy:"লিংক কপি",copied:"লিংক কপি হয়েছে",realTime:"রিয়েল-টাইম"},
+  en:{location:"",live:"● Live Updates",home:"Home",latest:"Latest",breaking:"Breaking",management:"Editorial & Publishing",editor:"Editor:",publisher:"Publisher:",owner:"Copyright owner:",contact:"Contact",
+      welcomeTitle:"Welcome to Haimchar News24BD",welcomeSub:"Your trusted local digital news source",latestNews:"Latest News",
+      search:"Search news…",searchBtn:"Search",popular:"Most Read",ad:"Advertise\nwith us",rights:"All rights reserved",
+      empty:"No news has been published yet",justNow:"Just now",share:"Share",copy:"Copy link",copied:"Link copied",realTime:"Real-time"}
+};
+function t(k){return i18n[lang][k]||k}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function img(u){u=String(u||"").trim();if(!u)return"";let m=u.match(/drive\.google\.com\/(?:file\/d\/|open\?id=)([\w-]+)/);return m?`https://drive.google.com/uc?export=view&id=${m[1]}`:u}
+function newsImg(x){return (x&&x.imageData)?x.imageData:img((x&&x.imageUrl)||"")}
+function storyTitle(x){return lang==="en"?(x.titleEn||x.title||""):(x.title||x.titleEn||"")}
+function storyExcerpt(x){return lang==="en"?(x.excerptEn||x.excerpt||""):(x.excerpt||x.excerptEn||"")}
+function storyContent(x){return lang==="en"?(x.contentEn||x.content||x.excerptEn||x.excerpt||""):(x.content||x.excerpt||x.contentEn||x.excerptEn||"")}
+function safeImageTag(src,cls=""){return src?`<img class="${cls}" src="${esc(src)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.classList.add('brokenImage')">`:""}
+function stamp(ts){
+  if(!ts||!ts.toDate)return t("justNow");
+  const d=ts.toDate();
+  if(lang==="bn"){
+    const months=["জানু","ফেব","মার্চ","এপ্রি","মে","জুন","জুলাই","আগ","সেপ্ট","অক্টো","নভে","ডিসে"];
+    let h=d.getHours(), period=h>=12?"PM":"AM";
+    h=h%12||12;
+    return `${d.getDate()} ${months[d.getMonth()]}, ${d.getFullYear()} • ${h}:${String(d.getMinutes()).padStart(2,"0")} ${period}`;
+  }
+  return new Intl.DateTimeFormat("en-US",{dateStyle:"medium",timeStyle:"short"}).format(d);
+}
+
+function defaultCategories(){
+  return [
+    {name:"হাইমচর",nameEn:"Haimchar",order:1},{name:"চাঁদপুর",nameEn:"Chandpur",order:2},{name:"জাতীয়",nameEn:"National",order:3},{name:"রাজনীতি",nameEn:"Politics",order:4},
+    {name:"আন্তর্জাতিক",nameEn:"International",order:5},{name:"অর্থনীতি",nameEn:"Economy",order:6},{name:"খেলাধুলা",nameEn:"Sports",order:7},{name:"বিনোদন",nameEn:"Entertainment",order:8},{name:"প্রবাস",nameEn:"Expatriate",order:9},{name:"প্রযুক্তি",nameEn:"Technology",order:10}
+  ];
+}
+function effectiveCategories(){
+  // Always keep the built-in categories and merge custom Firestore categories.
+  // Same Bengali/English category names are de-duplicated; Firestore values win.
+  const base=defaultCategories();
+  const merged=new Map();
+  const keyOf=c=>String(c?.name||c?.nameEn||c?.id||"").trim().toLocaleLowerCase();
+  base.forEach(c=>merged.set(keyOf(c),{...c}));
+  categories.forEach(c=>{
+    const k=keyOf(c);
+    if(!k)return;
+    const previous=merged.get(k)||{};
+    merged.set(k,{...previous,...c});
   });
-  function closeConfirm(res) { closeModal('custom-confirm-modal'); }
+  return [...merged.values()].sort((a,b)=>(Number(a.order)||999)-(Number(b.order)||999));
+}
 
-  setInterval(() => { let now = new Date(); safeSet('live-clock', 'innerText', now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})); safeSet('live-date', 'innerText', now.toLocaleDateString('en-US', {weekday: 'short', month: 'short', day: 'numeric'})); }, 1000);
+function applyHeaderLogoMode(){
+  const brand=document.querySelector(".brand");
+  const logo=document.getElementById("siteLogo") || brand?.querySelector("img");
+  if(!brand) return;
+  const hasLogo=!!(logo && logo.getAttribute("src") && logo.getAttribute("src").trim());
+  brand.classList.toggle("hasSiteLogo",hasLogo);
+  if(logo) logo.style.display=hasLogo?"block":"none";
+}
+function renderNav(){
+  $("navLinks").innerHTML=`<a href="#" data-home-link>${esc(t("home"))}</a><a href="#latest" data-cat="">${esc(t("latest"))}</a>`+
+    effectiveCategories().map(c=>`<a href="#latest" data-cat="${esc(c.name)}">${esc(lang==="en"?(c.nameEn||c.name):c.name)}</a>`).join("");
+  $("navLinks").querySelector("[data-home-link]").onclick=(e)=>{e.preventDefault();currentFilter="";render(all);scrollTo({top:0,behavior:"smooth"})};
+  $("navLinks").querySelectorAll("[data-cat]").forEach(a=>a.onclick=()=>{currentFilter=a.dataset.cat||"";const __iw=document.getElementById("introWordmark");if(__iw)__iw.innerHTML=`হাইমচর নিউজ<span class="intro24">24BD</span>`;
+setTimeout(()=>render(filtered()),0)});
+}
+function updateDateLine(){
+  const now=new Date();
+  const dateEl=$("todayLine");
+  if(!dateEl)return;
+  const locale=lang==="bn"?"bn-BD":"en-US";
+  dateEl.textContent=new Intl.DateTimeFormat(locale,{weekday:"long",day:"numeric",month:"long",year:"numeric",timeZone:"Asia/Dhaka"}).format(now);
+}
+function updateLiveClock(){
+  const el=$("liveClock");
+  if(!el)return;
+  const locale=lang==="bn"?"bn-BD":"en-US";
+  const now=new Date();
+  const time=new Intl.DateTimeFormat(locale,{timeZone:"Asia/Dhaka",hour:"numeric",minute:"2-digit",second:"2-digit",hour12:true}).format(now);
+  el.textContent=time;
+  el.title=lang==="bn"?"বাংলাদেশ সময়":"Bangladesh time";
+}
+updateLiveClock();
+setInterval(updateLiveClock,1000);
+function renderCategorySections(){
+  const wrap=$("categorySections");
+  if(!wrap)return;
+  const sections=effectiveCategories().map(c=>{
+    const list=sortNews(all.filter(x=>!x.deleted && (!x.publishAtMs || x.publishAtMs<=Date.now()) && x.category===c.name)).slice(0,3);
+    if(!list.length)return"";
+    return `<section class="categorySection"><div class="categoryHead"><h2>${esc(lang==="en"?(c.nameEn||c.name):c.name)}</h2></div><div class="categoryGrid">${
+      list.map((x,i)=>`<article class="miniCard ${i===0?"categoryMain":"categorySmall"}" data-mini="${x.id}">${newsImg(x)?safeImageTag(newsImg(x)):""}<div class="miniBody"><small>${esc(stamp(x.updatedAt||x.createdAt))}</small><h3>${esc(storyTitle(x))}</h3></div></article>`).join("")
+    }</div></section>`;
+  }).join("");
+  wrap.innerHTML=sections;
+  wrap.querySelectorAll("[data-mini]").forEach(el=>el.onclick=()=>openArticle(el.dataset.mini));
+}
 
-  let enteredPin = "";
-  function typePin(num) { if(enteredPin.length < 4) { enteredPin += num; updatePinDisplay(); } }
-  function clearPin() { enteredPin = enteredPin.slice(0, -1); updatePinDisplay(); }
-  function updatePinDisplay() {
-    let display = ""; for(let i=0; i<4; i++) { display += (i < enteredPin.length) ? "● " : "_ "; }
-    safeSet('pin-dots', 'innerText', display.trim());
+
+let publicTheme=localStorage.getItem("public_theme")||"light";
+function applyPublicTheme(next){
+  publicTheme=next;
+  document.documentElement.setAttribute("data-theme",publicTheme);
+  localStorage.setItem("public_theme",publicTheme);
+  $("publicThemeBtn").textContent=publicTheme==="dark"?"☀":"◐";
+}
+$("publicThemeBtn").onclick=()=>applyPublicTheme(publicTheme==="dark"?"light":"dark");
+applyPublicTheme(publicTheme);
+
+
+function safeUrl(u){try{const x=new URL(String(u||""),location.href);return ["http:","https:"].includes(x.protocol)?x.href:"#"}catch(_){return "#"}}
+function renderIntroBrand(name){
+  const el=$("introName"); if(!el)return;
+  el.innerHTML=`<span class="introMain">হাইমচর নিউজ</span><span class="introAccent">24BD</span>`;
+}
+
+function startSidebarAdAuto(){
+  clearInterval(window.sidebarAdTimer);
+  const ads=adsByFormat("large");
+  if(ads.length>1){
+    window.sidebarAdTimer=setInterval(()=>{
+      sidebarAdIndex=(sidebarAdIndex+1)%ads.length;
+      renderSidebarAd();
+    },5000);
   }
-  function submitPin() {
-    if(enteredPin === appSettings.adminPin) { loginAs('admin'); } 
-    else if(enteredPin === appSettings.cashierPin) { loginAs('cashier'); } 
-    else { showToast("❌ Incorrect PIN!"); }
-    enteredPin = ""; updatePinDisplay();
-  }
-  function loginAs(role) {
-    currentLoginRole = role; let lock = document.getElementById('lock-screen'), app = document.getElementById('app-content');
-    if(lock) lock.style.display = 'none';
-    if(app) {
-      app.style.display = 'block';
-      app.style.opacity = '1';
-      app.classList.add('show');
+}
+function renderSidebarAd(){
+  const box=$("sidebarRealAd");
+  if(!box) return;
+  const ads=adsByFormat("large");
+  box.dataset.adFormat="large";
+  if(!ads.length){box.style.display="none";box.innerHTML="";clearInterval(window.sidebarAdTimer);return;}
+  box.style.display="block";
+  const i=((sidebarAdIndex%ads.length)+ads.length)%ads.length;
+  const a=ads[i];
+  box.innerHTML=`
+    <div class="sidebarAdViewport">
+      <div class="sidebarAdTrack" style="transform:translateX(-${i*100}%);">
+        ${ads.map((x,idx)=>`
+          <a class="sidebarAdSlide" href="${safeUrl(x.link||"#")}" ${safeUrl(x.link||"#")!=="#"?'target="_blank" rel="noopener noreferrer"':""}>
+            <img src="${x.image}" alt="${esc(x.label||"Advertisement")}" loading="lazy" decoding="async">
+          </a>`).join("")}
+      </div>
+      <span class="sidebarAdBadge">${esc(a.label||(lang==="bn"?"বিজ্ঞাপন":"Advertisement"))}</span>
+      ${ads.length>1?`
+        <button class="sidebarAdPrev" type="button" aria-label="Previous">‹</button>
+        <button class="sidebarAdNext" type="button" aria-label="Next">›</button>
+        <div class="sidebarAdDots">${ads.map((_,idx)=>`<button type="button" class="${idx===i?"active":""}" data-i="${idx}" aria-label="Ad ${idx+1}"></button>`).join("")}</div>
+      `:""}
+    </div>`;
+  box.querySelector(".sidebarAdPrev")?.addEventListener("click",e=>{e.preventDefault();sidebarAdIndex=(i-1+ads.length)%ads.length;renderSidebarAd();startSidebarAdAuto();});
+  box.querySelector(".sidebarAdNext")?.addEventListener("click",e=>{e.preventDefault();sidebarAdIndex=(i+1)%ads.length;renderSidebarAd();startSidebarAdAuto();});
+  box.querySelectorAll(".sidebarAdDots button").forEach(b=>b.addEventListener("click",e=>{e.preventDefault();sidebarAdIndex=Number(b.dataset.i);renderSidebarAd();startSidebarAdAuto();}));
+}
+
+function youtubeEmbedUrl(u){
+  try{
+    const x=new URL(String(u||""));
+    let id="";
+    if(x.hostname.includes("youtu.be")) id=x.pathname.split("/").filter(Boolean)[0]||"";
+    else if(x.hostname.includes("youtube.com")){
+      if(x.pathname==="/watch") id=x.searchParams.get("v")||"";
+      else if(x.pathname.startsWith("/shorts/")||x.pathname.startsWith("/embed/")) id=x.pathname.split("/")[2]||"";
     }
-    if(role === 'cashier') { document.body.classList.add('cashier-mode'); safeSet('cashier-indicator', 'innerText', "(Cashier: " + appSettings.cashierName + ")"); showPage('sales'); } 
-    else { document.body.classList.remove('cashier-mode'); safeSet('cashier-indicator', 'innerText', "(Admin)"); showPage('home'); }
-    showToast("Logged in as " + role.toUpperCase());
-  }
-  function logout() { 
-    currentLoginRole = null; 
-    let app = document.getElementById('app-content');
-    let lock = document.getElementById('lock-screen');
-    if(app) { app.classList.remove('show'); app.style.display = 'none'; }
-    if(lock) { lock.style.display = 'flex'; lock.style.opacity = '1'; }
-  }
+    return /^[\w-]{6,20}$/.test(id)?`https://www.youtube.com/embed/${id}`:"";
+  }catch(_){return""}
+}
 
-  function saveSettings() {
-    let n = document.getElementById('set-name'), c = document.getElementById('set-curr'), v = document.getElementById('set-vat'), th = document.getElementById('set-theme'), lg = document.getElementById('set-lang');
-    let cn = document.getElementById('set-cashier-name'), ap = document.getElementById('set-admin-pin'), cp = document.getElementById('set-cashier-pin');
-    appSettings.shopName = n ? n.value : "Cup And Go"; appSettings.currency = c ? c.value : "SR"; appSettings.vatRate = v ? parseFloat(v.value) : 0;
-    appSettings.theme = th ? th.value : "maroon";
-    appSettings.lang = lg ? lg.value : "en";
-    appSettings.cashierName = cn ? cn.value : "Cashier"; appSettings.adminPin = ap ? ap.value : "1234"; appSettings.cashierPin = cp ? cp.value : "0000";
-    saveData(); applySettingsToUI(); updateCart(); showToast("Settings Updated!");
-  }
-
-  function showPage(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    let p = document.getElementById('page-' + id); if(p) p.classList.add('active');
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    let activeBtn = document.querySelector(`.nav-item[onclick="showPage('${id}')"]`); if(activeBtn) activeBtn.classList.add('active');
-  }
-
-  function initUI() {
-    let pg = document.getElementById('pos-products'), pt = document.getElementById('products-table'); 
-    if(pg) pg.innerHTML = ''; if(pt) pt.innerHTML = '';
-    products.forEach(p => {
-      let icn = p.icon.includes('http') ? `<img src="${p.icon}">` : p.icon;
-      if(pg) pg.innerHTML += `<div class="product-card" onclick="addToCart(${p.id})"><div class="p-icon">${icn}</div><b style="font-size:13px;display:block;margin-bottom:5px;">${p.name}</b><div class="p-price">${appSettings.currency} ${p.price}</div></div>`;
-      if(pt) pt.innerHTML += `<tr><td><b style="font-size:13px;">${p.name}</b></td><td><span class="p-price" style="font-size:11px;padding:2px 6px;">${p.price}</span></td><td style="text-align:right;"><button class="btn btn-delete" onclick="confirmAction('Delete Item?', 'Delete this item from inventory?', ()=>deleteProduct(${p.id}))">🗑️</button></td></tr>`;
-    });
-    updateDash(); renderOrders(); updateHistory();
-  }
-
-  function updateDash() {
-    safeSet('stat-active', 'innerText', products.length); safeSet('stat-cust', 'innerText', orders.length); safeSet('stat-sales', 'innerText', totalSales.toFixed(0)); 
-    safeSet('admin-orders-rpt', 'innerText', orders.length); safeSet('admin-rev', 'innerText', totalSales.toFixed(2));
-  }
-
-  function saveProduct() {
-    let n = document.getElementById('inp-name'), p = document.getElementById('inp-price'), i = document.getElementById('inp-icon');
-    if(n && p && n.value && p.value) { products.push({id:Date.now(), name:n.value, price:parseFloat(p.value), icon:(i?i.value:'☕')}); saveData(); initUI(); closeModal('p-modal'); showToast("Item Saved!"); }
-  }
-
-  function deleteProduct(id) { products = products.filter(p => p.id !== id); cart = cart.filter(c => c.id !== id); updateCart(); saveData(); initUI(); showToast("Deleted!"); }
-  function addToCart(id) { let p = products.find(x => x.id === id), ex = cart.find(x => x.id === id); if(ex) ex.qty++; else if(p) cart.push({...p, qty:1}); updateCart(); }
-  function changeQty(id, amt) { let item = cart.find(x => x.id === id); if(item) { item.qty += amt; if(item.qty<=0) cart = cart.filter(x=>x.id!==id); updateCart(); } }
-
-  function updateCart() {
-    let list = document.getElementById('cart-list'), sub = 0; if(!list) return;
-    if(cart.length === 0) list.innerHTML = `<div style="color:var(--muted);text-align:center;padding:20px 0;font-size:12px;" data-i18n="cart_empty">${translations[appSettings.lang].cart_empty}</div>`;
-    else {
-      list.innerHTML = '';
-      cart.forEach(c => {
-        let tot = c.price * c.qty; sub += tot;
-        list.innerHTML += `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;background:rgba(212,175,55,0.08);padding:10px;border-radius:14px;border:1px solid var(--glass-border);">
-          <div><b style="font-size:13px;">${c.name}</b><br><small style="color:var(--muted);">${appSettings.currency} ${c.price}</small></div>
-          <div style="display:flex;align-items:center;gap:8px;"><button class="btn" style="padding:4px 10px;border-radius:8px;" onclick="changeQty(${c.id},-1)">-</button> <b style="width:15px;text-align:center;">${c.qty}</b> <button class="btn" style="padding:4px 10px;border-radius:8px;" onclick="changeQty(${c.id},1)">+</button><b style="color:var(--orange);margin-left:8px;font-size:14px;width:60px;text-align:right;">${tot.toFixed(2)}</b></div></div>`;
+function collectAds(d){
+  const list=[];
+  for(let i=1;i<=6;i++){
+    const enabled=d[`ad${i}Enabled`];
+    const image=d[`ad${i}ImageData`]||"";
+    if(enabled && image){
+      list.push({
+        id:`slot${i}`,
+        image,
+        link:safeUrl(d[`ad${i}Link`]||"#"),
+        label:d[`ad${i}Label`]||"Advertisement",
+        format:d[`ad${i}Format`]||"wide"
       });
     }
-    
-    let discInput = document.getElementById('cart-discount');
-    let discPct = discInput ? parseFloat(discInput.value) || 0 : 0;
-    let discAmt = (sub * discPct) / 100;
-    let discountedSub = sub - discAmt;
-    let finalTotal = discountedSub + (discountedSub * (appSettings.vatRate/100));
-
-    safeSet('cart-total', 'innerText', finalTotal.toFixed(2));
   }
-
-  function completeSale(method) {
-    if(cart.length===0) return showToast("Cart is empty!");
-    let sub = 0; cart.forEach(c => sub += (c.price*c.qty));
-    let discInput = document.getElementById('cart-discount');
-    let discPct = discInput ? parseFloat(discInput.value) || 0 : 0;
-    let discAmt = (sub * discPct) / 100;
-    let discountedSub = sub - discAmt;
-    let tot = discountedSub + (discountedSub * (appSettings.vatRate/100)); 
-    totalSales += tot;
-
-    let ord = {id:Math.floor(20000+Math.random()*80000), time:new Date().toLocaleString(), method:method, items:JSON.parse(JSON.stringify(cart)), total:tot.toFixed(2), discount: discPct, cashier: (currentLoginRole === 'admin' ? "Admin" : appSettings.cashierName)};
-    orders.push(ord); updateHistory(); saveData(); cart = []; if(discInput) discInput.value = 0; updateCart(); showToast("Payment Successful!"); viewOrder(ord.id);
+  // backward compatibility with old single-ad fields
+  if(!list.length && d.adEnabled && d.adImageData){
+    list.push({id:"legacy",image:d.adImageData,link:safeUrl(d.adLink||"#"),label:d.adLabel||"Advertisement",format:"wide"});
   }
+  return list;
+}
 
-  function renderOrders() {
-    let tb = document.getElementById('orders-tlet ord = {id:Math.floor(20000+Math.random()*80000), time:new Date().toLocaleString(), method:method, items:JSON.parse(JSON.stringify(cart)), total:tot.toFixed(2), discount: discPct, cashier: (currentLoginRole === 'admin' ? "Admin" : appSettings.cashierName)};
-    orders.push(ord); updateHistory(); saveData(); cart = []; if(discInput) discInput.value = 0; updateCart(); showToast("Payment Successful!"); viewOrder(ord.id);
+function adsByFormat(format){
+  // Wide and Large are intentionally separate. Never stretch one size into the other.
+  return publicAds.filter(a=>(a.format||"wide")===format);
+}
+const placementTimers={};
+function placementEnabled(name){
+  const map={top:"adPlaceTop",feed:"adPlaceFeed",articleMiddle:"adPlaceArticleMiddle",articleBottom:"adPlaceArticleBottom",footer:"adPlaceFooter"};
+  if(name==="top") return siteSettings[map[name]]!==false;
+  return !!siteSettings[map[name]];
+}
+function renderPlacementAd(id,name){
+  const box=$(id); if(!box)return;
+  clearInterval(placementTimers[id]);
+  const format=(name==="articleMiddle"||name==="articleBottom")?"large":"wide";
+  const ads=adsByFormat(format);
+  if(!placementEnabled(name)||!ads.length){box.classList.add("hide");box.innerHTML="";return}
+  box.dataset.adFormat=format;
+  let ix=0;
+  const draw=()=>{
+    box.innerHTML=`<div class="placementAdViewport"><div class="placementAdTrack">${ads.map(a=>`
+      <a class="placementAdSlide" data-placement-ad="${esc(a.id||"ad")}" href="${esc(a.link)}" target="_blank" rel="noopener noreferrer">
+        <img src="${esc(a.image)}" alt="${esc(a.label||"Advertisement")}" loading="lazy" decoding="async"><span class="placementAdLabel">${esc(a.label||(lang==="bn"?"বিজ্ঞাপন":"Advertisement"))}</span>
+      </a>`).join("")}</div>${ads.length>1?`<div class="placementAdDots">${ads.map((_,n)=>`<i class="${n===ix?"active":""}"></i>`).join("")}</div>`:""}</div>`;
+    box.classList.remove("hide");
+    const track=box.querySelector(".placementAdTrack");
+    if(track) track.style.transform=`translateX(-${ix*100}%)`;
+    box.querySelectorAll("[data-placement-ad]").forEach(el=>el.onclick=()=>recordAdClick(el.dataset.placementAd));
+  };
+  draw();
+  if(ads.length>1) placementTimers[id]=setInterval(()=>{
+    ix=(ix+1)%ads.length;
+    const track=box.querySelector(".placementAdTrack");if(track)track.style.transform=`translateX(-${ix*100}%)`;
+    box.querySelectorAll(".placementAdDots i").forEach((d,n)=>d.classList.toggle("active",n===ix));
+  },5000);
+}
+function renderAllPlacementAds(){
+  renderPlacementAd("feedAdPlacement","feed");
+  renderPlacementAd("articleBottomAdPlacement","articleBottom");
+  renderPlacementAd("footerAdPlacement","footer");
+  const mid=$("articleMiddleAdPlacement"); if(mid) renderPlacementAd("articleMiddleAdPlacement","articleMiddle");
+}
+function stopAdAuto(){if(adTimer){clearInterval(adTimer);adTimer=null}}
+function goAd(i,reset=true){
+  const ads=adsByFormat("wide");
+  if(!ads.length)return;
+  adIndex=(i+ads.length)%ads.length;
+  $("adTrack").style.transform=`translateX(-${adIndex*100}%)`;
+  document.querySelectorAll("#adDots button").forEach((b,n)=>b.classList.toggle("active",n===adIndex));
+  if(reset)startAdAuto();
+  renderSidebarAd();
+}
+function startAdAuto(){
+  stopAdAuto();
+  if(adsByFormat("wide").length>1)adTimer=setInterval(()=>goAd(adIndex+1,false),5000);
+}
+function renderAds(){
+  const box=$("adCarousel");
+  const ads=adsByFormat("wide");
+  box.dataset.adFormat="wide";
+  if(!placementEnabled("top")){box.classList.add("hide");stopAdAuto();return}
+  if(!ads.length){box.classList.add("hide");stopAdAuto();renderSidebarAd();return}
+  $("adTrack").innerHTML=ads.map((a,i)=>`<a class="adSlide" data-ad-id="${esc(a.id||"ad")}" href="${esc(a.link)}" target="_blank" rel="noopener">
+    <img src="${esc(a.image)}" alt="Advertisement" loading="eager" fetchpriority="${i===0?"high":"auto"}" decoding="async" referrerpolicy="no-referrer">
+    <span class="adSlideLabel">${esc(a.label)}</span>
+  </a>`).join("");
+  $("adDots").innerHTML=ads.map((_,i)=>`<button type="button" data-ad-dot="${i}" class="${i===0?"active":""}"></button>`).join("");
+  $("adPrev").classList.toggle("hide",ads.length<2);
+  $("adNext").classList.toggle("hide",ads.length<2);
+  document.querySelectorAll("[data-ad-dot]").forEach(b=>b.onclick=()=>goAd(Number(b.dataset.adDot)));
+  adIndex=0;$("adTrack").style.transform="translateX(0)";
+  box.classList.remove("hide");
+  box.querySelectorAll("[data-ad-id]").forEach(el=>el.onclick=()=>recordAdClick(el.dataset.adId));
+  startAdAuto();
+}
+$("adPrev").onclick=()=>goAd(adIndex-1);
+$("adNext").onclick=()=>goAd(adIndex+1);
+document.addEventListener("visibilitychange",()=>{
+  if(document.visibilityState==="visible"){
+    startAdAuto();
+    startArticleAdAuto();
+  }else{
+    stopAdAuto();
+    stopArticleAdAuto();
   }
+});
 
-  function renderOrders() {
-    let tb = document.getElementById('orders-table'); if(!tb) return; tb.innerHTML = '';
-    if(orders.length===0) tb.innerHTML = `<tr><td colspan="4" style="text-align:center;padding:20px;color:var(--muted);">No sales today</td></tr>`;
-    [...orders].reverse().forEach(o => { tb.innerHTML += `<tr><td><b>#${o.id}</b></td><td><small style="color:var(--muted);">${o.time.split(',')[1]}</small></td><td><b style="color:var(--text);">${appSettings.currency} ${o.total}</b></td><td><button class="btn btn-primary" style="padding:6px 12px;border-radius:10px;font-size:10px;" onclick="viewOrder(${o.id})">View</button></td></tr>`; });
+
+function stopArticleAdAuto(){if(articleAdTimer){clearInterval(articleAdTimer);articleAdTimer=null}}
+function goArticleAd(i,reset=true){
+  const ads=adsByFormat("large");
+  if(!ads.length)return;
+  articleAdIndex=(i+ads.length)%ads.length;
+  $("articleAdTrack").style.transform=`translateX(-${articleAdIndex*100}%)`;
+  document.querySelectorAll("#articleAdDots button").forEach((b,n)=>b.classList.toggle("active",n===articleAdIndex));
+  if(reset)startArticleAdAuto();
+}
+function startArticleAdAuto(){
+  stopArticleAdAuto();
+  if(adsByFormat("large").length>1)articleAdTimer=setInterval(()=>goArticleAd(articleAdIndex+1,false),5000);
+}
+function renderArticleAds(){
+  const box=$("articleAdCarousel");
+  if(!box)return;
+  const ads=adsByFormat("large");
+  if(!ads.length){
+    box.classList.add("hide");
+    stopArticleAdAuto();
+    return;
   }
+  $("articleAdTrack").innerHTML=ads.map(a=>`<a class="articleAdSlide" data-ad-id="${esc(a.id||"ad")}" href="${esc(a.link)}" target="_blank" rel="noopener">
+    <img src="${esc(a.image)}" alt="Advertisement" loading="lazy" decoding="async">
+    <span class="articleAdLabel">${esc(a.label)}</span>
+  </a>`).join("");
+  $("articleAdDots").innerHTML=ads.map((_,i)=>`<button type="button" data-article-ad-dot="${i}" class="${i===0?"active":""}"></button>`).join("");
+  $("articleAdPrev").classList.toggle("hide",ads.length<2);
+  $("articleAdNext").classList.toggle("hide",ads.length<2);
+  document.querySelectorAll("[data-article-ad-dot]").forEach(b=>b.onclick=()=>goArticleAd(Number(b.dataset.articleAdDot)));
+  articleAdIndex=0;
+  $("articleAdTrack").style.transform="translateX(0)";
+  box.classList.remove("hide");
+  box.querySelectorAll("[data-ad-id]").forEach(el=>el.onclick=()=>recordAdClick(el.dataset.adId));
+  startArticleAdAuto();
+}
+$("articleAdPrev").onclick=()=>goArticleAd(articleAdIndex-1);
+$("articleAdNext").onclick=()=>goArticleAd(articleAdIndex+1);
 
-  function viewOrder(id) {
-    let o = orders.find(x => x.id === id); if(!o) return;
-    safeSet('rcpt-inv', 'innerText', o.id); safeSet('rcpt-date', 'innerText', o.time); safeSet('rcpt-cashier-print', 'innerText', o.cashier || appSettings.cashierName);
-    safeSet('rcpt-due', 'innerText', o.total); safeSet('rcpt-method', 'innerText', o.method.toUpperCase()); safeSet('rcpt-paid', 'innerText', o.total);
-    let tb = document.getElementById('rcpt-items'); if(tb) { tb.innerHTML = ''; o.items.forEach(i => { tb.innerHTML += `<tr><td style="padding:4px 0;color:#000;">${i.name}</td><td style="text-align:center;color:#000;">${i.qty}</td><td style="text-align:right;color:#000;">${(i.price*i.qty).toFixed(2)}</td></tr>`; }); }
-    openModal('order-detail-modal');
-  }
-
-  function updateHistory() {
-    let dStr = new Date().toLocaleDateString(), ext = history30Days.find(x => x.date === dStr);
-    if(ext) { ext.orders = orders.length; ext.rev = totalSales; } else { history30Days.unshift({date:dStr, orders:orders.length, rev:totalSales}); } saveData();
-    let tb = document.getElementById('history-table'); if(!tb) return; tb.innerHTML = '';
-    history30Days.forEach(h => { tb.innerHTML += `<tr><td><b>${h.date}</b></td><td><span style="background:rgba(212,175,55,0.1);padding:4px 8px;border-radius:8px;font-size:11px;">${h.orders}</span></td><td><b style="color:var(--orange);">${appSettings.currency} ${h.rev.toFixed(2)}</b></td></tr>`; });
-  }
-
-  function filterHistory() {
-    let s = document.getElementById('date-search'), tb = document.getElementById('history-table'); if(!s || !tb) return; let q = s.value.toLowerCase(); tb.innerHTML = '';
-    history30Days.filter(h => h.date.toLowerCase().includes(q)).forEach(h => { tb.innerHTML += `<tr><td><b>${h.date}</b></td><td><span style="background:rgba(212,175,55,0.1);padding:4px 8px;border-radius:8px;font-size:11px;">${h.orders}</span></td><td><b style="color:var(--orange);">${appSettings.currency} ${h.rev.toFixed(2)}</b></td></tr>`; });
-  }
-
-  function downloadReceiptPDF() { html2pdf().set({margin:0.2, filename:'Invoice.pdf', jsPDF:{unit:'in',format:[3.15, 6]}}).from(document.getElementById('receipt-content')).save(); }
+function setLang(next){
+  localStorage.setItem("haimchar_lang",next);
   
-  function generateDayClosePDF() {
-    if(orders.length===0) return showToast("No sales to report!"); 
-    let tb = document.getElementById('pdf-items'), sum = 0; if(!tb) return; tb.innerHTML = '';
-    safeSet('pdf-date-print', 'innerText', new Date().toLocaleDateString());
-    orders.forEach(o => { o.items.forEach(i => { sum += (i.price*i.qty); tb.innerHTML += `<tr><td style="padding:6px 0;border-bottom:1px solid #eee;">${i.name}</td><td style="text-align:center;padding:6px 0;border-bottom:1px solid #eee;">${i.qty}</td><td style="text-align:right;padding:6px 0;border-bottom:1px solid #eee;">${(i.price*i.qty).toFixed(2)}</td></tr>`; }); });
-    safeSet('pdf-total', 'innerText', "Total: " + (sum + (sum * (appSettings.vatRate/100))).toFixed(2));
-    
-    html2pdf().set({margin:0.15, filename:'Daily_Report.pdf', jsPDF:{unit:'in', format:[3.15, 6.5]}}).from(document.getElementById('pdf-report')).save();
+  lang=next;localStorage.setItem("site_lang",lang);document.documentElement.lang=lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(i18n[lang][k])el.textContent=i18n[lang][k]});
+  document.querySelectorAll("[data-ph]").forEach(el=>el.placeholder=t(el.dataset.ph));
+  $("bnBtn").classList.toggle("active",lang==="bn");$("enBtn").classList.toggle("active",lang==="en");
+  renderNav();updateDateLine();updateLiveClock();render(filtered());
+}
+$("bnBtn").onclick=()=>setLang("bn");$("enBtn").onclick=()=>setLang("en");
+
+function filtered(){
+  let list=all.filter(x=>!x.deleted && (!x.publishAtMs || x.publishAtMs<=Date.now()));
+  if(currentFilter) list=list.filter(x=>x.category===currentFilter);
+  return list;
+}
+function sortNews(list){return [...list].sort((a,b)=>(b.createdAt?.seconds||b.updatedAt?.seconds||0)-(a.createdAt?.seconds||a.updatedAt?.seconds||0))}
+
+function stopLeadAuto(){
+  if(leadTimer){clearInterval(leadTimer);leadTimer=null}
+}
+function goLead(index,resetTimer=true){
+  if(!leadSlides.length)return;
+  leadIndex=(index+leadSlides.length)%leadSlides.length;
+  $("leadTrack").style.transform=`translateX(-${leadIndex*100}%)`;
+  document.querySelectorAll("#leadDots button").forEach((b,i)=>b.classList.toggle("active",i===leadIndex));
+  if(resetTimer) startLeadAuto();
+}
+function startLeadAuto(){
+  stopLeadAuto();
+  if(leadSlides.length>1) leadTimer=setInterval(()=>goLead(leadIndex+1,false),4500);
+}
+function renderLeadCarousel(list){
+  const sorted=sortNews(list);
+  const featured=sorted.filter(x=>x.featured);
+  const rest=sorted.filter(x=>!x.featured);
+  leadSlides=[...featured,...rest].slice(0,6);
+  const track=$("leadTrack"),dots=$("leadDots");
+  if(!leadSlides.length){
+    track.innerHTML=`<article class="leadSlide"><div class="leadText"><span class="headlineBoard">NEWS24BD</span><h1>${esc(t("welcomeTitle"))}</h1><p>${esc(t("welcomeSub"))}</p></div></article>`;
+    dots.innerHTML="";$("leadPrev").classList.add("hide");$("leadNext").classList.add("hide");stopLeadAuto();return;
   }
+  $("leadPrev").classList.toggle("hide",leadSlides.length<2);
+  $("leadNext").classList.toggle("hide",leadSlides.length<2);
+  track.innerHTML=leadSlides.map(x=>`<article class="leadSlide" data-lead-id="${x.id}">
+    ${safeImageTag(newsImg(x))}
+    <div class="leadText">
+      <span class="headlineBoard">★ ${esc(x.category||"প্রধান সংবাদ")}</span>
+      <h1>${esc(storyTitle(x))}</h1>
+      <p>${esc(storyExcerpt(x))}</p>
+    </div>
+  </article>`).join("");
+  dots.innerHTML=leadSlides.map((_,i)=>`<button type="button" data-dot="${i}" class="${i===0?"active":""}" aria-label="Slide ${i+1}"></button>`).join("");
+  leadIndex=0;track.style.transform="translateX(0)";
+  track.querySelectorAll("[data-lead-id]").forEach(el=>el.onclick=()=>openArticle(el.dataset.leadId));
+  dots.querySelectorAll("[data-dot]").forEach(b=>b.onclick=(e)=>{e.stopPropagation();goLead(Number(b.dataset.dot))});
+  startLeadAuto();
+}
+$("leadPrev").onclick=(e)=>{e.stopPropagation();goLead(leadIndex-1)};
+$("leadNext").onclick=(e)=>{e.stopPropagation();goLead(leadIndex+1)};
+$("leadCarousel").addEventListener("mouseenter",stopLeadAuto);
+$("leadCarousel").addEventListener("mouseleave",startLeadAuto);
+$("leadCarousel").addEventListener("touchstart",e=>{touchStartX=e.changedTouches[0].clientX;stopLeadAuto()},{passive:true});
+$("leadCarousel").addEventListener("touchend",e=>{
+  const dx=e.changedTouches[0].clientX-touchStartX;
+  if(Math.abs(dx)>45)goLead(dx<0?leadIndex+1:leadIndex-1);
+  else startLeadAuto();
+},{passive:true});
+
+function render(list){
+  list=sortNews(list);
+  renderLeadCarousel(list);
+  // Latest News is independent from the lead slider:
+  // a story may appear in both places, like a normal news portal.
+  const rest=list.slice(0,12);
+  $("newsGrid").innerHTML=rest.length?rest.map((x,i)=>{
+    const cls=i===0?"heroLatest":(i>=3?"compactLatest":"");
+    return `<article class="card ${cls}" data-id="${x.id}">
+      ${newsImg(x)?safeImageTag(newsImg(x),"photo"):`<div class="visual">📰</div>`}
+      <div class="body"><span class="headlineBoard">${esc(x.category||"")}</span><h3>${esc(storyTitle(x))}</h3><p>${esc(storyExcerpt(x))}</p><small>${esc(stamp(x.updatedAt||x.createdAt))}</small></div>
+    </article>`;
+  }).join(""):`<div class="empty">${esc(t("empty"))}</div>`;
+  document.querySelectorAll(".card[data-id]").forEach(c=>c.onclick=()=>openArticle(c.dataset.id));
+  const mostRead=[...list].sort((a,b)=>Number(viewStats[b.id]?.views||0)-Number(viewStats[a.id]?.views||0)).slice(0,5);
+  $("popular").innerHTML=mostRead.map((x,i)=>`<div class="rank" data-pop="${x.id}"><strong>${String(i+1).padStart(2,"0")}</strong><span>${esc(storyTitle(x))}<small>${esc(x.category||"")} • 👁 ${Number(viewStats[x.id]?.views||0).toLocaleString()}</small></span></div>`).join("");
+  document.querySelectorAll("[data-pop]").forEach(r=>r.onclick=()=>openArticle(r.dataset.pop));
+  {
+    const breakingItems=list.filter(x=>x.breaking && !x.deleted && (!x.publishAtMs || x.publishAtMs<=Date.now()));
+    const ticker=$("breakingTicker");
+    if(breakingItems.length){
+      ticker.innerHTML=breakingItems.map((x,i)=>`<a href="#news=${encodeURIComponent(x.id)}" data-breaking-id="${esc(x.id)}">${esc(storyTitle(x))}</a>${i<breakingItems.length-1?'<span class="breakingSep"> • </span>':''}`).join("");
+      ticker.querySelectorAll("[data-breaking-id]").forEach(el=>el.onclick=(e)=>{e.preventDefault();openArticle(el.dataset.breakingId)});
+      syncBreakingTickerSpeed();
+    }else{
+      ticker.textContent=lang==="bn"?"হাইমচরের সর্বশেষ সংবাদ—দ্রুত ও নির্ভুল":"Latest Haimchar news — fast and reliable";
+    }
+  }
+  renderCategorySections();
+}
+
+
+function syncBreakingTickerSpeed(){
+  const ticker=$("breakingTicker");
+  if(!ticker)return;
+  requestAnimationFrame(()=>{
+    const distance=(window.innerWidth*.70)+ticker.scrollWidth;
+    const oldVisualSpeed=50; // px/sec, matches the original single-headline 18s ticker
+    const duration=Math.max(18,distance/oldVisualSpeed);
+    ticker.style.setProperty("--breaking-duration",duration.toFixed(2)+"s");
+  });
+}
+
+function canonicalArticleUrl(id){
+  const base=(location.protocol==="http:"||location.protocol==="https:")?`${location.origin}${location.pathname}`:location.href.split("#")[0];
+  return `${base}#news=${encodeURIComponent(id)}`;
+}
+function tsISO(ts){try{return ts?.toDate?ts.toDate().toISOString():""}catch(_){return""}}
+function setJsonLd(id,obj){const el=$(id);if(el)el.textContent=JSON.stringify(obj)}
+function savedIds(){try{return JSON.parse(localStorage.getItem("haimchar_saved_news")||"[]")}catch(_){return[]}}
+function isSaved(id){return savedIds().includes(id)}
+function toggleSaved(id){
+  let ids=savedIds();ids=ids.includes(id)?ids.filter(x=>x!==id):[id,...ids].slice(0,100);
+  localStorage.setItem("haimchar_saved_news",JSON.stringify(ids));return ids.includes(id);
+}
+function trendingNews(currentId){
+  const now=Date.now()/1000;
+  return all.filter(n=>n.id!==currentId&&!n.deleted&&(!n.publishAtMs||n.publishAtMs<=Date.now())).map(n=>{
+    const sec=n.createdAt?.seconds||n.updatedAt?.seconds||now, ageH=Math.max(1,(now-sec)/3600);
+    const views=Number(viewStats[n.id]?.views||0);
+    return {...n,_trend:(views+2)/Math.pow(ageH+2,1.15)};
+  }).sort((a,b)=>b._trend-a._trend).slice(0,4);
+}
+function updateReadingProgress(){
+  if(!document.body.classList.contains("article-open")){$("readingProgress").style.width="0";return}
+  const el=$("articleInner");if(!el)return;
+  const start=el.getBoundingClientRect().top+scrollY;
+  const total=Math.max(1,el.offsetHeight-innerHeight*.55);
+  const pct=Math.max(0,Math.min(100,((scrollY-start)/total)*100));
+  $("readingProgress").style.width=pct+"%";
+}
+window.addEventListener("scroll",updateReadingProgress,{passive:true});
+function speakArticle(x,btn){
+  if(!("speechSynthesis" in window)){btn.textContent=lang==="bn"?"শোনা সাপোর্ট নেই":"TTS unavailable";return}
+  if(speechSynthesis.speaking){speechSynthesis.cancel();btn.textContent=lang==="bn"?"🔊 শুনুন":"🔊 Listen";return}
+  const u=new SpeechSynthesisUtterance(`${storyTitle(x)}. ${storyContent(x)}`);
+  u.lang=lang==="bn"?"bn-BD":"en-US";u.rate=.95;
+  u.onend=()=>btn.textContent=lang==="bn"?"🔊 শুনুন":"🔊 Listen";
+  speechSynthesis.speak(u);btn.textContent=lang==="bn"?"■ বন্ধ":"■ Stop";
+}
+function openArticle(id,pushHash=true){
+  const x=all.find(n=>n.id===id);if(!x || x.deleted || (x.publishAtMs && x.publishAtMs>Date.now()))return;
+  recordArticleView(id);
+  const images=[newsImg(x),x.imageData2||"",x.imageData3||""].filter(Boolean);
+  const gallery=images.length?`<div class="articleGallery">${images.map(s=>safeImageTag(s)).join("")}</div>`:"";
+  const related=sortNews(all.filter(n=>n.id!==x.id && !n.deleted && (!n.publishAtMs || n.publishAtMs<=Date.now()) && n.category===x.category)).slice(0,4);
+  const authorMore=x.reporter?sortNews(all.filter(n=>n.id!==x.id && !n.deleted && (!n.publishAtMs || n.publishAtMs<=Date.now()) && n.reporter===x.reporter)).slice(0,4):[];
+  const trending=trendingNews(x.id);
+
+  $("articleInner").innerHTML=`
+    <span class="headlineBoard">${esc(x.category||"সংবাদ")}</span>
+    <h1>${esc(storyTitle(x))}</h1>
+    <div class="articleMeta">${esc(stamp(x.updatedAt||x.createdAt))}${x.reporter?` • ${lang==="bn"?"প্রতিবেদক":"Reporter"}: ${esc(x.reporter)}`:""}${x.source?` • ${lang==="bn"?"সূত্র":"Source"}: ${esc(x.source)}`:""}</div>
+    ${gallery}
+    <div id="articleMiddleAdPlacement" class="placementAd articleInlineAd hide" aria-label="Advertisement"></div>
+    ${x.imageCaption?`<div class="articleMeta">${esc(x.imageCaption)}</div>`:""}
+    ${youtubeEmbedUrl(x.youtubeVideo)?`<div class="articleVideo"><iframe src="${esc(youtubeEmbedUrl(x.youtubeVideo))}" title="YouTube video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`:""}
+    <div class="readerTools">
+      <button id="fontMinus" type="button" title="Smaller text">A−</button>
+      <button id="fontNormal" type="button" title="Normal text">A</button>
+      <button id="fontPlus" type="button" title="Larger text">A+</button>
+      <button id="bookmarkBtn" type="button">${isSaved(x.id)?(lang==="bn"?"★ সেভ করা":"★ Saved"):(lang==="bn"?"☆ পরে পড়ুন":"☆ Save")}</button>
+      <button id="printBtn" type="button">${lang==="bn"?"🖨 প্রিন্ট":"🖨 Print"}</button>
+      <button id="listenBtn" type="button">${lang==="bn"?"🔊 শুনুন":"🔊 Listen"}</button>
+    </div>
+    <div id="articleText" class="articleContent readerNormal">${esc(storyContent(x))}</div>
+    <div class="shareRow"><button id="shareBtn">${esc(t("share"))}</button><button id="copyBtn">${esc(t("copy"))}</button></div>
+    <div class="socialSharePremium">
+      <a id="facebookShareBtn" class="fbShare" href="#" target="_blank" rel="noopener noreferrer">Facebook Share</a>
+      <a id="whatsappShareBtn" class="waShare" href="#" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      ${safeUrl(x.youtubeVideo)!=="#"?`<a class="ytWatch" href="${esc(safeUrl(x.youtubeVideo))}" target="_blank" rel="noopener noreferrer">YouTube</a>`:""}
+      ${safeUrl(x.facebookPost)!=="#"?`<a class="fbPost" href="${esc(safeUrl(x.facebookPost))}" target="_blank" rel="noopener noreferrer">Facebook Post</a>`:""}
+      <div class="extraShares"><a id="telegramShareBtn" href="#" target="_blank" rel="noopener">Telegram</a><a id="xShareBtn" href="#" target="_blank" rel="noopener">X</a><a id="linkedinShareBtn" href="#" target="_blank" rel="noopener">LinkedIn</a></div>
+    </div>
+    ${authorMore.length?`<div class="relatedBox"><h3>${lang==="bn"?"এই লেখকের আরও":"More from this reporter"}</h3><div class="relatedList">${authorMore.map(r=>`<div class="relatedItem" data-related="${r.id}">${esc(storyTitle(r))}</div>`).join("")}</div></div>`:""}
+    ${trending.length?`<div class="relatedBox"><h3>${lang==="bn"?"ট্রেন্ডিং সংবাদ":"Trending News"}</h3><div class="relatedList">${trending.map(r=>`<div class="relatedItem" data-related="${r.id}">${esc(storyTitle(r))}</div>`).join("")}</div></div>`:""}
+    ${related.length?`<div class="relatedBox"><h3>${lang==="bn"?"সম্পর্কিত সংবাদ":"Related News"}</h3><div class="relatedList">${related.map(r=>`<div class="relatedItem" data-related="${r.id}">${esc(storyTitle(r))}</div>`).join("")}</div></div>`:""}
+  `;
+
+  document.body.classList.add("article-open");
+  $("articlePage").classList.add("active");
+  renderArticleAds();
+  renderAllPlacementAds();
+  window.scrollTo({top:0,behavior:"instant"});
+
+  if(pushHash) history.pushState({newsId:id},"",`#news=${encodeURIComponent(id)}`);
+  const url=location.href;
+  const fbShare=$("facebookShareBtn"), waShare=$("whatsappShareBtn");
+  if(fbShare) fbShare.href=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+  if(waShare) waShare.href=`https://wa.me/?text=${encodeURIComponent(storyTitle(x)+" "+url)}`;
+  const tg=$("telegramShareBtn"),xs=$("xShareBtn"),li=$("linkedinShareBtn");
+  if(tg)tg.href=`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(storyTitle(x))}`;
+  if(xs)xs.href=`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(storyTitle(x))}`;
+  if(li)li.href=`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+  const articleText=$("articleText");
+  const setReaderSize=size=>{articleText.classList.remove("readerSmall","readerNormal","readerLarge");articleText.classList.add(size);localStorage.setItem("haimchar_reader_size",size)};
+  setReaderSize(localStorage.getItem("haimchar_reader_size")||"readerNormal");
+  $("fontMinus").onclick=()=>setReaderSize("readerSmall");$("fontNormal").onclick=()=>setReaderSize("readerNormal");$("fontPlus").onclick=()=>setReaderSize("readerLarge");
+  $("bookmarkBtn").onclick=()=>{$("bookmarkBtn").textContent=toggleSaved(x.id)?(lang==="bn"?"★ সেভ করা":"★ Saved"):(lang==="bn"?"☆ পরে পড়ুন":"☆ Save")};
+  $("printBtn").onclick=()=>window.print();
+  $("listenBtn").onclick=()=>speakArticle(x,$("listenBtn"));
+  updateReadingProgress();
+
+  const canonical=canonicalArticleUrl(x.id);
+  const canonicalEl=$("canonicalLink");if(canonicalEl)canonicalEl.href=canonical;
+  const ogUrl=document.querySelector('meta[property="og:url"]');if(ogUrl)ogUrl.content=canonical;
+  const pubISO=tsISO(x.createdAt),modISO=tsISO(x.updatedAt||x.createdAt);
+  const pmeta=document.querySelector('meta[property="article:published_time"]');if(pmeta)pmeta.content=pubISO;
+  const mmeta=document.querySelector('meta[property="article:modified_time"]');if(mmeta)mmeta.content=modISO;
+  setJsonLd("newsArticleSchema",{"@context":"https://schema.org","@type":"NewsArticle","headline":x.seoTitle||storyTitle(x),"description":(x.seoDescription||storyExcerpt(x)).slice(0,180),"image":[newsImg(x),x.imageData2||"",x.imageData3||""].filter(Boolean),"datePublished":pubISO,"dateModified":modISO||pubISO,"author":{"@type":"Person","name":x.reporter||siteSettings.editorName||siteSettings.name||"হাইমচর নিউজ24BD"},"publisher":{"@type":"Organization","name":siteSettings.name||"হাইমচর নিউজ24BD","logo":siteSettings.logoData?{"@type":"ImageObject","url":siteSettings.logoData}:undefined},"mainEntityOfPage":canonical});
+  setJsonLd("breadcrumbSchema",{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":lang==="bn"?"হোম":"Home","item":location.href.split("#")[0]},{"@type":"ListItem","position":2,"name":x.category||"News"},{"@type":"ListItem","position":3,"name":storyTitle(x),"item":canonical}]});
+
+
+  $("copyBtn").onclick=async()=>{try{await navigator.clipboard.writeText(url);$("copyBtn").textContent=t("copied")}catch(_){}};
+  $("shareBtn").onclick=async()=>{if(navigator.share){try{await navigator.share({title:storyTitle(x),text:storyExcerpt(x),url})}catch(_){}}else{$("copyBtn").click()}};
+  document.querySelectorAll("[data-related]").forEach(el=>el.onclick=()=>openArticle(el.dataset.related,true));
+
+  document.title=`${x.seoTitle||storyTitle(x)} — ${siteSettings.name||"হাইমচর নিউজ24BD"}`;
+  const seoDesc=(x.seoDescription||storyExcerpt(x)).slice(0,155);
+  const desc=document.querySelector('meta[name="description"]');if(desc)desc.setAttribute("content",seoDesc);
+  const ogTitle=document.querySelector('meta[property="og:title"]');if(ogTitle)ogTitle.content=x.seoTitle||storyTitle(x);
+  const ogDesc=document.querySelector('meta[property="og:description"]');if(ogDesc)ogDesc.content=seoDesc;
+  const ogImg=document.querySelector('meta[property="og:image"]');if(ogImg)ogImg.content=newsImg(x)||"";
+  const ogType=document.querySelector('meta[property="og:type"]');if(ogType)ogType.content="article";
+  let twTitle=document.querySelector('meta[name="twitter:title"]');if(!twTitle){twTitle=document.createElement("meta");twTitle.name="twitter:title";document.head.appendChild(twTitle)}twTitle.content=x.seoTitle||storyTitle(x);
+  let twDesc=document.querySelector('meta[name="twitter:description"]');if(!twDesc){twDesc=document.createElement("meta");twDesc.name="twitter:description";document.head.appendChild(twDesc)}twDesc.content=seoDesc;
+  let twImg=document.querySelector('meta[name="twitter:image"]');if(!twImg){twImg=document.createElement("meta");twImg.name="twitter:image";document.head.appendChild(twImg)}twImg.content=newsImg(x)||"";
+}
+function closeArticle(pushHistory=true){
+  $("articlePage").classList.remove("active");
+  document.body.classList.remove("article-open");
+  stopArticleAdAuto();
+  if("speechSynthesis" in window)speechSynthesis.cancel();
+  if($("readingProgress"))$("readingProgress").style.width="0";
+  document.title=siteSettings.name||"হাইমচর নিউজ24BD";
+  if(pushHistory && location.hash.startsWith("#news=")) history.pushState({home:true},"",location.pathname+location.search);
+  window.scrollTo({top:0,behavior:"instant"});
+}
+
+// v17.8 — mobile Back protection.
+// Article Back returns to Public Home; Back on Home does not immediately leave the site.
+(function initPublicBackGuard(){
+  try{
+    const cleanUrl=location.pathname+location.search;
+    if(!location.hash.startsWith("#news=")){
+      history.replaceState({publicHome:true,guard:true},"",cleanUrl);
+      history.pushState({publicHome:true},"",cleanUrl);
+    }
+  }catch(_){}
+})();
+
+$("backArticleBtn").onclick=()=>history.back();
+window.addEventListener("popstate",()=>{
+  const hash=decodeURIComponent(location.hash||"");
+  if(hash.startsWith("#news=")){
+    const id=hash.slice(6);
+    if(all.some(x=>x.id===id)) openArticle(id,false);
+    return;
+  }
+  closeArticle(false);
+  // Keep one protected Home entry ahead, so a single hardware Back cannot leave the Public page.
+  try{
+    if(!history.state || history.state.guard){
+      history.pushState({publicHome:true},"",location.pathname+location.search);
+    }
+  }catch(_){}
+});
+
+$("searchForm").onsubmit=e=>{
+  e.preventDefault();const q=$("searchInput").value.trim().toLowerCase();
+  const base=filtered();render(q?base.filter(x=>(`${x.title||""} ${x.titleEn||""} ${x.category||""} ${x.excerpt||""} ${x.excerptEn||""} ${x.content||""} ${x.contentEn||""}`).toLowerCase().includes(q)):base);
+};
+
+async function recordArticleView(id){
+  try{
+    const key=`haimchar_viewed_${id}`;
+    if(sessionStorage.getItem(key))return;
+    await setDoc(doc(db,"publicStats",id),{views:increment(1),updatedAt:serverTimestamp()},{merge:true});
+    sessionStorage.setItem(key,"1");
+  }catch(err){console.warn("Article view:",err?.message||err)}
+}
+async function recordAdClick(id){
+  try{await setDoc(doc(db,"adStats",id||"unknown"),{clicks:increment(1),updatedAt:serverTimestamp()},{merge:true})}catch(err){console.warn("Ad click:",err?.message||err)}
+}
+async function recordVisit(){
+  try{
+    const key="haimchar_unique_visitor_v1";
+    const isNew=!localStorage.getItem(key);
+    await setDoc(doc(db,"analytics","site"),{
+      pageViews:increment(1),
+      visitorCount:increment(isNew?1:0),
+      updatedAt:serverTimestamp()
+    },{merge:true});
+    if(isNew)localStorage.setItem(key,"1");
+  }catch(err){console.warn("Analytics:",err?.message||err)}
+}
+recordVisit();
+
+
+function preloadVisual(src,timeout=7000){
+  return new Promise(resolve=>{
+    if(!src){resolve(false);return}
+    const im=new Image(); let done=false;
+    const finish=ok=>{if(done)return;done=true;clearTimeout(timer);resolve(ok)};
+    const timer=setTimeout(()=>finish(false),timeout);
+    im.onload=()=>{if(im.decode){im.decode().catch(()=>{}).finally(()=>finish(true))}else finish(true)};
+    im.onerror=()=>finish(false); im.decoding="async"; im.src=src;
+    if(im.complete&&im.naturalWidth)finish(true);
+  });
+}
+function warmVisuals(list){
+  [...new Set((list||[]).filter(Boolean))].slice(0,8).forEach(src=>{
+    const im=new Image(); im.decoding="async"; im.src=src;
+  });
+}
+
+const FAST_SITE_CACHE="haimchar_site_fast_v1";
+const FAST_ADS_CACHE="haimchar_ads_fast_v1";
+function saveFastCache(key,value){try{localStorage.setItem(key,JSON.stringify(value))}catch(_){}}
+function readFastCache(key){try{return JSON.parse(localStorage.getItem(key)||"null")}catch(_){return null}}
+function applyFastSiteCache(d){
+  if(!d||typeof d!=="object")return;
+  siteSettings={...siteSettings,...d};
+  const logoSize=Math.max(35,Math.min(100,Number(d.logoSize||80)));
+  document.documentElement.style.setProperty("--header-logo-size",logoSize+"%");
+  document.documentElement.style.setProperty("--header-logo-size-pct",String(logoSize));
+  document.documentElement.style.setProperty("--header-logo-max-px",Math.round(620*logoSize/100)+"px");
+  const hLogo=$("headerLogo");
+  if(hLogo&&d.logoData){
+    hLogo.loading="eager"; hLogo.fetchPriority="high"; hLogo.src=d.logoData;
+    hLogo.classList.remove("hide");
+    document.documentElement.classList.add("site-settings-ready");
+    setTimeout(applyHeaderLogoMode,0);
+  }
+}
+const cachedSite=readFastCache(FAST_SITE_CACHE);
+if(cachedSite)applyFastSiteCache(cachedSite);
+// Ads always come fresh from Firestore. Avoid stale cached image URLs blanking the top banner.
+try{localStorage.removeItem(FAST_ADS_CACHE)}catch(_){}
+
+onSnapshot(query(collection(db,"news"),where("status","==","published")),(snap)=>{
+  all=snap.docs.map(d=>({id:d.id,...d.data()}));
+  render(filtered());
+  $("loading")?.remove();
+  const hash=decodeURIComponent(location.hash||"");
+  if(hash.startsWith("#news=")){const id=hash.slice(6);if(all.some(x=>x.id===id))openArticle(id,false)}
+},(err)=>{
+  console.error(err);$("newsGrid").innerHTML=`<div class="empty">${esc(err.message)}</div>`;$("loading")?.remove();
+});
+
+onSnapshot(collection(db,"publicStats"),(snap)=>{viewStats={};snap.docs.forEach(d=>viewStats[d.id]=d.data());render(filtered())},console.error);
+
+onSnapshot(collection(db,"ads"),(snap)=>{
+  adDocs=snap.docs.map(d=>({id:d.id,...d.data()}));
+  if(adDocs.length){
+    publicAds=adDocs
+      .filter(x=>x.enabled&&x.imageData)
+      .map(x=>({id:x.id,image:x.imageData,link:safeUrl(x.link||"#"),label:x.label||(lang==="bn"?"বিজ্ঞাপন":"Advertisement"),format:x.format||"wide"}));
+  }else{
+    publicAds=collectAds(siteSettings||{});
+  }
+  adIndex=0;
+  warmVisuals(publicAds.map(a=>a.image));
+  renderAds();renderArticleAds();renderSidebarAd();startSidebarAdAuto();renderAllPlacementAds();
+  
+},(err)=>{
+  console.warn("Ads collection:",err?.message||err);
+  publicAds=collectAds(siteSettings||{});
+  adIndex=0;renderAds();renderArticleAds();renderSidebarAd();startSidebarAdAuto();renderAllPlacementAds();
+});
+
+onSnapshot(collection(db,"categories"),(snap)=>{
+  categories=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.order||999)-(b.order||999));
+  renderNav();renderCategorySections();
+},console.error);
+
+onSnapshot(doc(db,"siteSettings","general"),(snap)=>{
+  if(!snap.exists()){document.documentElement.classList.add("site-settings-ready");return;}
+  const d=snap.data();siteSettings=d;
+  saveFastCache(FAST_SITE_CACHE,{
+    logoData:d.logoData||"",logoSize:d.logoSize||80,name:d.name||"",
+    tagline:d.tagline||"",headerAnimation:d.headerAnimation||"none",
+    fontFamily:d.fontFamily||"",customFontFamily:d.customFontFamily||""
+  });
+  document.documentElement.classList.add("site-settings-ready");
+  const logoSize=Math.max(35,Math.min(100,Number(d.logoSize||80)));
+  document.documentElement.style.setProperty("--header-logo-size",logoSize+"%");
+  document.documentElement.style.setProperty("--header-logo-size-pct",String(logoSize));
+  document.documentElement.style.setProperty("--header-logo-max-px",Math.round(620*logoSize/100)+"px");
+  setTimeout(applyHeaderLogoMode,0);
+  const wordmark=$("siteWordmark");
+  const brandLogo=$("headerLogo");
+  const animTargets=[wordmark,brandLogo].filter(Boolean);
+  animTargets.forEach(el=>[...el.classList].filter(c=>c.startsWith("headerAnim-")).forEach(c=>el.classList.remove(c)));
+  const legacyMap={float:"tvReveal",shine:"tvSweep",pulse:"tvZoom",tilt:"tvFlip"};
+  const rawAnim=d.headerAnimation||"none";
+  const anim=legacyMap[rawAnim]||rawAnim;
+  if(["tvFlip","tvReveal","tvZoom","tvSweep"].includes(anim)) animTargets.forEach(el=>el.classList.add(`headerAnim-${anim}`));
+  const displayName=d.name||"হাইমচর নিউজ24BD";
+  const cleanName=displayName.trim();
+  let primary="হাইমচর", secondary="নিউজ24BD";
+  if(cleanName){
+    const parts=cleanName.split(/\s+/);
+    primary=parts.shift()||"হাইমচর";
+    secondary=parts.join(" ")||"নিউজ24BD";
+    if(!/24BD/i.test(secondary) && /নিউজ/i.test(secondary)) secondary=secondary+"24BD";
+  }
+  $("siteNamePrimary").textContent=primary;
+  $("siteNameSecondary").textContent=secondary;
+  $("footerName").textContent=displayName;
+  $("copyName").textContent=displayName;
+  $("footerTag").textContent=d.tagline||"";
+  if($("headerTagline")) $("headerTagline").textContent=d.tagline||"হাইমচরের কথা, মানুষের কণ্ঠে";
+  $("footerAbout").textContent=d.about||"";
+  if($("footerEditor")) $("footerEditor").textContent=d.editorName||"—";
+  if($("footerPublisher")) $("footerPublisher").textContent=d.publisherName||"—";
+  if($("footerOwner")) $("footerOwner").textContent=d.ownerName||"—";
+  $("footerAddress").textContent=d.address||"";
+  $("footerPhone").textContent=d.phone||"";$("footerPhone").href=d.phone?`tel:${d.phone}`:"#";
+  $("footerEmail").textContent=d.email||"";$("footerEmail").href=d.email?`mailto:${d.email}`:"#";
+  $("footerFacebook").style.display=d.facebook?"inline-flex":"none";$("footerFacebook").href=safeUrl(d.facebook||"");
+  $("footerYoutube").style.display=d.youtube?"inline-flex":"none";$("footerYoutube").href=safeUrl(d.youtube||"");
+  $("copyYear").textContent=new Date().getFullYear();
+  if(d.customFontUrl){let fl=document.getElementById("customFontStylesheet");if(!fl){fl=document.createElement("link");fl.id="customFontStylesheet";fl.rel="stylesheet";document.head.appendChild(fl)}fl.href=safeUrl(d.customFontUrl)}
+  const chosenFont=(d.customFontFamily||d.fontFamily||"Hind Siliguri").trim();
+  document.documentElement.style.setProperty("--site-font",`"${chosenFont}","Hind Siliguri","Noto Sans Bengali",Arial,sans-serif`);
+  document.documentElement.style.setProperty("--headline-weight",String(d.headlineWeight||900));
+  const hLogo=$("headerLogo");
+  if(d.logoData){
+    hLogo.loading="eager";hLogo.fetchPriority="high";
+    const current=hLogo.getAttribute("src")||"";
+    if(current!==d.logoData){
+      preloadVisual(d.logoData).then(ok=>{if(ok){hLogo.src=d.logoData;hLogo.classList.remove("hide");}});
+    }else{hLogo.classList.remove("hide");}
+  }else{hLogo.classList.add("hide")}
+  if($("copyOwner")) $("copyOwner").textContent=d.ownerName?` • ${d.ownerName}`:"";
+  updateDateLine();
+  renderIntroBrand(d.name||"হাইমচর নিউজ24BD");
+  if($("introTag")) $("introTag").textContent=d.tagline||"হাইমচরের কথা, মানুষের কণ্ঠে";
+  if(!adDocs.length){publicAds=collectAds(d);adIndex=0;}
+  renderAds();renderArticleAds();renderSidebarAd();startSidebarAdAuto();renderAllPlacementAds();
+},console.error);
+
+setLang(lang);
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}
+if(sessionStorage.getItem("news_intro_seen")){
+  $("introSplash")?.remove();
+}else{
+  sessionStorage.setItem("news_intro_seen","1");
+  // Keep the intro brief and independent of Firestore/network loading.
+  setTimeout(()=>$("introSplash")?.classList.add("hideIntro"),1400);
+  setTimeout(()=>$("introSplash")?.remove(),1750);
+}
+
+setTimeout(applyHeaderLogoMode,0);
+
+window.addEventListener("resize",syncBreakingTickerSpeed);
 </script>
+
+<style id="v19-live-clock">
+.topDateClock{display:flex;align-items:center;gap:9px;min-width:0;flex:1}
+.liveClock{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;padding:4px 9px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.08);color:#fff;font-family:"Noto Sans Bengali","Hind Siliguri",Arial,sans-serif!important;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.2}
+@media(max-width:620px){.topDateClock{gap:5px}.topDateClock .dateLine{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.liveClock{font-size:10px;padding:3px 6px;flex:0 0 auto}}
+</style>
 </body>
 </html>
-

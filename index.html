@@ -1429,7 +1429,48 @@ img,video,iframe,svg{max-width:100%}
   .mast{width:100%!important;max-width:100%!important}
 }
 </style>
+
+<style id="v21-prayer-breaking">
+#breakingTicker .prayerTicker{display:inline-flex;align-items:center;gap:7px;font-weight:800}
+#breakingTicker .prayerTitle{color:#071f36;font-weight:900}
+[data-theme="dark"] #breakingTicker .prayerTitle{color:#f3f7fa}
+#breakingTicker .waqt{font-weight:900}.waqt-fajr{color:#6f42c1}.waqt-dhuhr{color:#0b7285}.waqt-asr{color:#d97706}.waqt-maghrib{color:#d7192d}.waqt-isha{color:#2563eb}
+#breakingTicker .prayerTime{color:inherit;font-weight:800}.prayerSep{color:#9aa6b2;padding:0 2px}
+@media(max-width:620px){#breakingTicker .prayerTicker{gap:5px}}
+</style>
+
+<style id="v22-smart-daily-info">
+.dailyInfoBar{background:#fff;border-bottom:1px solid var(--line)}
+.dailyInfoBar .wrap{display:flex;align-items:center;gap:8px;padding:8px 0;overflow-x:auto;scrollbar-width:none}
+.dailyInfoBar .wrap::-webkit-scrollbar{display:none}
+.dailyChip{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:#f7f9fb;color:#25384a;font-size:12px;font-weight:700;white-space:nowrap}
+.dailyChip b{font-weight:900}.dailyChip.nextPrayer{border-color:#f1ccd1;background:#fff7f8;color:#a91425}.dailyChip.weather{border-color:#cfe3ef;background:#f5fbff;color:#0b587a}.dailyChip.calendar{border-color:#d8dfeb;background:#f8f9fc;color:#394b63}
+[data-theme="dark"] .dailyInfoBar{background:var(--card)}[data-theme="dark"] .dailyChip{background:#17242e;color:#e8eef3;border-color:#30414e}[data-theme="dark"] .dailyChip.nextPrayer{color:#ff9aa5}[data-theme="dark"] .dailyChip.weather{color:#8fd7f5}
+@media(max-width:620px){.dailyInfoBar .wrap{padding:7px 0}.dailyChip{font-size:11px;padding:6px 9px}}
+</style>
+
+<style id="v23-popular-local-shortcuts">
+.localQuick{background:#fff;border-bottom:1px solid var(--line)}
+.localQuick .wrap{display:flex;align-items:center;gap:9px;padding-top:9px;padding-bottom:9px;overflow:auto;scrollbar-width:none}
+.localQuick .wrap::-webkit-scrollbar{display:none}
+.localQuickLabel{flex:0 0 auto;font-weight:800;font-size:13px;color:var(--muted)}
+.localQuickBtn{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--navy);border-radius:999px;padding:8px 13px;font-weight:800;cursor:pointer;white-space:nowrap}
+.localQuickBtn:first-of-type{border-color:#f3bcc4;color:var(--red);background:#fff7f8}
+.localQuickBtn:active{transform:scale(.97)}
+[data-theme="dark"] .localQuick{background:var(--card)}
+[data-theme="dark"] .localQuickBtn{color:#eef5fa;background:#15232e}
+@media(max-width:620px){.localQuick .wrap{padding-top:8px;padding-bottom:8px}.localQuickLabel{font-size:12px}.localQuickBtn{padding:7px 12px;font-size:13px}}
+</style>
 </head>
+
+<style id="v24-push-notification">
+.notifyBtn{width:36px;height:36px;border-radius:50%;border:1px solid #ffffff25;background:#ffffff12;color:#fff;display:grid;place-items:center;cursor:pointer;font-size:17px;position:relative}
+.notifyBtn.on::after{content:"";position:absolute;right:3px;top:3px;width:7px;height:7px;border-radius:50%;background:#2ecc71;border:1px solid #fff}
+.notifyBtn:disabled{opacity:.65;cursor:wait}
+.pushToast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);z-index:99999;max-width:min(92vw,420px);padding:11px 15px;border-radius:13px;background:#071f36;color:#fff;box-shadow:0 12px 34px #0004;font-weight:800;font-size:13px;opacity:0;pointer-events:none;transition:.25s ease;text-align:center}
+.pushToast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:620px){.notifyBtn{width:34px;height:34px;font-size:16px}}
+</style>
 <body><div id="readingProgress" aria-hidden="true"></div>
 </div>
 
@@ -1438,6 +1479,7 @@ img,video,iframe,svg{max-width:100%}
   <div class="wrap">
     <div class="topDateClock"><span class="dateLine" id="todayLine"></span><span class="liveClock" id="liveClock" aria-live="off">--:--:--</span></div>
     <div class="right">
+      <button id="notifyBtn" class="notifyBtn" type="button" aria-label="নোটিফিকেশন চালু করুন" title="নোটিফিকেশন চালু করুন">🔔</button>
       <button id="publicThemeBtn" class="themePublic" type="button" aria-label="Theme">◐</button>
       <div class="langSwitch">
         <button id="bnBtn" class="active" type="button">বাংলা</button>
@@ -1475,11 +1517,28 @@ img,video,iframe,svg{max-width:100%}
   </div>
 </div>
 
+
+<div id="dailyInfoBar" class="dailyInfoBar">
+  <div class="wrap">
+    <span class="dailyChip nextPrayer">🕌 <b>পরবর্তী নামাজ</b> <span id="nextPrayerText">সময় নেওয়া হচ্ছে…</span></span>
+    <span class="dailyChip weather">🌤️ <b>আবহাওয়া</b> <span id="weatherText">সময় নেওয়া হচ্ছে…</span></span>
+    <span class="dailyChip calendar">📅 <span id="banglaDateText">বাংলা তারিখ</span> • <span id="hijriDateText">হিজরি তারিখ</span></span>
+  </div>
+</div>
+
 <section id="adCarousel" class="adCarousel wrap hide" aria-label="Advertisement">
   <div id="adTrack" class="adTrack"></div>
   <button id="adPrev" class="adArrow adPrev" type="button" aria-label="Previous ad">‹</button>
   <button id="adNext" class="adArrow adNext" type="button" aria-label="Next ad">›</button>
   <div id="adDots" class="adDots"></div>
+</section>
+
+<section class="localQuick" aria-label="স্থানীয় সংবাদ শর্টকাট">
+  <div class="wrap">
+    <span class="localQuickLabel">📍 স্থানীয় সংবাদ</span>
+    <button class="localQuickBtn" type="button" data-local-news="হাইমচর">হাইমচর</button>
+    <button class="localQuickBtn" type="button" data-local-news="চাঁদপুর">চাঁদপুর</button>
+  </div>
 </section>
 
 <main class="wrap layout">
@@ -1549,6 +1608,8 @@ img,video,iframe,svg{max-width:100%}
 </section>
 
 <section id="footerAdPlacement" class="placementAd placementFooter wrap hide" aria-label="Advertisement"></section>
+<div id="pushToast" class="pushToast" role="status" aria-live="polite"></div>
+
 <footer>
   <div class="wrap">
     <div class="footerGrid">
@@ -1581,6 +1642,7 @@ img,video,iframe,svg{max-width:100%}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import { getMessaging, getToken, onMessage, isSupported } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-messaging.js";
 import {
   getFirestore, collection, doc, onSnapshot, query, where, setDoc, increment, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
@@ -1596,6 +1658,72 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const $ = id => document.getElementById(id);
+
+// v24 — Firebase Cloud Messaging Web Push
+const VAPID_PUBLIC_KEY = "BGEQjewObb_5NBobVkG2qwoA52npjDRESsc-zJR951-oHk_m7vMAGhu34m1MjMgfJLYqONIi5O41jKyISy3Cv5c";
+let messaging = null;
+let messagingSW = null;
+function pushToast(msg){
+  const el=$("pushToast"); if(!el)return; el.textContent=msg; el.classList.add("show");
+  clearTimeout(pushToast._t); pushToast._t=setTimeout(()=>el.classList.remove("show"),3000);
+}
+async function tokenDocId(token){
+  try{const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(token));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,"0")).join("").slice(0,48)}catch(_){return token.slice(-48).replace(/[^a-zA-Z0-9_-]/g,"_")}
+}
+async function savePushSubscriber(token){
+  localStorage.setItem("fcm_token",token);
+  try{
+    const id=await tokenDocId(token);
+    await setDoc(doc(db,"pushSubscribers",id),{token,enabled:true,updatedAt:serverTimestamp(),userAgent:navigator.userAgent.slice(0,180)},{merge:true});
+  }catch(e){console.warn("Push token saved locally; Firestore subscriber save was blocked.",e)}
+}
+async function enablePush(){
+  const btn=$("notifyBtn"); if(btn)btn.disabled=true;
+  try{
+    if(location.protocol === "file:") throw new Error("https");
+    if(!("Notification" in window) || !("serviceWorker" in navigator)) throw new Error("unsupported");
+    if(!window.isSecureContext) throw new Error("https");
+    if(!(await isSupported())) throw new Error("unsupported");
+    const permission=await window.Notification.requestPermission();
+    if(permission!=="granted") throw new Error(permission==="denied"?"denied":"permission");
+    messagingSW=await navigator.serviceWorker.register("firebase-messaging-sw.js");
+    await navigator.serviceWorker.ready;
+    messaging=messaging||getMessaging(app);
+    const token=await getToken(messaging,{vapidKey:VAPID_PUBLIC_KEY,serviceWorkerRegistration:messagingSW});
+    if(!token)throw new Error("token");
+    await savePushSubscriber(token);
+    btn?.classList.add("on");
+    if(btn){btn.title="নোটিফিকেশন চালু আছে";btn.setAttribute("aria-label","নোটিফিকেশন চালু আছে")}
+    pushToast("🔔 নোটিফিকেশন চালু হয়েছে");
+  }catch(e){
+    console.error(e);
+    const msg=e?.message==="denied"?"ব্রাউজারে Notification permission Allow করুন":e?.message==="https"?"Notification চালাতে HTTPS ওয়েবসাইট খুলুন":e?.message==="unsupported"?"এই ব্রাউজারে Web Push সাপোর্ট নেই":"Notification চালু করা যায়নি—আবার চেষ্টা করুন";
+    pushToast(msg);
+  }finally{if(btn)btn.disabled=false}
+}
+async function initPushUI(){
+  const btn=$("notifyBtn"); if(!btn)return;
+  btn.onclick=enablePush;
+  const pushApiAvailable = location.protocol !== "file:" && window.isSecureContext && ("Notification" in window) && ("serviceWorker" in navigator);
+  if(!pushApiAvailable){
+    btn.classList.remove("on");
+    btn.title="নোটিফিকেশন পরীক্ষা করতে HTTPS লাইভ সাইট খুলুন";
+    btn.setAttribute("aria-label","নোটিফিকেশন পরীক্ষা করতে HTTPS লাইভ সাইট খুলুন");
+    return;
+  }
+  if(window.Notification.permission==="granted" && localStorage.getItem("fcm_token"))btn.classList.add("on");
+  try{
+    if(await isSupported()){
+      messaging=messaging||getMessaging(app);
+      onMessage(messaging,payload=>{
+        const title=payload?.notification?.title||payload?.data?.title||"হাইমচর নিউজ24BD";
+        const body=payload?.notification?.body||payload?.data?.body||"নতুন সংবাদ প্রকাশিত হয়েছে";
+        pushToast(`🔔 ${title} — ${body}`);
+      });
+    }
+  }catch(e){console.warn("FCM foreground init",e)}
+}
+
 
 let lang = localStorage.getItem("site_lang") || "bn";
 let all = [];
@@ -1683,6 +1811,18 @@ function renderNav(){
   $("navLinks").querySelectorAll("[data-cat]").forEach(a=>a.onclick=()=>{currentFilter=a.dataset.cat||"";const __iw=document.getElementById("introWordmark");if(__iw)__iw.innerHTML=`হাইমচর নিউজ<span class="intro24">24BD</span>`;
 setTimeout(()=>render(filtered()),0)});
 }
+function bindLocalNewsShortcuts(){
+  document.querySelectorAll("[data-local-news]").forEach(btn=>{
+    btn.onclick=()=>{
+      currentFilter=btn.dataset.localNews||"";
+      render(filtered());
+      const latest=document.getElementById("latest");
+      if(latest) latest.scrollIntoView({behavior:"smooth",block:"start"});
+    };
+  });
+}
+bindLocalNewsShortcuts();
+
 function updateDateLine(){
   const now=new Date();
   const dateEl=$("todayLine");
@@ -2022,8 +2162,12 @@ function render(list){
   {
     const breakingItems=list.filter(x=>x.breaking && !x.deleted && (!x.publishAtMs || x.publishAtMs<=Date.now()));
     const ticker=$("breakingTicker");
-    if(breakingItems.length){
-      ticker.innerHTML=breakingItems.map((x,i)=>`<a href="#news=${encodeURIComponent(x.id)}" data-breaking-id="${esc(x.id)}">${esc(storyTitle(x))}</a>${i<breakingItems.length-1?'<span class="breakingSep"> • </span>':''}`).join("");
+    const newsHtml=breakingItems.map(x=>`<a href="#news=${encodeURIComponent(x.id)}" data-breaking-id="${esc(x.id)}">${esc(storyTitle(x))}</a>`);
+    const prayerHtml=prayerTickerHtml();
+    const parts=[...newsHtml];
+    if(prayerHtml) parts.push(prayerHtml);
+    if(parts.length){
+      ticker.innerHTML=parts.join('<span class="breakingSep"> • </span>');
       ticker.querySelectorAll("[data-breaking-id]").forEach(el=>el.onclick=(e)=>{e.preventDefault();openArticle(el.dataset.breakingId)});
       syncBreakingTickerSpeed();
     }else{
@@ -2033,6 +2177,43 @@ function render(list){
   renderCategorySections();
 }
 
+
+// v21 — automatic Bangladesh prayer times inside the breaking ticker.
+// Exact visitor coordinates are used only when they fall inside Bangladesh; otherwise Chandpur is the fallback.
+let prayerTimes=null;
+const prayerFallback={lat:23.2333,lon:90.6711,label:"চাঁদপুর"};
+function prayerTickerHtml(){
+  if(!prayerTimes)return "";
+  const p=prayerTimes;
+  return `<span class="prayerTicker"><span class="prayerTitle">🕌 আজকের নামাজের সময়</span><span class="prayerSep">|</span><span class="waqt waqt-fajr">ফজর <span class="prayerTime">${esc(p.Fajr)}</span></span><span class="prayerSep">•</span><span class="waqt waqt-dhuhr">যোহর <span class="prayerTime">${esc(p.Dhuhr)}</span></span><span class="prayerSep">•</span><span class="waqt waqt-asr">আসর <span class="prayerTime">${esc(p.Asr)}</span></span><span class="prayerSep">•</span><span class="waqt waqt-maghrib">মাগরিব <span class="prayerTime">${esc(p.Maghrib)}</span></span><span class="prayerSep">•</span><span class="waqt waqt-isha">এশা <span class="prayerTime">${esc(p.Isha)}</span></span></span>`;
+}
+function cleanPrayerTime(v){
+  const raw=String(v||"—").replace(/\s*\(.+?\)\s*$/,"").trim();
+  const m=raw.match(/^(\d{1,2}):(\d{2})$/);
+  if(!m)return raw;
+  let h=Number(m[1]),min=m[2];
+  const ap=h>=12?"PM":"AM";
+  h=h%12||12;
+  return `${h}:${min} ${ap}`;
+}
+function inBangladesh(lat,lon){return lat>=20.5&&lat<=26.7&&lon>=88.0&&lon<=92.8}
+async function fetchPrayerTimes(lat,lon){
+  const url=`https://api.aladhan.com/v1/timings?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&method=1`;
+  const r=await fetch(url,{cache:"no-store"}); if(!r.ok)throw new Error("Prayer API");
+  const j=await r.json(),t=j?.data?.timings||{};
+  prayerTimes={Fajr:cleanPrayerTime(t.Fajr),Dhuhr:cleanPrayerTime(t.Dhuhr),Asr:cleanPrayerTime(t.Asr),Maghrib:cleanPrayerTime(t.Maghrib),Isha:cleanPrayerTime(t.Isha),_raw:{Fajr:String(t.Fajr||"").slice(0,5),Dhuhr:String(t.Dhuhr||"").slice(0,5),Asr:String(t.Asr||"").slice(0,5),Maghrib:String(t.Maghrib||"").slice(0,5),Isha:String(t.Isha||"").slice(0,5)}};
+  updateNextPrayer();
+  render(filtered());
+}
+function loadPrayerTimes(){
+  const use=(lat,lon)=>fetchPrayerTimes(lat,lon).catch(()=>{});
+  if(!navigator.geolocation){use(prayerFallback.lat,prayerFallback.lon);loadWeather(prayerFallback.lat,prayerFallback.lon);return}
+  navigator.geolocation.getCurrentPosition(
+    pos=>{const {latitude:lat,longitude:lon}=pos.coords;const ok=inBangladesh(lat,lon);const a=ok?lat:prayerFallback.lat,o=ok?lon:prayerFallback.lon;use(a,o);loadWeather(a,o)},
+    ()=>{use(prayerFallback.lat,prayerFallback.lon);loadWeather(prayerFallback.lat,prayerFallback.lon)},
+    {enableHighAccuracy:false,timeout:7000,maximumAge:21600000}
+  );
+}
 
 function syncBreakingTickerSpeed(){
   const ticker=$("breakingTicker");
@@ -2044,6 +2225,37 @@ function syncBreakingTickerSpeed(){
     ticker.style.setProperty("--breaking-duration",duration.toFixed(2)+"s");
   });
 }
+
+
+// v22 — compact automatic daily information: next prayer, Bangladesh weather and Bangla/Hijri dates.
+function timeToMinutes(v){const m=String(v||"").match(/^(\d{1,2}):(\d{2})/);return m?Number(m[1])*60+Number(m[2]):null}
+function updateNextPrayer(){
+  const el=$("nextPrayerText"); if(!el||!prayerTimes?._raw)return;
+  const now=new Date(),cur=now.getHours()*60+now.getMinutes();
+  const names=[['Fajr','ফজর'],['Dhuhr','যোহর'],['Asr','আসর'],['Maghrib','মাগরিব'],['Isha','এশা']];
+  let chosen=null,diff=0;
+  for(const [k,n] of names){const m=timeToMinutes(prayerTimes._raw[k]);if(m!==null&&m>cur){chosen=[k,n];diff=m-cur;break}}
+  if(!chosen){chosen=['Fajr','ফজর'];const m=timeToMinutes(prayerTimes._raw.Fajr);diff=(1440-cur)+(m??0)}
+  const h=Math.floor(diff/60),min=diff%60,remain=(h?`${h} ঘণ্টা `:"")+(min?`${min} মিনিট`:h?"":"এখন");
+  el.textContent=`${chosen[1]} ${prayerTimes[chosen[0]]} • বাকি ${remain}`;
+}
+async function loadWeather(lat,lon){
+  const el=$("weatherText"); if(!el)return;
+  try{
+    const u=`https://api.open-meteo.com/v1/forecast?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&current=temperature_2m,apparent_temperature,weather_code&timezone=Asia%2FDhaka`;
+    const r=await fetch(u,{cache:"no-store"});if(!r.ok)throw new Error("weather");const j=await r.json(),c=j.current||{};
+    const code=Number(c.weather_code),label=code===0?'পরিষ্কার':code<=3?'আংশিক মেঘলা':code<=48?'কুয়াশা':code<=67?'বৃষ্টি':code<=77?'শিলাবৃষ্টি':code<=82?'বৃষ্টি':code<=99?'বজ্রবৃষ্টি':'আবহাওয়া';
+    el.textContent=`${Math.round(Number(c.temperature_2m))}°C • ${label}`;
+  }catch(_){el.textContent='তথ্য পাওয়া যায়নি'}
+}
+function updateLocalCalendars(){
+  const d=new Date();
+  try{$("banglaDateText").textContent=new Intl.DateTimeFormat('bn-BD-u-ca-beng',{day:'numeric',month:'long',year:'numeric'}).format(d)}catch(_){$("banglaDateText").textContent='বাংলা তারিখ'}
+  try{$("hijriDateText").textContent=new Intl.DateTimeFormat('bn-BD-u-ca-islamic',{day:'numeric',month:'long',year:'numeric'}).format(d)}catch(_){$("hijriDateText").textContent='হিজরি তারিখ'}
+}
+updateLocalCalendars();
+setInterval(updateNextPrayer,60000);
+setInterval(updateLocalCalendars,3600000);
 
 function canonicalArticleUrl(id){
   const base=(location.protocol==="http:"||location.protocol==="https:")?`${location.origin}${location.pathname}`:location.href.split("#")[0];
@@ -2386,7 +2598,7 @@ onSnapshot(doc(db,"siteSettings","general"),(snap)=>{
 },console.error);
 
 setLang(lang);
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}
+if("serviceWorker" in navigator){window.addEventListener("load",()=>{initPushUI();navigator.serviceWorker.register("firebase-messaging-sw.js").catch(()=>{})})}
 if(sessionStorage.getItem("news_intro_seen")){
   $("introSplash")?.remove();
 }else{
@@ -2398,6 +2610,7 @@ if(sessionStorage.getItem("news_intro_seen")){
 
 setTimeout(applyHeaderLogoMode,0);
 
+loadPrayerTimes();
 window.addEventListener("resize",syncBreakingTickerSpeed);
 </script>
 

@@ -1906,7 +1906,7 @@ function renderCategorySections(){
   const wrap=$("categorySections");
   if(!wrap)return;
   const sections=effectiveCategories().map(c=>{
-    const list=sortNews(all.filter(x=>!x.deleted && (!x.publishAtMs || x.publishAtMs<=Date.now()) && x.category===c.name)).slice(0,3);
+    const list=sortNews(all.filter(x=>!x.deleted && x.status!=="draft" && (!x.publishAtMs || x.publishAtMs<=Date.now()) && x.category===c.name)).slice(0,3);
     if(!list.length)return"";
     return `<section class="categorySection"><div class="categoryHead"><h2>${esc(lang==="en"?(c.nameEn||c.name):c.name)}</h2></div><div class="categoryGrid">${
       list.map((x,i)=>`<article class="miniCard ${i===0?"categoryMain":"categorySmall"}" data-mini="${x.id}">${newsImg(x)?safeImageTag(newsImg(x),"",storyTitle(x)):""}<div class="miniBody"><small>${esc(stamp(x.updatedAt||x.createdAt))}</small><h3>${esc(storyTitle(x))}</h3></div></article>`).join("")
@@ -2146,7 +2146,7 @@ function setLang(next){
 $("bnBtn").onclick=()=>setLang("bn");$("enBtn").onclick=()=>setLang("en");
 
 function filtered(){
-  let list=all.filter(x=>!x.deleted && (!x.publishAtMs || x.publishAtMs<=Date.now()));
+  let list=all.filter(x=>!x.deleted && x.status!=="draft" && (!x.publishAtMs || x.publishAtMs<=Date.now()));
   if(currentFilter) list=list.filter(x=>x.category===currentFilter);
   return list;
 }
@@ -2221,7 +2221,7 @@ function render(list){
   $("popular").innerHTML=mostRead.map((x,i)=>`<div class="rank" data-pop="${x.id}"><strong>${String(i+1).padStart(2,"0")}</strong><span>${esc(storyTitle(x))}<small>${esc(x.category||"")} • 👁 ${Number(viewStats[x.id]?.views||0).toLocaleString()}</small></span></div>`).join("");
   document.querySelectorAll("[data-pop]").forEach(r=>r.onclick=()=>openArticle(r.dataset.pop));
   {
-    const breakingItems=list.filter(x=>x.breaking && !x.deleted && (!x.publishAtMs || x.publishAtMs<=Date.now()));
+    const breakingItems=list.filter(x=>x.breaking && !x.deleted && x.status!=="draft" && (!x.publishAtMs || x.publishAtMs<=Date.now()));
     const ticker=$("breakingTicker");
     const newsHtml=breakingItems.map(x=>`<a href="#news=${encodeURIComponent(x.id)}" data-breaking-id="${esc(x.id)}">${esc(storyTitle(x))}</a>`);
     const prayerHtml=prayerTickerHtml();
@@ -2332,7 +2332,7 @@ function toggleSaved(id){
 }
 function trendingNews(currentId){
   const now=Date.now()/1000;
-  return all.filter(n=>n.id!==currentId&&!n.deleted&&(!n.publishAtMs||n.publishAtMs<=Date.now())).map(n=>{
+  return all.filter(n=>n.id!==currentId&&!n.deleted&&n.status!=="draft"&&(!n.publishAtMs||n.publishAtMs<=Date.now())).map(n=>{
     const sec=n.createdAt?.seconds||n.updatedAt?.seconds||now, ageH=Math.max(1,(now-sec)/3600);
     const views=Number(viewStats[n.id]?.views||0);
     return {...n,_trend:(views+2)/Math.pow(ageH+2,1.15)};
@@ -2356,12 +2356,12 @@ function speakArticle(x,btn){
   speechSynthesis.speak(u);btn.textContent=lang==="bn"?"■ বন্ধ":"■ Stop";
 }
 function openArticle(id,pushHash=true){
-  const x=all.find(n=>n.id===id);if(!x || x.deleted || (x.publishAtMs && x.publishAtMs>Date.now()))return;
+  const x=all.find(n=>n.id===id);if(!x || x.deleted || x.status==="draft" || (x.publishAtMs && x.publishAtMs>Date.now()))return;
   recordArticleView(id);
   const images=[newsImg(x),x.imageData2||"",x.imageData3||""].filter(Boolean);
   const gallery=images.length?`<div class="articleGallery">${images.map((s,i)=>safeImageTag(s,"",`${storyTitle(x)} — ছবি ${i+1}`,i===0)).join("")}</div>`:"";
-  const related=sortNews(all.filter(n=>n.id!==x.id && !n.deleted && (!n.publishAtMs || n.publishAtMs<=Date.now()) && n.category===x.category)).slice(0,4);
-  const authorMore=x.reporter?sortNews(all.filter(n=>n.id!==x.id && !n.deleted && (!n.publishAtMs || n.publishAtMs<=Date.now()) && n.reporter===x.reporter)).slice(0,4):[];
+  const related=sortNews(all.filter(n=>n.id!==x.id && !n.deleted && n.status!=="draft" && (!n.publishAtMs || n.publishAtMs<=Date.now()) && n.category===x.category)).slice(0,4);
+  const authorMore=x.reporter?sortNews(all.filter(n=>n.id!==x.id && !n.deleted && n.status!=="draft" && (!n.publishAtMs || n.publishAtMs<=Date.now()) && n.reporter===x.reporter)).slice(0,4):[];
   const trending=trendingNews(x.id);
 
   $("articleInner").innerHTML=`

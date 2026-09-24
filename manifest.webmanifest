@@ -1,0 +1,19 @@
+{
+  "name": "হাইমচর নিউজ24BD",
+  "short_name": "নিউজ24BD",
+  "description": "হাইমচর ও চাঁদপুরের স্থানীয় ও সর্বশেষ সংবাদ",
+  "lang": "bn-BD",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f3f6f8",
+  "theme_color": "#071f36",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

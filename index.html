@@ -2619,5 +2619,68 @@ window.addEventListener("resize",syncBreakingTickerSpeed);
 .liveClock{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;padding:4px 9px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.08);color:#fff;font-family:"Noto Sans Bengali","Hind Siliguri",Arial,sans-serif!important;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.2}
 @media(max-width:620px){.topDateClock{gap:5px}.topDateClock .dateLine{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.liveClock{font-size:10px;padding:3px 6px;flex:0 0 auto}}
 </style>
+
+<style id="v25-responsive-header-logo-fix">
+/* Final responsive masthead fix: real logo when available, clean wordmark fallback. */
+html,body{max-width:100%;overflow-x:hidden}
+.mast{overflow:hidden!important}
+.mast .brand.brandTextOnly{
+  width:min(calc(100% - 28px),720px)!important;
+  max-width:calc(100% - 28px)!important;
+  min-width:0!important;
+  left:50%!important;
+  transform:translateX(-50%)!important;
+}
+.mast .headerBrandMain{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  gap:8px!important;overflow:hidden!important;
+}
+#headerLogo.headerLogo{
+  flex:0 1 auto!important;width:auto!important;height:auto!important;
+  max-width:min(var(--header-logo-max-px,420px),76vw)!important;
+  max-height:72px!important;object-fit:contain!important;
+  color:transparent!important;font-size:0!important;
+}
+.brand:not(.hasSiteLogo) #headerLogo{display:none!important}
+.brand:not(.hasSiteLogo) #siteWordmark{display:flex!important}
+.brand.hasSiteLogo #siteWordmark{display:none!important}
+#siteWordmark{justify-content:center!important;max-width:100%!important;min-width:0!important;overflow:hidden!important}
+.siteNamePrimary,.siteNameSecondary{flex:0 1 auto!important;min-width:0!important}
+.headerTagline{max-width:100%!important}
+@media(max-width:620px){
+  .mast{padding:8px 10px!important;min-height:86px!important}
+  .mast .brand.brandTextOnly{width:calc(100% - 20px)!important;max-width:calc(100% - 20px)!important;gap:4px!important}
+  #headerLogo.headerLogo{max-width:88vw!important;max-height:58px!important}
+  #siteWordmark{gap:4px!important}
+  .siteNamePrimary,.siteNameSecondary{font-size:clamp(19px,6.1vw,24px)!important;letter-spacing:-.35px!important;white-space:nowrap!important}
+  .headerTagline{font-size:10.5px!important;line-height:1.15!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+}
+@media(max-width:360px){
+  .siteNamePrimary,.siteNameSecondary{font-size:18px!important}
+  #headerLogo.headerLogo{max-height:52px!important}
+}
+</style>
+<script>
+(function(){
+  function installHeaderLogoGuard(){
+    var brand=document.querySelector('.mast .brand');
+    var logo=document.getElementById('headerLogo');
+    if(!brand||!logo)return;
+    function sync(){
+      var ready=!!(logo.getAttribute('src')&&logo.complete&&logo.naturalWidth>0);
+      brand.classList.toggle('hasSiteLogo',ready);
+      logo.classList.toggle('hide',!ready);
+    }
+    logo.addEventListener('load',sync);
+    logo.addEventListener('error',sync);
+    new MutationObserver(sync).observe(logo,{attributes:true,attributeFilter:['src']});
+    sync();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installHeaderLogoGuard);
+  else installHeaderLogoGuard();
+})();
+</script>
+
 </body>
 </html>

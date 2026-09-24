@@ -1,0 +1,10 @@
+{
+  "name": "হাইমচর নিউজ24BD অ্যাডমিন",
+  "short_name": "News Admin",
+  "start_url": "/admin.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#071f36",
+  "theme_color": "#071f36",
+  "lang": "bn"
+}

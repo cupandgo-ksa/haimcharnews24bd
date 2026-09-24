@@ -1413,10 +1413,11 @@ html:not(.site-settings-ready) .mast .brand #headerLogo{
 
 <style id="v19-6-breaking-all">
 .tickerWindow{min-width:0;overflow:hidden;flex:1}
-#breakingTicker{display:inline-block;width:max-content;white-space:nowrap;animation:breakingAllMove var(--breaking-duration,18s) linear infinite!important}
+#breakingTicker{display:inline-block;width:max-content;white-space:nowrap;animation:breakingAllMove var(--breaking-duration,45s) linear infinite!important}
 #breakingTicker a{color:inherit;text-decoration:none;font-weight:800}
 #breakingTicker a:hover{text-decoration:underline}
 #breakingTicker .breakingSep{display:inline-block;padding:0 14px;color:#d7192d;font-weight:900}
+.tickerWindow:hover #breakingTicker,.tickerWindow:focus-within #breakingTicker{animation-play-state:paused!important}
 @keyframes breakingAllMove{from{transform:translateX(70vw)}to{transform:translateX(-100%)}}
 
 </style>
@@ -2280,8 +2281,8 @@ function syncBreakingTickerSpeed(){
   if(!ticker)return;
   requestAnimationFrame(()=>{
     const distance=(window.innerWidth*.70)+ticker.scrollWidth;
-    const oldVisualSpeed=50; // px/sec, matches the original single-headline 18s ticker
-    const duration=Math.max(18,distance/oldVisualSpeed);
+    const readableSpeed=24; // px/sec: deliberately slow enough to read Bengali headlines
+    const duration=Math.max(45,distance/readableSpeed);
     ticker.style.setProperty("--breaking-duration",duration.toFixed(2)+"s");
   });
 }

@@ -1074,6 +1074,26 @@ html:not(.admin-scroll-locked) body{
   .topbarTitle h1{font-size:18px!important}
 }
 </style>
+<style id="v31-newsroom-subtitle-one-line">
+/* Compact, readable single-line newsroom subtitle across phones and tablets. */
+.dashboardHero>div:first-child{min-width:0}
+.dashboardHero>div:first-child>p{
+  white-space:nowrap!important;
+  font-size:clamp(12px,1.55vw,15px)!important;
+  line-height:1.55!important;
+  letter-spacing:-.1px!important;
+  max-width:100%;
+}
+@media(max-width:760px){
+  .dashboardHero>div:first-child{width:100%;min-width:0}
+  .dashboardHero>div:first-child>p{
+    font-size:clamp(10px,3.15vw,12.5px)!important;
+    white-space:nowrap!important;
+    margin-top:4px!important;
+    letter-spacing:-.1px!important;
+  }
+}
+</style>
 </head>
 <body>
 <div id="adminIntro" class="adminIntro v26Intro" aria-label="Admin loading">
@@ -1946,7 +1966,7 @@ function statsHtml(){
   </div>`;
 }
 function dashboardWelcomeHtml(){
-  return `<section class="dashboardHero"><div><h2>${lang==="bn"?"নিউজরুম কন্ট্রোল সেন্টার":"Newsroom control center"}</h2><p>${lang==="bn"?"খবর প্রকাশ, সময় নির্ধারণ ও ওয়েবসাইট পরিচালনা করুন।":"Publish, schedule and manage your newsroom."}</p></div><div class="dashboardHeroActions"><button class="heroAction primary" data-quick-new>＋ ${lang==="bn"?"নতুন সংবাদ":"New story"}</button><button class="heroAction" data-quick-page="scheduled">◷ ${lang==="bn"?"নির্ধারিত":"Scheduled"}</button><button class="heroAction" data-quick-page="site">⚙ ${lang==="bn"?"সাইট সেটিংস":"Site settings"}</button></div></section>`;
+  return `<section class="dashboardHero"><div><h2>${lang==="bn"?"নিউজরুম কন্ট্রোল সেন্টার":"Newsroom control center"}</h2><p>${lang==="bn"?"খবর প্রকাশ • সময় নির্ধারণ • সাইট পরিচালনা":"Publish • Schedule • Manage site"}</p></div><div class="dashboardHeroActions"><button class="heroAction primary" data-quick-new>＋ ${lang==="bn"?"নতুন সংবাদ":"New story"}</button><button class="heroAction" data-quick-page="scheduled">◷ ${lang==="bn"?"নির্ধারিত":"Scheduled"}</button><button class="heroAction" data-quick-page="site">⚙ ${lang==="bn"?"সাইট সেটিংস":"Site settings"}</button></div></section>`;
 }
 function tableHtml(list,title){
   return `<section class="panel">

@@ -1745,10 +1745,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const $ = id => document.getElementById(id);
-function fullNewsName(name){
-  const value=(name||"হাইমচর নিউজ২৪বিডি").trim();
-  if(/হাইমচর/.test(value) && /নিউজ/.test(value)) return "হাইমচর নিউজ২৪বিডি";
-  return value;
+function fullNewsName(){
+  // The brand identity stays complete even when the Admin name field is used as an About heading.
+  return "হাইমচর নিউজ২৪বিডি";
 }
 function updateSiteIdentity(){
   const name=fullNewsName(siteSettings.name);

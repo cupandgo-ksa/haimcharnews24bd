@@ -883,6 +883,67 @@ html.admin-scroll-locked,html.admin-scroll-locked body{overflow:hidden!important
 }
 @supports not (height:100dvh){.sidebar{height:100vh}}
 </style>
+<style id="v28-admin-mobile-scroll-stability">
+/* Preserve regular document scrolling; only the news editor may lock the background. */
+html:not(.admin-scroll-locked),
+html:not(.admin-scroll-locked) body{
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+}
+.main,#content{min-width:0;max-width:100%}
+#content{overflow:visible}
+.sidebar .nav{scrollbar-width:thin}
+.modalCard{min-height:0;touch-action:pan-y;overflow-y:auto!important}
+@media(max-width:980px){
+  /* A single native-scrolling drawer works consistently on Android and iOS. */
+  .sidebar{
+    width:min(252px,calc(100vw - 52px));
+    height:100vh;height:100dvh;
+    max-height:100dvh;
+    display:block!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-y:contain;
+    touch-action:pan-y;
+    padding-bottom:max(18px,env(safe-area-inset-bottom));
+  }
+  .sidebar .sideBrand{
+    position:sticky;top:0;z-index:2;
+    background:var(--navy);
+    padding:6px 2px 14px;
+    margin-bottom:5px;
+  }
+  .sidebar .nav{
+    display:grid!important;
+    height:auto!important;min-height:0!important;max-height:none!important;
+    overflow:visible!important;
+    touch-action:pan-y;
+    padding-bottom:16px!important;
+  }
+  .sidebar .sideBottom{margin-top:0}
+  .sidebarBackdrop.open{touch-action:manipulation}
+  .main{min-height:100dvh;overflow:visible!important}
+}
+@media(max-width:760px){
+  .modalCard{
+    overscroll-behavior-y:contain;
+    -webkit-overflow-scrolling:touch;
+    touch-action:pan-y;
+    height:calc(100dvh - 16px)!important;
+    max-height:calc(100dvh - 16px)!important;
+    overflow-y:auto!important;
+  }
+  #content :is(.panel,.settingsCard,.workflowWide,.accountColumns){min-width:0;max-width:100%}
+}
+@media(max-width:620px){
+  .sidebar .nav button,.sidebar .navGroup summary,.sidebar .navLiveSite{
+    font-size:15px!important;line-height:1.4!important;
+  }
+  .sidebar .nav button{padding-block:10px!important}
+  .sidebar .navGroup summary{padding-block:11px!important}
+}
+</style>
 </head>
 <body>
 <div id="adminIntro" class="adminIntro v26Intro" aria-label="Admin loading">
@@ -1449,13 +1510,16 @@ els.loginForm.addEventListener("submit", async (e)=>{
 
 els.logoutBtn.onclick = ()=>signOut(auth);
 function syncAdminScrollLock(){
-  const locked=(innerWidth<=980&&els.sidebar.classList.contains("open"))||!els.newsModal.classList.contains("hide");
+  // The drawer has its own native scroll; do not freeze every admin page behind it.
+  // Only a visible news editor must lock the document while its form scrolls.
+  const locked=!els.appView.classList.contains("hide")&&!els.newsModal.classList.contains("hide");
   document.documentElement.classList.toggle("admin-scroll-locked",locked);
 }
 function setAdminMenu(open){
-  els.sidebar.classList.toggle("open",open);
-  $("sidebarBackdrop").classList.toggle("open",open);
-  els.menuBtn.setAttribute("aria-expanded",String(open));
+  const show=!!open&&innerWidth<=980&&!els.appView.classList.contains("hide");
+  els.sidebar.classList.toggle("open",show);
+  $("sidebarBackdrop").classList.toggle("open",show);
+  els.menuBtn.setAttribute("aria-expanded",String(show));
   syncAdminScrollLock();
 }
 els.menuBtn.setAttribute("aria-controls","sidebar");
@@ -1475,7 +1539,7 @@ function setAdminPage(page){
   const activeBtn=document.querySelector(`.nav button[data-page="${currentPage}"]`); activeBtn?.closest("details")?.setAttribute("open","");
   setAdminMenu(false);
   document.activeElement?.blur();
-  render();
+  render(true);
   window.scrollTo({top:0,left:0,behavior:"auto"});
 }
 (function initAdminBackGuard(){
@@ -1949,11 +2013,33 @@ function showPreview(x){
 }
 function previewNews(id){const x=items.find(n=>n.id===id);if(x)showPreview(x)}
 
-function render(){
+// Firestore delivers several snapshots close together. Never replace the visible
+// page's DOM during a finger swipe, wheel gesture, or a focused form edit.
+let adminLastScrollGesture=0,adminLastDomRender=0,adminDeferredRenderTimer=0;
+const markAdminScrollGesture=()=>{adminLastScrollGesture=Date.now();};
+window.addEventListener("scroll",markAdminScrollGesture,{passive:true});
+for(const eventName of ["touchmove","wheel"]){
+  document.addEventListener(eventName,event=>{
+    if(event.target instanceof Element && event.target.closest("#content,.main,.sidebar,.modalCard")){
+      markAdminScrollGesture();
+    }
+  },{passive:true});
+}
+function render(force=false){
   const samePage=els.content.dataset.page===currentPage;
   if(samePage&&(accountBusy||workflowBusy||document.querySelector("#content input:focus,#content textarea:focus,#content select:focus,#content [contenteditable]:focus")))return;
+  if(!els.appView || els.appView.classList.contains("hide"))return;
+  const now=Date.now();
+  const delay=samePage&&!force?Math.max(0,480-(now-adminLastScrollGesture),150-(now-adminLastDomRender)):0;
+  if(delay>0){
+    clearTimeout(adminDeferredRenderTimer);
+    adminDeferredRenderTimer=setTimeout(()=>{adminDeferredRenderTimer=0;render();},delay+30);
+    return;
+  }
+  clearTimeout(adminDeferredRenderTimer);
+  adminDeferredRenderTimer=0;
   const previousScroll=samePage?window.scrollY:0;
-  if(!els.appView || els.appView.classList.contains("hide")) return;
+  const innerScroll=samePage?[...els.content.querySelectorAll(".tableWrap")].map(node=>({x:node.scrollLeft,y:node.scrollTop})):[];
   roleControls();
   const pageLabels={
     review:lang==="bn"?"প্রকাশের অনুমোদন":"Publication approval",inbox:lang==="bn"?"পাঠকের বার্তা":"Reader inbox",backup:lang==="bn"?"ব্যাকআপ":"Backup",security:lang==="bn"?"পাসওয়ার্ড ও নিরাপত্তা":"Password and security",
@@ -2005,7 +2091,14 @@ function render(){
   }
   els.content.dataset.page=currentPage;
   wireDynamic();
-  if(samePage&&previousScroll>0)window.scrollTo({top:previousScroll,left:0,behavior:"auto"});
+  if(samePage){
+    [...els.content.querySelectorAll(".tableWrap")].forEach((node,index)=>{
+      const previous=innerScroll[index];
+      if(previous){node.scrollLeft=previous.x;node.scrollTop=previous.y;}
+    });
+    if(previousScroll>0)window.scrollTo({top:previousScroll,left:0,behavior:"auto"});
+  }
+  adminLastDomRender=Date.now();
 }
 
 function enhanceSelects(root=document){
@@ -2436,6 +2529,9 @@ onAuthStateChanged(auth,async(user)=>{
   const logged=!!user;
   const gate=$("adminEntryGate"), gateTitle=$("adminEntryTitle"), gateSub=$("adminEntrySub");
   if(logged){
+    setAdminMenu(false);
+    els.newsModal.classList.add("hide");
+    syncAdminScrollLock();
     els.loginView.classList.add("hide");
     els.appView.classList.add("hide");
     if(gateTitle) gateTitle.textContent=lang==="bn"?"ড্যাশবোর্ড প্রস্তুত হচ্ছে":"Preparing dashboard";
@@ -2454,6 +2550,9 @@ onAuthStateChanged(auth,async(user)=>{
     },850);
   }else{
     resetLoginControls();
+    setAdminMenu(false);
+    els.newsModal.classList.add("hide");
+    syncAdminScrollLock();
     newsroomItems=[];reviewItems=[];readerItems=[];items=[];pendingBackup=null;
     gate?.classList.add("hideGate");
     els.loginView.classList.remove("hide");

@@ -865,6 +865,9 @@ button:disabled,.btn:disabled{opacity:.64!important;cursor:wait!important}
   input,textarea{scroll-margin-top:140px}
 }
 </style>
+<style id="news-workflow-controls">
+.workflowWide{max-width:none}.workflowEntry{padding:20px 0;border-bottom:1px solid var(--line)}.workflowEntry h3{margin:0 0 8px}.workflowEntry small{color:var(--muted);overflow-wrap:anywhere}.workflowEntry p{line-height:1.8}.workflowActions{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}.workflowNotice{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--red);border-radius:14px;padding:14px 18px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;gap:12px}.readerMessage{white-space:pre-wrap;overflow-wrap:anywhere}.readerAttachment{display:block;max-width:min(100%,360px);max-height:260px;object-fit:contain;margin:14px 0}.badge.pending{background:#fff0c9;color:#77500d}#forgotPasswordBtn{width:100%;margin-top:12px}#changePasswordForm .field{display:flex;flex-direction:column;gap:8px;margin:16px 0}#backupPreview,#backupStatus,#passwordStatus{line-height:1.8;overflow-wrap:anywhere}@media(max-width:760px){.workflowActions{display:grid;grid-template-columns:1fr 1fr}.workflowActions .btn{min-height:48px;padding:10px 12px;white-space:normal}.workflowNotice{align-items:stretch;flex-direction:column}#changePasswordForm button{width:100%;min-height:50px}.workflowEntry input{width:100%;font-size:16px}.workflowEntry .field{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}}
+</style>
 </head>
 <body>
 <div id="adminIntro" class="adminIntro v26Intro" aria-label="Admin loading">
@@ -912,6 +915,8 @@ button:disabled,.btn:disabled{opacity:.64!important;cursor:wait!important}
 
     <div id="loginError" class="errorBox hide"></div>
     <button id="loginSubmit" class="btn btn-primary loginSubmit" type="submit" data-i18n="secureLogin">নিরাপদ লগইন</button>
+    <button id="forgotPasswordBtn" class="btn btn-soft" type="button">পাসওয়ার্ড ভুলে গেছেন?</button>
+    <p id="passwordResetStatus" class="subtle" role="status"></p>
     <button id="googleLogin" class="btn loginSubmit" type="button" data-i18n="googleLogin" style="margin-top:12px">Gmail দিয়ে লগইন</button>
   </form>
 </section>
@@ -945,6 +950,10 @@ button:disabled,.btn:disabled{opacity:.64!important;cursor:wait!important}
           <button data-page="contact">যোগাযোগ</button>
         </div>
       </details>
+      <button id="reviewNav" data-page="review" class="navPrimary hide">✓ প্রকাশের অনুমোদন</button>
+      <button id="readerNav" data-page="inbox" class="navPrimary hide">✉ পাঠকের বার্তা</button>
+      <button id="backupNav" data-page="backup" class="navPrimary hide">↧ ব্যাকআপ</button>
+      <button data-page="security" class="navPrimary">⚿ পাসওয়ার্ড ও নিরাপত্তা</button>
       <button id="teamNav" data-page="accounts" class="navPrimary hide">♙ টিমের অ্যাকাউন্ট</button>
       <button data-page="trash" class="navPrimary navTrash">♲ ট্র্যাশ</button>
     </nav>
@@ -1156,11 +1165,11 @@ document.addEventListener("click",(e)=>{
 import { initializeApp, deleteApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 import {
   getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup,
-  setPersistence, browserLocalPersistence, inMemoryPersistence, createUserWithEmailAndPassword, deleteUser, EmailAuthProvider, linkWithCredential
+  setPersistence, browserLocalPersistence, inMemoryPersistence, createUserWithEmailAndPassword, deleteUser, EmailAuthProvider, linkWithCredential, updatePassword, reauthenticateWithCredential, sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 import {
   getFirestore, collection, doc, addDoc, updateDoc, deleteDoc, setDoc,
-  onSnapshot, serverTimestamp, runTransaction, Timestamp, getDoc
+  onSnapshot, serverTimestamp, runTransaction, Timestamp, getDoc, getDocs, query, where, writeBatch
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -1544,6 +1553,7 @@ function slugifyCategory(name){
 }
 
 function openNew(){
+  roleControls();
   els.newsForm.reset();
   els.editId.value="";
   pendingImages=["","",""];
@@ -1573,11 +1583,12 @@ function formPreviewData(){
 }
 
 function editNews(id){
+  roleControls();
   const x=items.find(n=>n.id===id); if(!x) return;
   els.editId.value=id;
   els.titleInput.value=x.title||"";
   syncCategorySelect(x.category||"হাইমচর");
-  els.statusSelect.value=(x.status==="draft"?"draft":"published"); // never undefined
+  els.statusSelect.value=(x.isRevision&&isNewsOwner(auth.currentUser)?"published":x.status==="draft"?"draft":"published"); // never undefined
   if(typeof els.statusSelect._customRebuild==="function") els.statusSelect._customRebuild();
   els.reporterInput.value=x.reporter||"";
   els.sourceInput.value=x.source||"";
@@ -1646,12 +1657,16 @@ els.newsForm.addEventListener("submit", async (e)=>{
 
   startLoad(); els.saveBtn.disabled=true; els.saveBtn.textContent=t("saving");
   try{
-    if(els.editId.value){
+    if(!isNewsOwner(auth.currentUser)){
+      await saveForReview(data,els.editId.value,status);
+    }else if(els.editId.value.startsWith('review:')){
+      await approveRevision(els.editId.value.slice(7),data);
+    }else if(els.editId.value){
       await updateDoc(doc(db,"news",els.editId.value),data);
     }else{
       await addDoc(collection(db,"news"),{...data,views:0,createdAt:serverTimestamp()});
     }
-    closeModal(); toast(t("saved"));
+    closeModal(); toast(isNewsOwner(auth.currentUser)?t("saved"):(status==="draft"?(lang==="bn"?"খসড়া সেভ হয়েছে।":"Draft saved."):(lang==="bn"?"তোমার অনুমোদনের জন্য সংবাদ পাঠানো হয়েছে।":"Story sent for approval.")));
   }catch(err){
     console.error(err); toast(err?.message || "Save failed",true);
   }finally{
@@ -1661,11 +1676,13 @@ els.newsForm.addEventListener("submit", async (e)=>{
 });
 
 function newsState(x){
+  if(x.isRevision)return x.reviewState==="pending"?"pending":"draft";
   if(x.status==="draft") return "draft";
   if(Number(x.publishAtMs||0)>Date.now()) return "scheduled";
   return "published";
 }
 function stateLabel(state){
+  if(state==="pending")return lang==="bn"?"অনুমোদনের অপেক্ষায়":"Awaiting approval";
   if(state==="draft") return t("draft");
   if(state==="scheduled") return lang==="bn"?"নির্ধারিত":"Scheduled";
   return t("published");
@@ -1695,7 +1712,7 @@ function tableHtml(list,title){
     </div>
     <div class="panelHead filters proFilters">
       <input id="tableSearch" placeholder="${esc(t("search"))}">
-      <select id="statusFilter"><option value="">${esc(t("allStatus"))}</option><option value="published">${esc(t("published"))}</option><option value="scheduled">${lang==="bn"?"নির্ধারিত":"Scheduled"}</option><option value="draft">${esc(t("draft"))}</option></select>
+      <select id="statusFilter"><option value="">${esc(t("allStatus"))}</option><option value="published">${esc(t("published"))}</option><option value="scheduled">${lang==="bn"?"নির্ধারিত":"Scheduled"}</option><option value="draft">${esc(t("draft"))}</option><option value="pending">${lang==="bn"?"অনুমোদনের অপেক্ষায়":"Awaiting approval"}</option></select>
       <select id="categoryFilter"><option value="">${lang==="bn"?"সব ক্যাটাগরি":"All categories"}</option>${effectiveCategories().map(c=>`<option value="${esc(c.name)}">${esc(lang==="bn"?(c.name||""):(c.nameEn||c.name||""))}</option>`).join("")}</select>
       <select id="sortFilter"><option value="newest">${lang==="bn"?"সর্বশেষ আগে":"Newest first"}</option><option value="views">${lang==="bn"?"সর্বাধিক পঠিত":"Most viewed"}</option><option value="title">${lang==="bn"?"শিরোনাম A–Z":"Title A–Z"}</option></select>
     </div>
@@ -1705,14 +1722,14 @@ function tableHtml(list,title){
 function rowsHtml(list){
   if(!list.length) return `<div class="empty">${esc(t("noNews"))}</div>`;
   return list.map(x=>{const state=newsState(x);return `<div class="newsRow ${state==="scheduled"?"isScheduled":state==="draft"?"isDraft":""}">
-    <div class="newsTitle"><b>${esc(x.title)}</b><small>${esc(stampText(x.updatedAt||x.createdAt))} • 👁 ${Number(publicStats[x.id]?.views||0).toLocaleString()}${state==="scheduled"?` • ${lang==="bn"?"প্রকাশ":"Publishes"}: ${new Date(x.publishAtMs).toLocaleString(lang==="bn"?"bn-BD":"en-GB")}`:""}</small></div>
+    <div class="newsTitle"><b>${esc(x.title)}</b><small>${x.isRevision?esc(x.reviewNote||x.authorEmail||"")+" · ":""}${esc(stampText(x.updatedAt||x.createdAt))} • 👁 ${Number(publicStats[x.id]?.views||0).toLocaleString()}${state==="scheduled"?` • ${lang==="bn"?"প্রকাশ":"Publishes"}: ${new Date(x.publishAtMs).toLocaleString(lang==="bn"?"bn-BD":"en-GB")}`:""}</small></div>
     <span>${esc(x.category||"")}</span>
     <span class="badge ${state}">${esc(stateLabel(state))}</span>
     <div class="actions">
       ${x.breaking?'<span class="badge break">BREAKING</span>':""}
       <button class="actionText previewTextBtn" type="button" data-preview="${x.id}">${lang==="bn"?"প্রিভিউ":"Preview"}</button>
       <button class="actionText editText" type="button" data-edit="${x.id}">${lang==="bn"?"এডিট":"Edit"}</button>
-      <button class="actionText deleteText" type="button" data-delete="${x.id}">${lang==="bn"?"ডিলিট":"Delete"}</button>
+      ${isNewsOwner(auth.currentUser)||x.isRevision?`<button class="actionText deleteText" type="button" data-delete="${x.id}">${lang==="bn"?"ডিলিট":"Delete"}</button>`:""}
     </div>
   </div>`}).join("");
 }
@@ -1901,9 +1918,11 @@ function showPreview(x){
 function previewNews(id){const x=items.find(n=>n.id===id);if(x)showPreview(x)}
 
 function render(){
-  if(currentPage==="accounts" && (accountBusy || document.querySelector("#content input:focus"))) return;
+  if(["accounts","security","backup","review","inbox"].includes(currentPage) && (accountBusy || workflowBusy || document.querySelector("#content input:focus,#content textarea:focus"))) return;
   if(!els.appView || els.appView.classList.contains("hide")) return;
+  roleControls();
   const pageLabels={
+    review:lang==="bn"?"প্রকাশের অনুমোদন":"Publication approval",inbox:lang==="bn"?"পাঠকের বার্তা":"Reader inbox",backup:lang==="bn"?"ব্যাকআপ":"Backup",security:lang==="bn"?"পাসওয়ার্ড ও নিরাপত্তা":"Password and security",
     accounts:lang==="bn"?"টিমের অ্যাকাউন্ট":"Team accounts",
     dashboard:lang==="bn"?"ড্যাশবোর্ড":"Dashboard",
     news:lang==="bn"?"সকল সংবাদ":"All News",
@@ -1919,10 +1938,14 @@ function render(){
     trash:lang==="bn"?"ট্র্যাশ":"Trash"
   };
   els.pageTitle.textContent=pageLabels[currentPage]||pageLabels.dashboard;
-  if(currentPage==="accounts"){
+  if(currentPage==="review"){els.content.innerHTML=reviewHtml();
+  }else if(currentPage==="inbox"){els.content.innerHTML=readerInboxHtml();
+  }else if(currentPage==="backup"){els.content.innerHTML=backupHtml();
+  }else if(currentPage==="security"){els.content.innerHTML=securityHtml();
+  }else if(currentPage==="accounts"){
     els.content.innerHTML=teamAccountHtml();
   }else if(currentPage==="dashboard"){
-    els.content.innerHTML=dashboardWelcomeHtml()+statsHtml()+tableHtml(items.filter(x=>!x.deleted).slice(0,8),t("recent"));
+    els.content.innerHTML=dashboardWelcomeHtml()+reviewNoticeHtml()+statsHtml()+tableHtml(items.filter(x=>!x.deleted).slice(0,8),t("recent"));
   }else if(currentPage==="news"){
     els.content.innerHTML=tableHtml(items.filter(x=>!x.deleted),t("allNews").replace(/^.\s*/,""));
   }else if(currentPage==="scheduled"){
@@ -1972,6 +1995,7 @@ function enhanceSelects(root=document){
 document.addEventListener("click",()=>document.querySelectorAll(".customSelectMenu").forEach(m=>m.classList.add("hide")));
 
 function wireDynamic(){
+  wireWorkflow();
   wireAccountControls();
   const add=$("panelAdd"); if(add) add.onclick=openNew;
   document.querySelector("[data-quick-new]")?.addEventListener("click",openNew);
@@ -2123,8 +2147,8 @@ function wireDynamic(){
     try{await deleteDoc(doc(db,"reporters",b.dataset.reporterDelete));toast(lang==="bn"?"প্রতিবেদক মুছে ফেলা হয়েছে":"Reporter deleted")}
     catch(err){console.error(err);toast(err.message,true)}
   });
-  document.querySelectorAll("[data-restore]").forEach(b=>b.onclick=async()=>{await updateDoc(doc(db,"news",b.dataset.restore),{deleted:false,deletedAt:null,updatedAt:serverTimestamp()});toast(lang==="bn"?"ফিরিয়ে আনা হয়েছে":"Restored")});
-  document.querySelectorAll("[data-permadelete]").forEach(b=>b.onclick=async()=>{if(await askConfirm(lang==="bn"?"স্থায়ীভাবে ডিলিট করলে সংবাদটি আর ফেরত আনা যাবে না।":"Deleting permanently cannot be undone.")){await deleteDoc(doc(db,"news",b.dataset.permadelete));toast(t("deleted"));}});
+  document.querySelectorAll("[data-restore]").forEach(b=>b.onclick=async()=>{await updateDoc(doc(db,items.find(x=>x.id===b.dataset.restore)?.isRevision?"newsRevisions":"news",b.dataset.restore.replace(/^review:/,"")),{deleted:false,deletedAt:null,updatedAt:serverTimestamp()});toast(lang==="bn"?"ফিরিয়ে আনা হয়েছে":"Restored")});
+  document.querySelectorAll("[data-permadelete]").forEach(b=>b.onclick=async()=>{if(await askConfirm(lang==="bn"?"স্থায়ীভাবে ডিলিট করলে সংবাদটি আর ফেরত আনা যাবে না।":"Deleting permanently cannot be undone.")){await deleteDoc(doc(db,items.find(x=>x.id===b.dataset.permadelete)?.isRevision?"newsRevisions":"news",b.dataset.permadelete.replace(/^review:/,"")));toast(t("deleted"));}});
   document.querySelectorAll("[data-preview]").forEach(b=>b.onclick=()=>previewNews(b.dataset.preview));
   enhanceSelects(els.content);
 
@@ -2133,13 +2157,80 @@ function wireRows(){
   document.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>editNews(b.dataset.edit));
   document.querySelectorAll("[data-delete]").forEach(b=>b.onclick=async()=>{
     if(!await askConfirm(lang==="bn"?"সংবাদটি ট্র্যাশে পাঠানো হবে। পরে চাইলে ফিরিয়ে আনতে পারবেন।":"Move this story to trash? You can restore it later.",{danger:false})) return;
+    const item=items.find(x=>x.id===b.dataset.delete);
+    if(!item)return;
+    if(!isNewsOwner(auth.currentUser)&&!item.isRevision){toast(lang==="bn"?"শুধু মালিক প্রকাশিত খবর মুছতে পারবেন।":"Only the owner can delete live stories.",true);return;}
     startLoad();
-    try{ await updateDoc(doc(db,"news",b.dataset.delete),{deleted:true,deletedAt:serverTimestamp(),updatedAt:serverTimestamp()}); toast(lang==="bn"?"ট্র্যাশে পাঠানো হয়েছে":"Moved to trash"); }
+    try{ await updateDoc(doc(db,item.isRevision?"newsRevisions":"news",item.isRevision?item.revisionId:b.dataset.delete),{deleted:true,deletedAt:serverTimestamp(),updatedAt:serverTimestamp()}); toast(lang==="bn"?"ট্র্যাশে পাঠানো হয়েছে":"Moved to trash"); }
     catch(err){ console.error(err); toast(err?.message||"Delete failed",true); }
     finally{ endLoad(); }
   });
 }
 
+
+const NEWS_FIELDS=['title','category','status','reporter','source','excerpt','content','titleEn','excerptEn','contentEn','imageUrl','imageData','imageData2','imageData3','imageCaption','featured','breaking','publishAtMs','seoTitle','seoDescription','youtubeVideo','facebookPost','deleted'];
+const BACKUP_COLLECTIONS=['news','categories','ads','reporters','siteSettings','publicStats','adStats','analytics'];
+let newsroomItems=[],reviewItems=[],readerItems=[],reviewUnsub=null,readerUnsub=null,workflowBusy=false,pendingBackup=null;
+function pickNewsData(data){return Object.fromEntries(NEWS_FIELDS.filter(k=>Object.hasOwn(data,k)).map(k=>[k,data[k]]));}
+function rebuildNewsItems(){items=[...newsroomItems,...reviewItems.filter(x=>x.reviewState!=='approved')].sort((a,b)=>(b.updatedAt?.seconds||b.createdAt?.seconds||0)-(a.updatedAt?.seconds||a.createdAt?.seconds||0));}
+function roleControls(){
+  const owner=isNewsOwner(auth.currentUser);
+  ['reviewNav','backupNav','readerNav'].forEach(id=>$(id)?.classList.toggle('hide',!owner));
+  const publishOption=els.statusSelect.querySelector('option[value="published"]');
+  if(publishOption)publishOption.textContent=owner?t('published'):(lang==='bn'?'অনুমোদনের জন্য পাঠান':'Send for approval');
+  const trash=document.querySelector('.nav button[data-page="trash"]');trash?.classList.toggle('hide',!owner);
+  if(['review','backup','inbox'].includes(currentPage)&&!owner)currentPage='dashboard';
+}
+async function saveForReview(data,id,status){
+  if(!auth.currentUser)throw Error('Sign in required');
+  const previous=id?.startsWith('review:')?reviewItems.find(x=>x.id===id):null;
+  const ref=previous?doc(db,'newsRevisions',previous.revisionId):doc(collection(db,'newsRevisions'));
+  const payload={...data,status:'draft',reviewState:status==='draft'?'draft':'pending',updatedAt:serverTimestamp()};
+  if(!previous)Object.assign(payload,{authorUid:auth.currentUser.uid,authorEmail:auth.currentUser.email,targetId:id||'',createdAt:serverTimestamp()});
+  await setDoc(ref,payload,{merge:!!previous});
+}
+async function approveRevision(revisionId,overrides={}){
+  if(!isNewsOwner(auth.currentUser))throw Error('Owner approval required');
+  const revisionRef=doc(db,'newsRevisions',revisionId),newRef=doc(collection(db,'news'));
+  await runTransaction(db,async transaction=>{
+    const revision=await transaction.get(revisionRef);if(!revision.exists()||revision.data().reviewState==='approved')throw Error('This submission has already been handled');
+    const source=revision.data(),next={...pickNewsData(source),...pickNewsData(overrides),status:overrides.status||'published',deleted:false};
+    if(!next.title?.trim()||(next.status==='published'&&(!next.excerpt?.trim()||!next.content?.trim())))throw Error(lang==='bn'?'শিরোনাম, সারসংক্ষেপ ও সংবাদ লিখুন।':'Add title, excerpt and article content.');
+    const target=source.targetId?doc(db,'news',source.targetId):newRef;
+    const existing=await transaction.get(target);
+    transaction.set(target,{...(existing.exists()?existing.data():{views:0,createdAt:serverTimestamp()}),...next,updatedAt:serverTimestamp()});
+    transaction.update(revisionRef,{reviewState:'approved',publishedId:target.id,approvedBy:auth.currentUser.uid,approvedAt:serverTimestamp(),updatedAt:serverTimestamp()});
+  });
+}
+function reviewNoticeHtml(){
+  const n=reviewItems.filter(x=>!x.deleted&&x.reviewState==='pending').length;
+  return n?`<div class="workflowNotice">${lang==='bn'?`${n}টি সংবাদ অনুমোদনের অপেক্ষায় আছে।`:`${n} stories await approval.`} ${isNewsOwner(auth.currentUser)?`<button class="btn btn-soft" data-quick-page="review">${lang==='bn'?'পর্যালোচনা করুন':'Review'}</button>`:''}</div>`:'';
+}
+function reviewHtml(){return `<section class="settingsCard workflowWide"><h2>${lang==='bn'?'প্রকাশের অনুমোদন':'Publication approval'}</h2><p class="settingsSectionNote">${lang==='bn'?'প্রিভিউ দেখে প্রকাশ করুন অথবা পরিবর্তনের জন্য ফিরিয়ে দিন। প্রকাশিত খবরের পরিবর্তন অনুমোদন না হওয়া পর্যন্ত আগের খবরটি লাইভ থাকবে।':'Review before publishing. The current live story stays unchanged until you approve its revision.'}</p>${reviewItems.filter(x=>!x.deleted&&x.reviewState==='pending').map(x=>`<article class="workflowEntry"><h3>${esc(x.title)}</h3><small>${esc(x.authorEmail||'')} · ${x.targetId?(lang==='bn'?'প্রকাশিত খবরের পরিবর্তন':'Revision'):(lang==='bn'?'নতুন সংবাদ':'New story')}</small><p>${esc(x.excerpt||'')}</p><div class="workflowActions"><button class="btn btn-soft" data-preview="${esc(x.id)}">${lang==='bn'?'প্রিভিউ':'Preview'}</button><button class="btn btn-soft" data-edit="${esc(x.id)}">${lang==='bn'?'সম্পাদনা করুন':'Edit'}</button><button class="btn btn-primary" data-approve="${esc(x.revisionId)}">${lang==='bn'?'অনুমোদন ও প্রকাশ':'Approve and publish'}</button></div><label class="field"><span>${lang==='bn'?'সংশোধনের নির্দেশনা (ঐচ্ছিক)':'Revision note (optional)'}</span><input data-review-note="${esc(x.revisionId)}" maxlength="500"></label><button class="btn btn-soft" data-return="${esc(x.revisionId)}">${lang==='bn'?'সংশোধনের জন্য ফেরত দিন':'Return for changes'}</button></article>`).join('')||`<p class="empty">${lang==='bn'?'কোনো সংবাদ অনুমোদনের অপেক্ষায় নেই।':'No stories awaiting approval.'}</p>`}</section>`;}
+function securityHtml(){const hasPassword=auth.currentUser?.providerData.some(x=>x.providerId==='password');return `<section class="settingsCard"><h2>${lang==='bn'?'পাসওয়ার্ড ও নিরাপত্তা':'Password and security'}</h2><p>${esc(auth.currentUser?.email||'')}</p><form id="changePasswordForm" autocomplete="off">${hasPassword?`<label class="field"><span>${lang==='bn'?'বর্তমান অ্যাডমিন পাসওয়ার্ড':'Current admin password'}</span><input name="current" type="password" autocomplete="current-password" required></label>`:''}<label class="field"><span>${lang==='bn'?'নতুন পাসওয়ার্ড':'New password'}</span><input name="password" type="password" minlength="8" maxlength="128" autocomplete="new-password" required></label><label class="field"><span>${lang==='bn'?'আবার নতুন পাসওয়ার্ড দিন':'Confirm new password'}</span><input name="confirm" type="password" minlength="8" maxlength="128" autocomplete="new-password" required></label><button class="btn btn-primary" type="submit">${lang==='bn'?'পাসওয়ার্ড পরিবর্তন করুন':'Change password'}</button><p id="passwordStatus" role="status"></p></form><p class="settingsSectionNote">${lang==='bn'?'পাসওয়ার্ড মনে না থাকলে লগইন পাতার “পাসওয়ার্ড ভুলে গেছেন?” চাপুন। ইমেইলে পাওয়া লিংক দিয়ে নিজেই নতুন পাসওয়ার্ড সেট করবেন।':'Forgot your password? Use the password recovery button on the sign-in page and follow the email link.'}</p></section>`;}
+function encodeBackup(value){if(value instanceof Timestamp)return {__firestoreType:'timestamp',seconds:value.seconds,nanoseconds:value.nanoseconds};if(Array.isArray(value))return value.map(encodeBackup);if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([k,v])=>[k,encodeBackup(v)]));return value;}
+function decodeBackup(value,depth=0){if(depth>25)throw Error('Backup is too deeply nested');if(value===null||typeof value==='string'||typeof value==='boolean')return value;if(typeof value==='number'){if(!Number.isFinite(value))throw Error('Invalid number');return value;}if(Array.isArray(value))return value.map(v=>decodeBackup(v,depth+1));if(!value||typeof value!=='object')throw Error('Invalid backup value');if(Object.keys(value).some(k=>['__proto__','constructor','prototype'].includes(k)))throw Error('Invalid field name');if(value.__firestoreType==='timestamp'){if(Object.keys(value).length!==3||!Number.isInteger(value.seconds)||!Number.isInteger(value.nanoseconds)||value.nanoseconds<0||value.nanoseconds>999999999)throw Error('Invalid timestamp');return new Timestamp(value.seconds,value.nanoseconds);}return Object.fromEntries(Object.entries(value).map(([k,v])=>[k,decodeBackup(v,depth+1)]));}
+function validateBackup(value){
+  if(value?.format!=='haimchar-news-backup'||value.version!==1||value.projectId!==firebaseConfig.projectId||!Array.isArray(value.documents)||value.documents.length>2000)throw Error(lang==='bn'?'এই সাইটের সঠিক ব্যাকআপ ফাইল দিন (সর্বোচ্চ ২০০০টি ডকুমেন্ট)।':'Select a valid backup for this site (up to 2000 documents).');
+  const seen=new Set();return value.documents.map(entry=>{const parts=String(entry.path||'').split('/');if(parts.length!==2||!BACKUP_COLLECTIONS.includes(parts[0])||!parts[1]||parts[1]==='.'||parts[1]==='..'||/^__.*__$/.test(parts[1])||(parts[0]==='siteSettings'&&parts[1]!=='general')||(parts[0]==='analytics'&&parts[1]!=='site')||seen.has(entry.path)||!entry.data||typeof entry.data!=='object'||Array.isArray(entry.data)||JSON.stringify(entry.data).length>1100000)throw Error('Invalid document in backup');seen.add(entry.path);return {path:entry.path,data:decodeBackup(entry.data)};});
+}
+async function collectBackup(){if(!isNewsOwner(auth.currentUser))throw Error('Owner access required');const documents=[];for(const name of BACKUP_COLLECTIONS){const snap=await getDocs(collection(db,name));snap.forEach(d=>{if(name==="siteSettings"&&d.id!=="general"||name==="analytics"&&d.id!=="site")return;documents.push({path:`${name}/${d.id}`,data:encodeBackup(d.data())});});if(documents.length>2000)throw Error('Backup exceeds 2000 documents');}return {format:'haimchar-news-backup',version:1,projectId:firebaseConfig.projectId,exportedAt:new Date().toISOString(),documents};}
+function downloadBackup(value,suffix=''){const blob=new Blob([JSON.stringify(value,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`Haimchar-News24BD-${new Date().toISOString().slice(0,10)}${suffix}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function backupHtml(){return `<section class="settingsCard"><h2>${lang==='bn'?'ব্যাকআপ ও ফিরিয়ে আনা':'Backup and restore'}</h2><p class="settingsSectionNote">${lang==='bn'?'সংবাদ, ক্যাটাগরি, বিজ্ঞাপন, প্রতিবেদক, সাইটের সেটিংস ও কাউন্টারের ব্যাকআপ নিন। অ্যাকাউন্ট, পাসওয়ার্ড ও পাঠকের ব্যক্তিগত বার্তা এই ফাইলে থাকবে না।':'Export news, categories, ads, reporters, site settings and counters. Accounts, passwords and private reader messages are excluded.'}</p><button class="btn btn-primary" id="downloadBackupBtn">${lang==='bn'?'ব্যাকআপ ডাউনলোড':'Download backup'}</button><hr><label class="field"><span>${lang==='bn'?'এই সাইটের JSON ব্যাকআপ নির্বাচন করুন':'Select this site’s JSON backup'}</span><input id="backupFile" type="file" accept=".json,application/json"></label><p id="backupPreview" role="status"></p><button class="btn btn-soft" id="restoreBackupBtn" disabled>${lang==='bn'?'ব্যাকআপ ফিরিয়ে আনুন':'Restore backup'}</button><p class="settingsSectionNote">${lang==='bn'?'ফাইলের একই আইডির তথ্য প্রতিস্থাপিত হবে; ফাইলে না থাকা তথ্য মুছবে না। ফিরিয়ে আনার আগে বর্তমান তথ্যের ব্যাকআপ ডাউনলোড হবে। সর্বোচ্চ ৫০ MB / ২০০০টি ডকুমেন্ট।':'Matching document IDs are replaced; documents absent from the file stay intact. A backup of current data downloads before restoring. Limit: 50 MB / 2000 documents.'}</p><p id="backupStatus" role="status"></p></section>`;}
+function readerInboxHtml(){return `<section class="settingsCard workflowWide"><h2>${lang==='bn'?'পাঠকের খবর ও সংশোধনী':'Reader submissions'}</h2><p class="settingsSectionNote">${lang==='bn'?'পাঠকের তথ্য ব্যক্তিগত। যাচাই ছাড়া প্রকাশ করবেন না। খবর গ্রহণ করলে খসড়া তৈরি হবে; সেটি সম্পাদনা করে প্রকাশ করুন।':'Reader details are private. Verify before publishing. Accepted news becomes a draft for you to edit.'}</p>${readerItems.map(x=>`<article class="workflowEntry"><h3>${esc(x.title)}</h3><small>${esc(x.name)} · ${esc(x.contact)} · ${esc(x.type==='correction'?(lang==='bn'?'সংশোধনী':'Correction'):(lang==='bn'?'সংবাদ':'News'))} · ${esc(x.status)}</small><p class="readerMessage">${esc(x.message)}</p>${x.articleUrl?`<a href="${esc(safeExternalLink(x.articleUrl))}" target="_blank" rel="noopener noreferrer">${lang==='bn'?'সংবাদের লিংক':'Article link'}</a>`:''}${/^data:image\/jpeg;base64,/.test(x.imageData||'')?`<img class="readerAttachment" src="${esc(x.imageData)}" alt="${lang==='bn'?'পাঠকের পাঠানো ছবি':'Reader attachment'}">`:''}${x.status==='new'||x.status==='seen'?`<div class="workflowActions">${x.type==='news'?`<button class="btn btn-primary" data-reader-draft="${esc(x.id)}">${lang==='bn'?'খসড়ায় নিন':'Create draft'}</button>`:`<button class="btn btn-primary" data-reader-status="${esc(x.id)}" data-status="accepted">${lang==='bn'?'সংশোধনী গ্রহণ':'Accept correction'}</button>`}<button class="btn btn-soft" data-reader-status="${esc(x.id)}" data-status="seen">${lang==='bn'?'দেখা হয়েছে':'Mark seen'}</button><button class="btn btn-soft" data-reader-status="${esc(x.id)}" data-status="rejected">${lang==='bn'?'বাতিল':'Reject'}</button></div>`:x.draftId?`<button class="btn btn-soft" data-edit="${esc(x.draftId)}">${lang==='bn'?'খসড়া সম্পাদনা':'Edit draft'}</button>`:''}</article>`).join('')||`<p class="empty">${lang==='bn'?'এখনো কোনো বার্তা আসেনি।':'No submissions yet.'}</p>`}</section>`;}
+function safeExternalLink(url){try{const parsed=new URL(url);return ['http:','https:'].includes(parsed.protocol)?parsed.href:'#';}catch{return '#';}}
+async function readerToDraft(id){if(!isNewsOwner(auth.currentUser))throw Error('Owner required');const sourceRef=doc(db,'readerSubmissions',id),draftRef=doc(collection(db,'news'));await runTransaction(db,async tx=>{const snap=await tx.get(sourceRef);if(!snap.exists()||!['new','seen'].includes(snap.data().status)||snap.data().type!=='news')throw Error('Submission already handled');const source=snap.data();tx.set(draftRef,{title:source.title,excerpt:source.message.slice(0,160),content:esc(source.message).replace(/\n/g,'<br>'),imageData:source.imageData||'',category:'হাইমচর',status:'draft',deleted:false,featured:false,breaking:false,publishAtMs:Date.now(),reporter:'',source:'পাঠকের পাঠানো তথ্য — যাচাই প্রয়োজন',views:0,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});tx.update(sourceRef,{status:'accepted',draftId:draftRef.id,reviewedAt:serverTimestamp(),reviewedBy:auth.currentUser.uid});});}
+function wireWorkflow(){
+  document.querySelectorAll('[data-approve]').forEach(button=>button.onclick=async()=>{if(!isNewsOwner(auth.currentUser)||workflowBusy)return;if(!await askConfirm(lang==='bn'?'সংবাদ যাচাই করেছেন? অনুমোদন করলে এটি প্রকাশিত হবে অথবা নির্ধারিত সময়ে প্রকাশ হবে।':'Approve this verified story for publication?',{danger:false}))return;workflowBusy=true;button.disabled=true;try{await approveRevision(button.dataset.approve);toast(lang==='bn'?'সংবাদ অনুমোদিত হয়েছে।':'Story approved.');}catch(error){toast(error.message,true);}finally{workflowBusy=false;render();}});
+  document.querySelectorAll('[data-return]').forEach(button=>button.onclick=async()=>{if(!isNewsOwner(auth.currentUser))return;const note=document.querySelector(`[data-review-note="${CSS.escape(button.dataset.return)}"]`)?.value.trim()||'';button.disabled=true;try{await updateDoc(doc(db,'newsRevisions',button.dataset.return),{reviewState:'returned',reviewNote:note,updatedAt:serverTimestamp()});document.activeElement?.blur();render();toast(lang==='bn'?'সংবাদ ফেরত দেওয়া হয়েছে।':'Story returned.');}catch(error){toast(error.message,true);}finally{button.disabled=false;}});
+  const passwordForm=$('changePasswordForm');if(passwordForm)passwordForm.onsubmit=async event=>{event.preventDefault();if(!passwordForm.reportValidity()||workflowBusy)return;const values=new FormData(passwordForm),password=String(values.get('password')),status=$('passwordStatus'),button=passwordForm.querySelector('button');if(password!==values.get('confirm')){status.textContent=lang==='bn'?'নতুন দুই পাসওয়ার্ড মিলছে না।':'Passwords do not match.';return;}workflowBusy=true;button.disabled=true;status.textContent=lang==='bn'?'পাসওয়ার্ড পরিবর্তন হচ্ছে…':'Changing password…';try{const user=auth.currentUser;if(user.providerData.some(x=>x.providerId==='password')){await reauthenticateWithCredential(user,EmailAuthProvider.credential(user.email,String(values.get('current'))));await updatePassword(user,password);}else await linkWithCredential(user,EmailAuthProvider.credential(user.email,password));passwordForm.reset();status.textContent=lang==='bn'?'পাসওয়ার্ড পরিবর্তন হয়েছে। পরেরবার নতুন পাসওয়ার্ড ব্যবহার করুন।':'Password changed. Use the new password next time.';}catch(error){status.textContent=['auth/invalid-credential','auth/wrong-password'].includes(error.code)?(lang==='bn'?'বর্তমান পাসওয়ার্ড সঠিক নয়।':'Current password is incorrect.'):accountErrorMessage(error);}finally{workflowBusy=false;button.disabled=false;}};
+  const download=$('downloadBackupBtn');if(download)download.onclick=async()=>{if(workflowBusy)return;workflowBusy=true;download.disabled=true;try{downloadBackup(await collectBackup());$('backupStatus').textContent=lang==='bn'?'ব্যাকআপ ডাউনলোড হয়েছে।':'Backup downloaded.';}catch(error){$('backupStatus').textContent=error.message;}finally{workflowBusy=false;download.disabled=false;}};
+  const file=$('backupFile');if(file)file.onchange=async()=>{pendingBackup=null;$('restoreBackupBtn').disabled=true;const selected=file.files?.[0];if(!selected)return;try{if(selected.size>50*1024*1024)throw Error('File exceeds 50 MB');const value=JSON.parse(await selected.text());pendingBackup=validateBackup(value);$('backupPreview').textContent=lang==='bn'?`${pendingBackup.length}টি ডকুমেন্ট · ব্যাকআপের সময়: ${value.exportedAt||''}`:`${pendingBackup.length} documents · Exported: ${value.exportedAt||''}`;$('restoreBackupBtn').disabled=!pendingBackup.length;}catch(error){$('backupPreview').textContent=error.message;}};
+  const restore=$('restoreBackupBtn');if(restore)restore.onclick=async()=>{if(!pendingBackup?.length||workflowBusy||!isNewsOwner(auth.currentUser))return;if(!await askConfirm(lang==='bn'?`${pendingBackup.length}টি ডকুমেন্ট ফিরিয়ে আনবেন? একই আইডির বর্তমান তথ্য প্রতিস্থাপিত হবে। বর্তমান তথ্যের ব্যাকআপ আগে ডাউনলোড হবে।`:`Restore ${pendingBackup.length} documents and replace matching IDs? A current backup downloads first.`,{danger:false}))return;workflowBusy=true;restore.disabled=true;let written=0;try{downloadBackup(await collectBackup(),'-before-restore');for(let offset=0;offset<pendingBackup.length;offset+=10){const batch=writeBatch(db);pendingBackup.slice(offset,offset+10).forEach(entry=>batch.set(doc(db,entry.path),entry.data));await batch.commit();written=Math.min(offset+10,pendingBackup.length);$('backupStatus').textContent=`${written} / ${pendingBackup.length}`;}$('backupStatus').textContent=lang==='bn'?`${written}টি ডকুমেন্ট ফিরিয়ে আনা হয়েছে।`:`Restored ${written} documents.`;pendingBackup=null;}catch(error){$('backupStatus').textContent=(lang==='bn'?`${written}টি ফিরেছে; বাকি কাজ থেমেছে। সংযোগ পরীক্ষা করে আবার চেষ্টা করুন। `:`${written} restored; the remaining restore stopped. `)+error.message;}finally{workflowBusy=false;restore.disabled=!pendingBackup;}};
+  document.querySelectorAll('[data-reader-status]').forEach(button=>button.onclick=async()=>{if(!isNewsOwner(auth.currentUser))return;button.disabled=true;try{await updateDoc(doc(db,'readerSubmissions',button.dataset.readerStatus),{status:button.dataset.status,reviewedAt:serverTimestamp(),reviewedBy:auth.currentUser.uid});}catch(error){toast(error.message,true);}finally{button.disabled=false;}});
+  document.querySelectorAll('[data-reader-draft]').forEach(button=>button.onclick=async()=>{button.disabled=true;try{await readerToDraft(button.dataset.readerDraft);toast(lang==='bn'?'খসড়া তৈরি হয়েছে। সম্পাদনা করে প্রকাশ করুন।':'Draft created. Edit before publishing.');}catch(error){toast(error.message,true);}finally{button.disabled=false;}});
+}
+$('forgotPasswordBtn').onclick=async()=>{const email=els.emailInput.value.trim();if(!email||!els.emailInput.reportValidity())return;const button=$('forgotPasswordBtn');button.disabled=true;els.loginError.classList.add('hide');try{await sendPasswordResetEmail(auth,email);$('passwordResetStatus').textContent=lang==='bn'?'অ্যাকাউন্ট থাকলে পাসওয়ার্ড সেট করার লিংক ইমেইলে পাবেন। ইনবক্স ও স্প্যাম দেখুন।':'If an account exists, check your inbox and spam for a password reset link.';}catch(error){$('passwordResetStatus').textContent=lang==='bn'?'ইমেইল পাঠানো যায়নি। কিছুক্ষণ পরে আবার চেষ্টা করুন।':'Could not send the email. Try again shortly.';}finally{button.disabled=false;}};
 
 const OWNER_EMAIL = "islamiclibrary2.0@gmail.com";
 const OWNER_UID = "9sdi8QAVckMYQyly8nE9adHC58W2";
@@ -2287,6 +2378,9 @@ onAuthStateChanged(auth,async(user)=>{
   const version=++authStateVersion;
   if(accessUnsub){accessUnsub();accessUnsub=null;}
   if(teamUnsub){teamUnsub();teamUnsub=null;}
+  if(reviewUnsub){reviewUnsub();reviewUnsub=null;}
+  if(readerUnsub){readerUnsub();readerUnsub=null;}
+  reviewItems=[];readerItems=[];
   if(user){
     let allowed=false,accessError=null;
     try{allowed=await canUseNewsAdmin(user);}catch(error){accessError=error;console.error("Access check failed",error.code);}
@@ -2324,6 +2418,7 @@ onAuthStateChanged(auth,async(user)=>{
     },850);
   }else{
     resetLoginControls();
+    newsroomItems=[];reviewItems=[];readerItems=[];items=[];pendingBackup=null;
     gate?.classList.add("hideGate");
     els.loginView.classList.remove("hide");
     els.appView.classList.add("hide");
@@ -2349,12 +2444,16 @@ onAuthStateChanged(auth,async(user)=>{
       },()=>signOut(auth).catch(console.error));
     }
     els.adminEmail.textContent=user.email||"";
+    const reviewsQuery=isNewsOwner(user)?collection(db,"newsRevisions"):query(collection(db,"newsRevisions"),where("authorUid","==",user.uid));
+    reviewUnsub=onSnapshot(reviewsQuery,snap=>{reviewItems=snap.docs.map(d=>({revisionId:d.id,...d.data(),id:'review:'+d.id,isRevision:true}));rebuildNewsItems();render();},error=>toast(error.message,true));
+    if(isNewsOwner(user))readerUnsub=onSnapshot(collection(db,"readerSubmissions"),snap=>{readerItems=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));render();},error=>toast(error.message,true));
+    roleControls();
     newsUnsub=onSnapshot(collection(db,"news"),(snap)=>{
-      items=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>{
+      newsroomItems=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>{
         const av=(a.createdAt?.seconds||a.updatedAt?.seconds||0), bv=(b.createdAt?.seconds||b.updatedAt?.seconds||0);
         return bv-av;
       });
-      render();
+      rebuildNewsItems();render();
     },(err)=>{console.error(err);toast(err.message,true)});
     categoriesUnsub=onSnapshot(collection(db,"categories"),(snap)=>{
       categories=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.order||999)-(b.order||999));

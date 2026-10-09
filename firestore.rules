@@ -18,6 +18,51 @@ service cloud.firestore {
       allow list, write: if owner();
     }
     match /reporters/{id} { allow read, write: if admin(); }
+    function validRevision() {
+      let data = request.resource.data;
+      return data.keys().hasOnly(['title', 'category', 'status', 'reporter', 'source', 'excerpt', 'content', 'titleEn', 'excerptEn', 'contentEn', 'imageUrl', 'imageData', 'imageData2', 'imageData3', 'imageCaption', 'featured', 'breaking', 'publishAtMs', 'seoTitle', 'seoDescription', 'youtubeVideo', 'facebookPost', 'deleted', 'authorUid', 'authorEmail', 'targetId', 'reviewState', 'createdAt', 'updatedAt', 'deletedAt', 'reviewNote'])
+        && data.keys().hasAll(['title', 'status', 'authorUid', 'authorEmail', 'targetId', 'reviewState', 'createdAt', 'updatedAt', 'deleted'])
+        && data.status == 'draft'
+        && data.reviewState in ['draft', 'pending']
+        && data.title is string && data.title.size() > 0 && data.title.size() <= 500
+        && data.targetId is string && data.targetId.size() <= 128
+        && data.deleted is bool
+        && data.get('content', '') is string && data.get('content', '').size() <= 200000
+        && data.get('excerpt', '') is string && data.get('excerpt', '').size() <= 5000
+        && data.updatedAt == request.time;
+    }
+    match /newsRevisions/{id} {
+      allow read: if owner() || (admin() && resource.data.authorUid == request.auth.uid);
+      allow create: if owner() || (admin() && validRevision()
+        && request.resource.data.authorUid == request.auth.uid
+        && request.resource.data.authorEmail == request.auth.token.email
+        && request.resource.data.createdAt == request.time);
+      allow update: if owner() || (admin() && resource.data.authorUid == request.auth.uid
+        && resource.data.reviewState != 'approved'
+        && validRevision()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['title', 'category', 'status', 'reporter', 'source', 'excerpt', 'content', 'titleEn', 'excerptEn', 'contentEn', 'imageUrl', 'imageData', 'imageData2', 'imageData3', 'imageCaption', 'featured', 'breaking', 'publishAtMs', 'seoTitle', 'seoDescription', 'youtubeVideo', 'facebookPost', 'deleted', 'reviewState', 'updatedAt', 'deletedAt']));
+      allow delete: if owner();
+    }
+    function validReaderSubmission() {
+      let data = request.resource.data;
+      return data.keys().hasOnly(['type','name','contact','title','message','articleUrl','imageData','consent','status','createdAt'])
+        && data.keys().hasAll(['type','name','contact','title','message','articleUrl','imageData','consent','status','createdAt'])
+        && data.type in ['news','correction'] && data.status == 'new' && data.consent == true
+        && data.name is string && data.name.size() >= 2 && data.name.size() <= 100
+        && data.contact is string && data.contact.size() >= 5 && data.contact.size() <= 120
+        && data.title is string && data.title.size() >= 5 && data.title.size() <= 180
+        && data.message is string && data.message.size() >= 30 && data.message.size() <= 4000
+        && data.articleUrl is string && data.articleUrl.size() <= 1000
+        && (data.articleUrl == '' || data.articleUrl.matches('https?://.*'))
+        && (data.type != 'correction' || data.articleUrl != '')
+        && data.imageData is string && data.imageData.size() <= 120000
+        && (data.imageData == '' || data.imageData.matches('data:image/jpeg;base64,[A-Za-z0-9+/=]+'))
+        && data.createdAt == request.time;
+    }
+    match /readerSubmissions/{id} {
+      allow create: if validReaderSubmission();
+      allow read, update, delete: if owner();
+    }
     function counterCreate(field) {
       return request.resource.data.keys().hasOnly([field, 'updatedAt'])
         && request.resource.data[field] == 1
@@ -30,7 +75,7 @@ service cloud.firestore {
     }
     match /news/{id} {
       allow read: if admin() || resource.data.status == 'published';
-      allow write: if admin();
+      allow write: if owner();
     }
     match /categories/{id} {
       allow read: if true;

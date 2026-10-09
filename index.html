@@ -1614,6 +1614,9 @@ footer .footerEditorial{align-items:center;text-align:center}
   footer .footerBrand{margin-bottom:24px}
 }
 </style>
+<style id="reader-submission-controls">
+.readerLaunchWrap{margin-top:24px;text-align:center}#readerSubmitLaunch,.readerInlineAction{font:inherit;cursor:pointer;padding:11px 20px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--footer-text);min-height:48px;font-weight:700}#readerSubmissionDialog{width:min(620px,calc(100% - 24px));max-height:88dvh;border:1px solid var(--line);padding:0;border-radius:16px;background:var(--card);color:var(--text);font-family:inherit;box-shadow:0 20px 80px #0006}#readerSubmissionDialog::backdrop{background:#0008}#readerSubmissionForm{padding:20px 24px}#readerSubmissionForm>label{display:flex;flex-direction:column;gap:7px;margin:14px 0;font-size:15px;font-weight:600}#readerSubmissionForm :is(input:not([type="checkbox"]),textarea,select){width:100%;max-width:100%;box-sizing:border-box;background:var(--paper);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px;font:inherit;font-size:16px}#readerSubmissionForm .readerConsent{flex-direction:row;align-items:flex-start;line-height:1.7}#readerSubmissionForm .readerConsent input{width:20px;height:20px;flex-shrink:0;margin-top:4px}.readerHoney{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}.readerFormIntro,#readerSubmitStatus{font-size:15px;line-height:1.8}.readerSend{width:100%;min-height:50px;border:0;border-radius:11px;background:var(--red);color:#fff;font:inherit;font-weight:700;cursor:pointer}.readerSend:disabled{opacity:.6;cursor:wait}#readerClose{border:0;background:transparent;color:var(--text);font-size:28px;min-width:44px;min-height:44px;cursor:pointer}@media(max-width:620px){#readerSubmissionForm{padding:16px 18px}#readerSubmissionDialog{max-height:calc(100dvh - 24px)}#readerSubmissionDialog .footerDialogHeader{padding:16px 18px}}
+</style>
 </head>
 
 <style id="v24-push-notification">
@@ -1789,6 +1792,7 @@ footer .footerEditorial{align-items:center;text-align:center}
         </div>
       </div>
     </div>
+    <div class="readerLaunchWrap"><button id="readerSubmitLaunch" type="button">খবর বা সংশোধনী পাঠান</button></div>
     <nav id="footerInfoNav" class="footerInfoNav" aria-label="সংবাদমাধ্যমের তথ্য">
       <button type="button" data-footer-info="about">আমাদের সম্পর্কে</button>
       <button type="button" data-footer-info="advertising">বিজ্ঞাপন</button>
@@ -1805,6 +1809,7 @@ footer .footerEditorial{align-items:center;text-align:center}
     <div class="copyright">© <span id="copyYear">2026</span> <span id="copyName">হাইমচর নিউজ২৪বিডি</span><span class="copyrightRights" data-i18n="rights">সর্বস্বত্ব সংরক্ষিত</span><span id="copyOwner"></span></div>
   </div>
 </footer>
+<dialog id="readerSubmissionDialog" aria-label="পাঠকের খবর ও সংশোধনী"></dialog>
 <dialog id="footerInfoDialog" aria-labelledby="footerInfoTitle">
   <div class="footerDialogHeader"><h2 id="footerInfoTitle"></h2><button id="footerInfoClose" type="button" aria-label="বন্ধ করুন">×</button></div>
   <article id="footerInfoText"></article>
@@ -1816,7 +1821,7 @@ footer .footerEditorial{align-items:center;text-align:center}
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 import { getMessaging, getToken, onMessage, isSupported } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-messaging.js";
 import {
-  getFirestore, collection, doc, onSnapshot, query, where, setDoc, increment, serverTimestamp
+  getFirestore, collection, doc, onSnapshot, query, where, setDoc, addDoc, increment, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -2271,11 +2276,33 @@ const footerInfoDefaults={
  terms:{bn:"প্রকাশিত সংবাদ ও ছবি ব্যবহার বা পুনঃপ্রকাশের আগে সংশ্লিষ্ট স্বত্বাধিকারীর অনুমতি নিন এবং উৎস উল্লেখ করুন। সংবাদ সম্পর্কে মতামত ও অভিযোগ জানানোর সময় প্রাসঙ্গিক তথ্য দিন এবং শালীন ভাষা ব্যবহার করুন।",en:"Before using or republishing news and images, obtain permission from the relevant rights holder and credit the source. Provide relevant details and use respectful language when submitting feedback or complaints."},
  corrections:{bn:"কোনো সংবাদে তথ্যগত ভুল দেখলে সংবাদটির শিরোনাম বা লিংক, সংশোধনের বিবরণ এবং প্রাসঙ্গিক সূত্রসহ আমাদের জানান। আপনার পাঠানো তথ্য যাচাই করে প্রয়োজনীয় সংশোধন করা হবে।",en:"If you find a factual error, send the article title or link, the proposed correction and relevant sources. Submitted information will be checked and corrections made where needed."}
 };
+let readerFormOpenedAt=0,readerSending=false;
+function readerLabels(){return lang==='bn'?{launch:'খবর বা সংশোধনী পাঠান',title:'পাঠকের খবর ও সংশোধনী',intro:'আপনার এলাকার খবর বা প্রকাশিত সংবাদের ভুল জানান। যাচাইয়ের পর সম্পাদক সিদ্ধান্ত নেবেন। আপনার যোগাযোগের তথ্য প্রকাশ করা হবে না।',type:'যা পাঠাবেন',news:'সংবাদ',correction:'সংশোধনী',name:'আপনার নাম',contact:'যোগাযোগের ইমেইল বা মোবাইল',headline:'শিরোনাম / বিষয়',message:'বিস্তারিত ও তথ্যের উৎস',article:'সংশ্লিষ্ট সংবাদের লিংক (সংশোধনীর জন্য)',image:'একটি ছবি (ঐচ্ছিক)',consent:'তথ্য যাচাইয়ের জন্য যোগাযোগে সম্মতি দিচ্ছি এবং ছবিটি ব্যবহারের অনুমতি আছে।',send:'পাঠান',close:'বন্ধ করুন'}:{launch:'Send news or a correction',title:'Reader news and corrections',intro:'Share local news or report an error. The editor will verify it before deciding. Your contact details will not be published.',type:'Submission type',news:'News',correction:'Correction',name:'Your name',contact:'Contact email or phone',headline:'Title / subject',message:'Details and sources',article:'Related article link (for corrections)',image:'One image (optional)',consent:'I agree to be contacted for verification and have permission to share this image.',send:'Send',close:'Close'};}
+function openReaderForm(type='news'){
+  const labels=readerLabels(),dialog=$('readerSubmissionDialog');
+  dialog.innerHTML=`<div class="footerDialogHeader"><h2>${labels.title}</h2><button id="readerClose" type="button" aria-label="${labels.close}">×</button></div><form id="readerSubmissionForm"><p class="readerFormIntro">${labels.intro}</p><label>${labels.type}<select name="type"><option value="news">${labels.news}</option><option value="correction">${labels.correction}</option></select></label><label>${labels.name}<input name="name" maxlength="100" required autocomplete="name"></label><label>${labels.contact}<input name="contact" maxlength="120" required autocomplete="email"></label><label>${labels.headline}<input name="title" maxlength="180" required></label><label>${labels.message}<textarea name="message" minlength="30" maxlength="4000" rows="6" required></textarea></label><label>${labels.article}<input name="articleUrl" type="url" maxlength="1000" placeholder="https://"></label><label>${labels.image}<input name="image" type="file" accept="image/jpeg,image/png,image/webp"></label><label class="readerConsent"><input name="consent" type="checkbox" required><span>${labels.consent}</span></label><div class="readerHoney" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div><button class="readerSend" type="submit">${labels.send}</button><p id="readerSubmitStatus" role="status" aria-live="polite"></p></form>`;
+  const form=$('readerSubmissionForm');form.elements.type.value=type;form.elements.articleUrl.required=type==='correction';form.elements.type.onchange=()=>{form.elements.articleUrl.required=form.elements.type.value==='correction';};
+  if(type==='correction'&&location.hash.startsWith('#news='))form.elements.articleUrl.value=location.href;
+  $('readerClose').onclick=()=>{if(!readerSending)dialog.close();};
+  form.onsubmit=submitReaderForm;readerFormOpenedAt=Date.now();dialog.showModal();
+}
+async function smallReaderImage(file){if(!file)return '';if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>10*1024*1024)throw Error(lang==='bn'?'JPG, PNG বা WebP ছবি দিন (সর্বোচ্চ ১০ MB)।':'Select JPG, PNG or WebP (up to 10 MB).');const url=URL.createObjectURL(file);try{const image=await new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(Error('Image could not be opened'));im.src=url;});let side=720,quality=.7;for(let i=0;i<10;i++){const canvas=document.createElement('canvas'),scale=Math.min(1,side/Math.max(image.width,image.height));canvas.width=Math.max(1,Math.round(image.width*scale));canvas.height=Math.max(1,Math.round(image.height*scale));const context=canvas.getContext('2d',{alpha:false});context.fillStyle='#fff';context.fillRect(0,0,canvas.width,canvas.height);context.drawImage(image,0,0,canvas.width,canvas.height);const data=canvas.toDataURL('image/jpeg',quality);if(data.length<=120000)return data;side=Math.floor(side*.85);quality=Math.max(.4,quality-.04);}throw Error(lang==='bn'?'ছবিটি ছোট করে আবার দিন।':'Select a smaller image.');}finally{URL.revokeObjectURL(url);}}
+function validateReaderPayload(data){return ['news','correction'].includes(data.type)&&data.name.length>=2&&data.name.length<=100&&data.contact.length>=5&&data.contact.length<=120&&data.title.length>=5&&data.title.length<=180&&data.message.length>=30&&data.message.length<=4000&&(!data.articleUrl||/^https?:\/\//i.test(data.articleUrl))&&(data.type!=='correction'||!!data.articleUrl)&&data.imageData.length<=120000&&(!data.imageData||/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(data.imageData));}
+async function submitReaderForm(event){event.preventDefault();const form=event.currentTarget,status=$('readerSubmitStatus'),button=form.querySelector('button[type="submit"]');if(readerSending||!form.reportValidity())return;const values=new FormData(form);if(values.get('website'))return;let last=0;try{last=Number(localStorage.getItem('haimchar_reader_last')||0);}catch{}
+  if(Date.now()-last<5*60*1000){status.textContent=lang==='bn'?'একটি বার্তা পাঠিয়েছেন। নতুন বার্তার জন্য ৫ মিনিট অপেক্ষা করুন।':'Please wait 5 minutes before sending another message.';return;}
+  if(Date.now()-readerFormOpenedAt<3000){status.textContent=lang==='bn'?'তথ্য যাচাই করে আবার পাঠান চাপুন।':'Review the details, then press Send again.';return;}
+  readerSending=true;button.disabled=true;status.textContent=lang==='bn'?'বার্তা পাঠানো হচ্ছে…':'Sending…';
+  try{const data={type:String(values.get('type')),name:String(values.get('name')).trim(),contact:String(values.get('contact')).trim(),title:String(values.get('title')).trim(),message:String(values.get('message')).trim(),articleUrl:String(values.get('articleUrl')).trim(),imageData:await smallReaderImage(form.elements.image.files?.[0]),consent:true,status:'new',createdAt:serverTimestamp()};if(!validateReaderPayload(data))throw Error(lang==='bn'?'সঠিক নাম, যোগাযোগ, শিরোনাম ও বিস্তারিত লিখুন। লিংক http/https হতে হবে।':'Enter valid details and an http/https link.');await addDoc(collection(db,'readerSubmissions'),data);try{localStorage.setItem('haimchar_reader_last',String(Date.now()));}catch{}form.reset();form.elements.articleUrl.required=false;status.textContent=lang==='bn'?'বার্তা পৌঁছেছে। সম্পাদক যাচাই করবেন; এটি এখনো প্রকাশিত হয়নি।':'Received. The editor will review it; it has not been published.';}catch(error){status.textContent=error.code?(lang==='bn'?'বার্তা পাঠানো যায়নি। সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।':'Could not send. Check your connection and try again.'):error.message;}finally{readerSending=false;button.disabled=false;}
+}
+$('readerSubmitLaunch').onclick=()=>openReaderForm();
+$('readerSubmissionDialog').addEventListener('cancel',event=>{if(readerSending)event.preventDefault();});
+
 const footerInfoLabels={bn:{about:"আমাদের সম্পর্কে",advertising:"বিজ্ঞাপন",privacy:"গোপনীয়তা",terms:"নীতি ও শর্ত",contact:"যোগাযোগ",corrections:"সংশোধনী"},en:{about:"About us",advertising:"Advertising",privacy:"Privacy",terms:"Terms",contact:"Contact",corrections:"Corrections"}};
 fetch('/footer-content.json').then(r=>{if(!r.ok)throw new Error('Footer content unavailable');return r.json();}).then(data=>{Object.assign(footerInfoDefaults,data);}).catch(()=>{});
 function renderFooterInfo(){
   const d=siteSettings||{};
   $("footerName").textContent=lang==="bn"?"আমাদের সম্পর্কে":"About us";
+  $("readerSubmitLaunch").textContent=readerLabels().launch;
   $("footerFollow").textContent=lang==="bn"?"অনুসরণ করুন":"Follow us";
   document.querySelectorAll("[data-footer-info]").forEach(btn=>{btn.textContent=footerInfoLabels[lang][btn.dataset.footerInfo];});
   [["footerFacebook",d.facebook],["footerYoutube",d.youtube],["footerInstagram",d.instagram],["footerX",d.xLink]].forEach(([id,value])=>{const el=$(id);const valid=typeof value==="string" && /^https?:\/\//i.test(value) && safeUrl(value)!=="#";el.hidden=!valid;el.href=valid?safeUrl(value):"#";el.style.display=valid?"inline-flex":"none";});
@@ -2293,6 +2320,7 @@ function openFooterInfo(key){
   text.split(/\n\n+/).forEach(block=>{const lines=block.split("\n");if(lines[0].startsWith("## ")){const h=document.createElement("h3");h.textContent=lines.shift().slice(3);body.appendChild(h);}if(lines.length){const p=document.createElement("p");p.textContent=lines.join("\n");body.appendChild(p);}});
   body.scrollTop=0;
   const contact=$("footerInfoContact");contact.replaceChildren();
+  if(key==="corrections"){const action=document.createElement("button");action.type="button";action.className="readerInlineAction";action.textContent=lang==="bn"?"সংশোধনী পাঠান":"Send a correction";action.onclick=()=>{$("footerInfoDialog").close();openReaderForm("correction");};contact.append(action);}
   [[d.email?"mailto:"+d.email:"",lang==="bn"?"ইমেইল করুন":"Email us"],[d.phone?"tel:"+d.phone:"",lang==="bn"?"ফোন করুন":"Call us"],[d.facebook?safeUrl(d.facebook):"","Facebook"]].forEach(([href,label])=>{if(href&&href!=="#"){const a=document.createElement("a");a.href=href;a.textContent=label;if(href.startsWith("http")){a.target="_blank";a.rel="noopener noreferrer";}contact.appendChild(a);}});
   $("footerInfoDialog").showModal();
   $("footerInfoDialog").scrollTop=0;

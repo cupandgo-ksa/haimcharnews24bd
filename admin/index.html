@@ -842,6 +842,23 @@ button:disabled,.btn:disabled{opacity:.64!important;cursor:wait!important}
   @media(max-width:760px){.modalCard{height:calc(100vh - 16px);max-height:calc(100vh - 16px)}}
 }
 </style>
+<style id="mobile-team-controls">
+/* Comfortable account and sign-in controls on phones. */
+@media(max-width:760px){
+  .accountColumns{grid-template-columns:minmax(0,1fr);gap:14px}
+  .accountColumns .settingsCard{width:100%;min-width:0;padding:18px}
+  .accountColumns input,.loginCard input{font-size:16px!important;min-height:52px}
+  .accountColumns button[type="submit"],.teamRow .btn{width:100%;min-height:50px;white-space:normal}
+  .teamRow{align-items:stretch;flex-direction:column;gap:12px}
+  .teamRow>div{min-width:0}.teamRow small,.accountStatus,.accountIntro p{overflow-wrap:anywhere}
+  .accountIntro h2{font-size:25px}.accountIntro p{font-size:15px;line-height:1.85}
+  #content{padding-bottom:calc(32px + env(safe-area-inset-bottom))}
+  .sidebar{max-width:calc(100vw - 40px);overflow-y:auto;overscroll-behavior:contain}
+  .nav button,.navGroup summary,.navLiveSite{min-height:48px}
+  .topbarTitle small{max-width:100%}
+  input,textarea{scroll-margin-top:140px}
+}
+</style>
 </head>
 <body>
 <div id="adminIntro" class="adminIntro v26Intro" aria-label="Admin loading">

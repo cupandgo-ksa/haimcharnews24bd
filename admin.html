@@ -1094,6 +1094,44 @@ html:not(.admin-scroll-locked) body{
   }
 }
 </style>
+<style id="v32-newsroom-actions-one-row">
+/* Mobile newsroom shortcuts — three balanced, single-line buttons. */
+@media(max-width:760px){
+  .dashboardHeroActions{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    width:100%!important;
+    gap:7px!important;
+    align-items:stretch!important;
+  }
+  .dashboardHeroActions .heroAction{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    flex:none!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:44px!important;
+    padding:9px 3px!important;
+    border-radius:12px!important;
+    white-space:nowrap!important;
+    word-break:keep-all!important;
+    text-align:center!important;
+    font-size:clamp(10px,1.6vw,12px)!important;
+    line-height:1.3!important;
+    letter-spacing:-.2px!important;
+  }
+}
+@media(max-width:430px){
+  .dashboardHero{padding:18px 14px!important}
+  .dashboardHeroActions{gap:5px!important}
+  .dashboardHeroActions .heroAction{
+    font-size:10px!important;
+    padding:9px 1px!important;
+    letter-spacing:-.3px!important;
+  }
+}
+</style>
 </head>
 <body>
 <div id="adminIntro" class="adminIntro v26Intro" aria-label="Admin loading">

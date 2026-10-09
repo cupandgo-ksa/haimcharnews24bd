@@ -2,12 +2,12 @@ importScripts('https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js
 importScripts('https://www.gstatic.com/firebasejs/10.12.5/firebase-messaging-compat.js');
 
 firebase.initializeApp({
-  apiKey: "AIzaSyAkAPHDwoG7iFc6rx-ujdVhl_DxF8lY_eA",
-  authDomain: "news-22d62.firebaseapp.com",
-  projectId: "news-22d62",
-  storageBucket: "news-22d62.firebasestorage.app",
-  messagingSenderId: "1087654881721",
-  appId: "1:1087654881721:web:0aeb2fb96dd269edba2e68"
+  apiKey: "AIzaSyDh9wI4xN8_dQaaXz3-7LKem3jUU-D_sAI",
+  authDomain: "haimchar-news24bd.firebaseapp.com",
+  projectId: "haimchar-news24bd",
+  storageBucket: "haimchar-news24bd.firebasestorage.app",
+  messagingSenderId: "946306315141",
+  appId: "1:946306315141:web:3bc741b4eb222dfc974aec"
 });
 
 const messaging = firebase.messaging();

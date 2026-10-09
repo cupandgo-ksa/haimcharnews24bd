@@ -1803,12 +1803,12 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAkAPHDwoG7iFc6rx-ujdVhl_DxF8lY_eA",
-  authDomain: "news-22d62.firebaseapp.com",
-  projectId: "news-22d62",
-  storageBucket: "news-22d62.firebasestorage.app",
-  messagingSenderId: "1087654881721",
-  appId: "1:1087654881721:web:0aeb2fb96dd269edba2e68"
+  apiKey: "AIzaSyDh9wI4xN8_dQaaXz3-7LKem3jUU-D_sAI",
+  authDomain: "haimchar-news24bd.firebaseapp.com",
+  projectId: "haimchar-news24bd",
+  storageBucket: "haimchar-news24bd.firebasestorage.app",
+  messagingSenderId: "946306315141",
+  appId: "1:946306315141:web:3bc741b4eb222dfc974aec"
 };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -1834,7 +1834,7 @@ function updateSiteIdentity(){
 }
 
 // v24 — Firebase Cloud Messaging Web Push
-const VAPID_PUBLIC_KEY = "BGEQjewObb_5NBobVkG2qwoA52npjDRESsc-zJR951-oHk_m7vMAGhu34m1MjMgfJLYqONIi5O41jKyISy3Cv5c";
+const VAPID_PUBLIC_KEY = "BPPm7HZJPIqvFdPtK3zkSZlZ02W30N6LCmti6sCYG8U86Os7hhOAfyE7wxKury0pEwtg5eAsTJfVfBpbRWIhQwc";
 let messaging = null;
 let messagingSW = null;
 function pushToast(msg){
@@ -1845,7 +1845,7 @@ async function tokenDocId(token){
   try{const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(token));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,"0")).join("").slice(0,48)}catch(_){return token.slice(-48).replace(/[^a-zA-Z0-9_-]/g,"_")}
 }
 async function savePushSubscriber(token){
-  localStorage.setItem("fcm_token",token);
+  localStorage.setItem("fcm_token_haimchar-news24bd",token);
   try{
     const id=await tokenDocId(token);
     await setDoc(doc(db,"pushSubscribers",id),{token,enabled:true,updatedAt:serverTimestamp(),userAgent:navigator.userAgent.slice(0,180)},{merge:true});
@@ -1885,7 +1885,7 @@ async function initPushUI(){
     btn.setAttribute("aria-label","নোটিফিকেশন পরীক্ষা করতে HTTPS লাইভ সাইট খুলুন");
     return;
   }
-  if(window.Notification.permission==="granted" && localStorage.getItem("fcm_token"))btn.classList.add("on");
+  if(window.Notification.permission==="granted" && localStorage.getItem("fcm_token_haimchar-news24bd"))btn.classList.add("on");
   try{
     if(await isSupported()){
       messaging=messaging||getMessaging(app);

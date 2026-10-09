@@ -10,7 +10,8 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="manifest" href="/admin-manifest.webmanifest">
+  <link id="adminManifest" rel="manifest" href="/admin-manifest.webmanifest">
+  <script>if(location.hostname==="cupandgo-ksa.github.io")document.getElementById("adminManifest").href=new URL("./admin-manifest.webmanifest",location.href).href;</script>
   <title>Admin — হাইমচর নিউজ24BD</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1240,7 +1241,7 @@ html:not(.admin-scroll-locked) body{
     <div id="loginError" class="errorBox hide"></div>
     <button id="loginSubmit" class="btn btn-primary loginSubmit" type="submit" data-i18n="secureLogin">নিরাপদ লগইন</button>
     <button id="forgotPasswordBtn" class="btn btn-soft" type="button">পাসওয়ার্ড ভুলে গেছেন?</button>
-    <p id="passwordResetStatus" class="subtle" role="status"></p>
+    <p id="passwordResetStatus" class="subtle" role="status" aria-live="polite"></p>
     <button id="googleLogin" class="btn loginSubmit" type="button" data-i18n="googleLogin" style="margin-top:12px">Gmail দিয়ে লগইন</button>
   </form>
 </section>
@@ -2640,7 +2641,17 @@ function wireWorkflow(){
   document.querySelectorAll('[data-reader-status]').forEach(button=>button.onclick=async()=>{if(!isNewsOwner(auth.currentUser))return;button.disabled=true;try{await updateDoc(doc(db,'readerSubmissions',button.dataset.readerStatus),{status:button.dataset.status,reviewedAt:serverTimestamp(),reviewedBy:auth.currentUser.uid});}catch(error){toast(error.message,true);}finally{button.disabled=false;}});
   document.querySelectorAll('[data-reader-draft]').forEach(button=>button.onclick=async()=>{button.disabled=true;try{await readerToDraft(button.dataset.readerDraft);toast(lang==='bn'?'খসড়া তৈরি হয়েছে। সম্পাদনা করে প্রকাশ করুন।':'Draft created. Edit before publishing.');}catch(error){toast(error.message,true);}finally{button.disabled=false;}});
 }
-$('forgotPasswordBtn').onclick=async()=>{const email=els.emailInput.value.trim();if(!email||!els.emailInput.reportValidity())return;const button=$('forgotPasswordBtn');button.disabled=true;els.loginError.classList.add('hide');try{await sendPasswordResetEmail(auth,email);$('passwordResetStatus').textContent=lang==='bn'?'অ্যাকাউন্ট থাকলে পাসওয়ার্ড সেট করার লিংক ইমেইলে পাবেন। ইনবক্স ও স্প্যাম দেখুন।':'If an account exists, check your inbox and spam for a password reset link.';}catch(error){$('passwordResetStatus').textContent=lang==='bn'?'ইমেইল পাঠানো যায়নি। কিছুক্ষণ পরে আবার চেষ্টা করুন।':'Could not send the email. Try again shortly.';}finally{button.disabled=false;}};
+$('forgotPasswordBtn').onclick=async()=>{
+  const input=els.emailInput,email=input.value.trim(),button=$('forgotPasswordBtn'),status=$('passwordResetStatus');
+  els.loginError.classList.add('hide');
+  if(!email){status.textContent=lang==='bn'?'আগে উপরের ইমেইলের ঘরে আপনার অ্যাডমিন ইমেইল লিখুন, তারপর আবার এই বোতাম চাপুন।':'Enter your admin email above, then press this button again.';input.focus();return;}
+  if(!input.reportValidity()){status.textContent=lang==='bn'?'সঠিক ইমেইল ঠিকানা লিখুন।':'Enter a valid email address.';return;}
+  if(button.disabled)return;
+  button.disabled=true;button.textContent=lang==='bn'?'লিংক পাঠানো হচ্ছে…':'Sending link…';status.textContent=lang==='bn'?'ইমেইলে পাসওয়ার্ড সেট করার লিংক পাঠানো হচ্ছে।':'Sending a password reset link to your email.';
+  try{await sendPasswordResetEmail(auth,email);status.textContent=lang==='bn'?'এই ইমেইলে অ্যাকাউন্ট থাকলে পাসওয়ার্ড সেট করার লিংক পাবেন। ইমেইলের ইনবক্স ও স্প্যাম দেখুন। লিংক খুলে নতুন অ্যাডমিন পাসওয়ার্ড সেট করুন।':'If an account exists for this email, check your inbox and spam. Open the link to set a new admin password.';}
+  catch(error){const messages=lang==='bn'?{'auth/too-many-requests':'অনেকবার চেষ্টা হয়েছে। কিছুক্ষণ পরে আবার চেষ্টা করুন।','auth/network-request-failed':'ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।','auth/invalid-email':'সঠিক ইমেইল ঠিকানা লিখুন।'}:{'auth/too-many-requests':'Too many attempts. Try again shortly.','auth/network-request-failed':'Check your internet connection and try again.','auth/invalid-email':'Enter a valid email address.'};status.textContent=messages[error.code]||(lang==='bn'?'লিংক পাঠানো যায়নি। কিছুক্ষণ পরে আবার চেষ্টা করুন।':'Could not send the link. Try again shortly.');}
+  finally{button.disabled=false;button.textContent=lang==='bn'?'পাসওয়ার্ড ভুলে গেছেন?':'Forgot password?';}
+};
 
 const OWNER_EMAIL = "islamiclibrary2.0@gmail.com";
 const OWNER_UID = "9sdi8QAVckMYQyly8nE9adHC58W2";

@@ -6,6 +6,18 @@ service cloud.firestore {
         && request.auth.token.email == 'islamiclibrary2.0@gmail.com'
         && request.auth.token.email_verified == true;
     }
+    function admin() {
+      return owner() || (request.auth != null
+        && exists(/databases/$(database)/documents/adminUsers/$(request.auth.uid))
+        && get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.enabled == true
+        && get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role == 'editor'
+        && get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.email == request.auth.token.email);
+    }
+    match /adminUsers/{uid} {
+      allow get: if owner() || (request.auth != null && request.auth.uid == uid);
+      allow list, write: if owner();
+    }
+    match /reporters/{id} { allow read, write: if admin(); }
     function counterCreate(field) {
       return request.resource.data.keys().hasOnly([field, 'updatedAt'])
         && request.resource.data[field] == 1
@@ -17,48 +29,48 @@ service cloud.firestore {
         && request.resource.data.updatedAt == request.time;
     }
     match /news/{id} {
-      allow read: if owner() || resource.data.status == 'published';
-      allow write: if owner();
+      allow read: if admin() || resource.data.status == 'published';
+      allow write: if admin();
     }
     match /categories/{id} {
       allow read: if true;
-      allow write: if owner();
+      allow write: if admin();
     }
     match /ads/{id} {
       allow read: if true;
-      allow write: if owner();
+      allow write: if admin();
     }
     match /siteSettings/{id} {
-      allow read: if id == 'general' || owner();
-      allow write: if owner();
+      allow read: if id == 'general' || admin();
+      allow write: if admin();
     }
     match /publicStats/{id} {
       allow read: if true;
-      allow create: if owner() || counterCreate('views');
-      allow update: if owner() || counterUpdate('views');
-      allow delete: if owner();
+      allow create: if admin() || counterCreate('views');
+      allow update: if admin() || counterUpdate('views');
+      allow delete: if admin();
     }
     match /adStats/{id} {
-      allow read, delete: if owner();
-      allow create: if owner() || counterCreate('clicks');
-      allow update: if owner() || counterUpdate('clicks');
+      allow read, delete: if admin();
+      allow create: if admin() || counterCreate('clicks');
+      allow update: if admin() || counterUpdate('clicks');
     }
     match /analytics/site {
-      allow read, delete: if owner();
-      allow create: if owner() || (
+      allow read, delete: if admin();
+      allow create: if admin() || (
         request.resource.data.keys().hasOnly(['pageViews', 'visitorCount', 'updatedAt'])
         && request.resource.data.pageViews == 1
         && request.resource.data.visitorCount in [0, 1]
         && request.resource.data.updatedAt == request.time);
-      allow update: if owner() || (
+      allow update: if admin() || (
         request.resource.data.keys().hasOnly(['pageViews', 'visitorCount', 'updatedAt'])
         && request.resource.data.pageViews == resource.data.pageViews + 1
         && request.resource.data.visitorCount in [resource.data.visitorCount, resource.data.visitorCount + 1]
         && request.resource.data.updatedAt == request.time);
     }
     match /pushSubscribers/{id} {
-      allow read, delete: if owner();
-      allow create, update: if owner() || (
+      allow read, delete: if admin();
+      allow create, update: if admin() || (
         request.resource.data.keys().hasOnly(['token', 'enabled', 'updatedAt', 'userAgent'])
         && request.resource.data.token is string
         && request.resource.data.token.size() <= 4096

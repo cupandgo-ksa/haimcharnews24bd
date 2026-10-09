@@ -1597,6 +1597,23 @@ footer :is(a,button):focus-visible{outline-color:var(--red)}
 #footerInfoContact a{color:var(--footer-text);text-decoration:underline;text-underline-offset:4px}
 @media(max-width:420px){.footerDialogHeader,#footerInfoContact{padding:14px 18px}#footerInfoText{padding:0 18px;font-size:15px}}
 </style>
+<style id="centered-news-footer">
+footer{text-align:center!important}
+footer .footerGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:start;gap:28px 40px!important}
+footer .footerGrid>div{min-width:0}
+footer #footerAbout{max-width:56ch;margin:0 auto!important}
+footer .footerSocialPremium{justify-content:center}
+footer .footerLinks>a{margin-inline:auto}
+footer .footerInfoNav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px 12px;align-items:stretch}
+footer .footerInfoNav button{min-height:48px;padding:8px 4px;display:flex;align-items:center;justify-content:center;text-align:center;overflow-wrap:anywhere}
+footer .footerEditorial{align-items:center;text-align:center}
+@media(max-width:700px){
+  footer .footerGrid{grid-template-columns:minmax(0,1fr)!important;gap:28px!important}
+  footer .footerInfoNav{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 10px;padding:16px 0}
+  footer .footerInfoNav button{font-size:14px;line-height:1.6}
+  footer .footerBrand{margin-bottom:24px}
+}
+</style>
 </head>
 
 <style id="v24-push-notification">

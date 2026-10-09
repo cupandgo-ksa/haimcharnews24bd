@@ -1833,6 +1833,10 @@ function ownershipSettingsHtml(){
   </form>`;
 }
 
+function footerTextSettingsHtml(){
+  const fields=[["Advertising","বিজ্ঞাপন","Advertising"],["Privacy","গোপনীয়তা","Privacy"],["Terms","নীতি ও শর্ত","Terms"],["Corrections","সংশোধনী","Corrections"]];
+  return `<form id="footerTextForm" class="settingsCard"><h2>${lang==="bn"?"ফুটারের তথ্য ও নীতিমালা":"Footer information"}</h2><p class="settingsSectionNote">${lang==="bn"?"নিচের লেখা ফুটারের সংশ্লিষ্ট বোতামে দেখা যাবে। খালি রাখলে সংক্ষিপ্ত ডিফল্ট লেখা থাকবে। আমাদের সম্পর্কে ও লোগো সাইট সেটিংস থেকে; সম্পাদক–প্রকাশকের নাম স্বত্বাধিকার অংশ থেকে বদলাতে পারবেন।":"Edit the text shown by each footer button. Empty fields use the default text. Edit About and logo in Site Settings, and publication names in Editorial / Ownership."}</p>${fields.map(([key,bn,en])=>`<label class="field"><span>${lang==="bn"?bn:en} — বাংলা</span><textarea id="setFooter${key}" rows="3">${esc(settings['footer'+key]||'')}</textarea></label><label class="field"><span>${en} — English</span><textarea id="setFooter${key}En" rows="3">${esc(settings['footer'+key+'En']||'')}</textarea></label>`).join('')}<button class="btn btn-primary" type="submit">${lang==="bn"?"সংরক্ষণ করুন":"Save"}</button></form>`;
+}
 function contactSettingsHtml(){
   return `<form id="contactForm" class="settingsCard">
     <h2>${lang==="bn"?"যোগাযোগ":"Contact"}</h2>
@@ -1841,6 +1845,8 @@ function contactSettingsHtml(){
       <label class="field"><span>${lang==="bn"?"ইমেইল":"Email"}</span><input id="setEmail" type="email" value="${esc(settings.email||"")}"></label>
       <label class="field"><span>${lang==="bn"?"ঠিকানা":"Address"}</span><input id="setAddress" value="${esc(settings.address||"")}"></label>
       <label class="field"><span>Facebook Page</span><input id="setFacebook" type="url" inputmode="url" placeholder="https://www.facebook.com/yourpage" value="${esc(settings.facebook||"")}"><small class="premiumHint">আপনার Facebook Page/Profile-এর সম্পূর্ণ লিংক দিন।</small></label>
+      <label class="field"><span>Instagram</span><input id="setInstagram" type="url" inputmode="url" placeholder="https://www.instagram.com/yourpage" value="${esc(settings.instagram||"")}"></label>
+      <label class="field"><span>X / Twitter</span><input id="setXLink" type="url" inputmode="url" placeholder="https://x.com/yourpage" value="${esc(settings.xLink||"")}"></label>
       <label class="field"><span>YouTube Channel</span><input id="setYoutube" type="url" inputmode="url" placeholder="https://www.youtube.com/@yourchannel" value="${esc(settings.youtube||"")}"><small class="premiumHint">আপনার YouTube Channel-এর সম্পূর্ণ লিংক দিন।</small></label>
     </div>
     <button class="btn btn-primary" type="submit">${lang==="bn"?"সংরক্ষণ করুন":"Save"}</button>
@@ -1900,7 +1906,7 @@ function render(){
   }else if(currentPage==="ownership"){
     els.content.innerHTML=ownershipSettingsHtml();
   }else if(currentPage==="contact"){
-    els.content.innerHTML=contactSettingsHtml();
+    els.content.innerHTML=contactSettingsHtml()+footerTextSettingsHtml();
   }else if(currentPage==="trash"){
     els.content.innerHTML=trashHtml();
   }else{
@@ -2062,10 +2068,16 @@ function wireDynamic(){
     try{await setDoc(doc(db,"siteSettings","general"),next,{merge:true});toast(t("settingsSaved"))}catch(err){console.error(err);toast(err.message,true)}
   };
 
+  const ft=$("footerTextForm");
+  if(ft) ft.onsubmit=async e=>{
+    e.preventDefault();const next={};
+    ["Advertising","Privacy","Terms","Corrections"].forEach(key=>{next["footer"+key]=$("setFooter"+key).value.trim();next["footer"+key+"En"]=$("setFooter"+key+"En").value.trim();});
+    try{await setDoc(doc(db,"siteSettings","general"),next,{merge:true});Object.assign(settings,next);toast(t("settingsSaved"))}catch(err){console.error(err);toast(err.message,true)}
+  };
   const cf=$("contactForm");
   if(cf) cf.onsubmit=async e=>{
     e.preventDefault();
-    const next={phone:$("setPhone").value.trim(),email:$("setEmail").value.trim(),address:$("setAddress").value.trim(),facebook:$("setFacebook").value.trim(),youtube:$("setYoutube").value.trim()};
+    const next={phone:$("setPhone").value.trim(),email:$("setEmail").value.trim(),address:$("setAddress").value.trim(),facebook:$("setFacebook").value.trim(),youtube:$("setYoutube").value.trim(),instagram:$("setInstagram").value.trim(),xLink:$("setXLink").value.trim()};
     try{await setDoc(doc(db,"siteSettings","general"),next,{merge:true});toast(t("settingsSaved"))}catch(err){console.error(err);toast(err.message,true)}
   };
 

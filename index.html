@@ -1548,6 +1548,32 @@ footer .copyrightRights::before{content:" — "}
  footer #copyOwner{display:block}
 }
 </style>
+
+<style id="news-footer-content">
+footer .footerBrand{display:flex;justify-content:center;margin:0 0 28px;text-decoration:none}
+footer .footerBrand img{display:block;width:min(300px,100%);height:auto;max-height:100px;object-fit:contain;background:#fff;border-radius:5px;padding:8px 12px}
+footer .footerFollow{color:#b9c7d2;margin-top:18px!important;font-size:13px!important}
+footer .footerSocialPremium a{display:inline-flex!important;align-items:center;justify-content:center;width:40px;height:40px;padding:9px!important;border:1px solid #ffffff24!important;border-radius:50%!important;color:#fff!important}
+footer .footerSocialPremium a[hidden]{display:none!important}
+footer .footerSocialPremium svg{width:22px;height:22px}
+footer .socialText{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+footer .footerInfoNav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 24px;border-top:1px solid #ffffff18;border-bottom:1px solid #ffffff18;padding:20px 0;margin-top:26px}
+footer .footerInfoNav button{font:inherit;font-size:14px;background:none;border:0;color:#d5e1e8;cursor:pointer;padding:4px 0;line-height:1.6}
+footer .footerInfoNav button:hover{color:#fff;text-decoration:underline;text-underline-offset:5px}
+footer :is(a,button):focus-visible{outline:2px solid #fff;outline-offset:4px}
+footer .footerEditorial{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;margin-top:18px;color:#b9c7d2;font-size:13px}
+footer .footerEditorial p{margin:0;line-height:1.9}
+footer .footerEditorial [hidden]{display:none}
+footer #copyOwner{display:none!important}
+#footerInfoDialog{background:#071f36;color:#d5e1e8;border:1px solid #ffffff26;border-radius:14px;width:min(560px,calc(100% - 32px));max-height:80vh;padding:24px;box-shadow:0 20px 80px #0006;font-family:"Hind Siliguri","Noto Sans Bengali",sans-serif}
+#footerInfoDialog::backdrop{background:#0009}
+.footerDialogHeader{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.footerDialogHeader h2{margin:0;color:#fff;font-size:21px}
+#footerInfoClose{flex:none;font:inherit;font-size:28px;background:none;border:0;color:#fff;cursor:pointer;width:40px;height:40px}
+#footerInfoText{font-size:16px;line-height:1.9;white-space:pre-line;margin:18px 0;overflow-wrap:anywhere}
+#footerInfoContact{display:flex;gap:16px;flex-wrap:wrap}
+#footerInfoContact a{color:#fff;overflow-wrap:anywhere}
+</style>
 </head>
 
 <style id="v24-push-notification">
@@ -1699,32 +1725,51 @@ footer .copyrightRights::before{content:" — "}
 
 <footer>
   <div class="wrap">
+    <a class="footerBrand" href="/" aria-label="হাইমচর নিউজ২৪বিডি হোম">
+      <img id="footerLogo" src="/site-logo.png" alt="হাইমচর নিউজ২৪বিডি" width="300" height="100" loading="lazy" decoding="async">
+    </a>
+
     <div class="footerGrid">
       <div>
-        <h3 id="footerName">হাইমচর নিউজ২৪বিডি</h3>
+        <h3 id="footerName">আমাদের সম্পর্কে</h3>
         <p id="footerTag">হাইমচর ও চাঁদপুরের মানুষের নির্ভরযোগ্য ডিজিটাল সংবাদমাধ্যম</p>
         <p id="footerAbout"></p>
-      </div>
-      <div class="footerMeta">
-        <h3 data-i18n="management">সম্পাদনা ও প্রকাশনা</h3>
-        <p><b data-i18n="editor">সম্পাদক:</b> <span id="footerEditor">—</span></p>
-        <p><b data-i18n="publisher">প্রকাশক:</b> <span id="footerPublisher">—</span></p>
-        <p><b data-i18n="owner">স্বত্বাধিকারী:</b> <span id="footerOwner">—</span></p>
       </div>
       <div class="footerLinks">
         <h3 data-i18n="contact">যোগাযোগ</h3>
         <p id="footerAddress"></p>
         <a id="footerPhone" href="#"></a>
         <a id="footerEmail" href="#"></a>
+        <p class="footerFollow" id="footerFollow">অনুসরণ করুন</p>
         <div class="footerSocialPremium">
-          <a id="footerFacebook" href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
-          <a id="footerYoutube" href="#" target="_blank" rel="noopener noreferrer">YouTube</a>
+          <a id="footerFacebook" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 21v-8h3l.5-4H14V7c0-1 .3-2 2-2h2V1.5A25 25 0 0 0 15 1c-3 0-5 2-5 5v3H7v4h3v8z"/></svg><span class="socialText">Facebook</span></a>
+          <a id="footerYoutube" href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="5" fill="currentColor"/><path d="m10 8 6 4-6 4z" fill="#041522"/></svg><span class="socialText">YouTube</span></a>
+          <a id="footerInstagram" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg><span class="socialText">Instagram</span></a>
+          <a id="footerX" href="#" target="_blank" rel="noopener noreferrer" aria-label="X" title="X" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h4l11 18h-4L5 3zm15 0L4 21" fill="none" stroke="currentColor" stroke-width="2"/></svg><span class="socialText">X</span></a>
         </div>
       </div>
+    </div>
+    <nav id="footerInfoNav" class="footerInfoNav" aria-label="সংবাদমাধ্যমের তথ্য">
+      <button type="button" data-footer-info="about">আমাদের সম্পর্কে</button>
+      <button type="button" data-footer-info="advertising">বিজ্ঞাপন</button>
+      <button type="button" data-footer-info="privacy">গোপনীয়তা</button>
+      <button type="button" data-footer-info="terms">নীতি ও শর্ত</button>
+      <button type="button" data-footer-info="contact">যোগাযোগ</button>
+      <button type="button" data-footer-info="corrections">সংশোধনী</button>
+    </nav>
+    <div class="footerEditorial" id="footerEditorial">
+      <p id="footerEditorRow" hidden><span data-i18n="editor">সম্পাদক:</span> <span id="footerEditor"></span></p>
+      <p id="footerPublisherRow" hidden><span data-i18n="publisher">প্রকাশক:</span> <span id="footerPublisher"></span></p>
+      <p id="footerOwnerRow" hidden><span data-i18n="owner">স্বত্বাধিকারী:</span> <span id="footerOwner"></span></p>
     </div>
     <div class="copyright">© <span id="copyYear">2026</span> <span id="copyName">হাইমচর নিউজ২৪বিডি</span><span class="copyrightRights" data-i18n="rights">সর্বস্বত্ব সংরক্ষিত</span><span id="copyOwner"></span></div>
   </div>
 </footer>
+<dialog id="footerInfoDialog" aria-labelledby="footerInfoTitle">
+  <div class="footerDialogHeader"><h2 id="footerInfoTitle"></h2><button id="footerInfoClose" type="button" aria-label="বন্ধ করুন">×</button></div>
+  <p id="footerInfoText"></p>
+  <div id="footerInfoContact"></div>
+</dialog>
 
 
 <script type="module">
@@ -2179,6 +2224,39 @@ function renderArticleAds(){
 $("articleAdPrev").onclick=()=>goArticleAd(articleAdIndex-1);
 $("articleAdNext").onclick=()=>goArticleAd(articleAdIndex+1);
 
+
+const footerInfoDefaults={
+ advertising:{bn:"হাইমচর নিউজ২৪বিডিতে বিজ্ঞাপন প্রকাশ, প্রচার ও বিজ্ঞাপনের মূল্য সম্পর্কে জানতে আমাদের সঙ্গে যোগাযোগ করুন।",en:"Contact Haimchar News24BD for advertising enquiries, placements and rates."},
+ privacy:{bn:"এই সাইটে ভাষা, থিম ও পড়ার পছন্দ মনে রাখতে আপনার ব্রাউজারে তথ্য সংরক্ষণ করা হয়। আপনি নোটিফিকেশন চালু করলে সংবাদ আপডেট পাঠানোর জন্য একটি নোটিফিকেশন টোকেন সংরক্ষিত হয়। ব্রাউজারের সেটিংস থেকে নোটিফিকেশন বন্ধ করতে এবং সংরক্ষিত সাইটের তথ্য মুছতে পারেন। গোপনীয়তা সম্পর্কে প্রশ্ন থাকলে আমাদের সঙ্গে যোগাযোগ করুন।",en:"This site stores language, theme and reading preferences in your browser. If you enable notifications, a notification token is stored to send news updates. You can disable notifications and clear stored site data in your browser settings. Contact us with privacy questions."},
+ terms:{bn:"প্রকাশিত সংবাদ ও ছবি ব্যবহার বা পুনঃপ্রকাশের আগে সংশ্লিষ্ট স্বত্বাধিকারীর অনুমতি নিন এবং উৎস উল্লেখ করুন। সংবাদ সম্পর্কে মতামত ও অভিযোগ জানানোর সময় প্রাসঙ্গিক তথ্য দিন এবং শালীন ভাষা ব্যবহার করুন।",en:"Before using or republishing news and images, obtain permission from the relevant rights holder and credit the source. Provide relevant details and use respectful language when submitting feedback or complaints."},
+ corrections:{bn:"কোনো সংবাদে তথ্যগত ভুল দেখলে সংবাদটির শিরোনাম বা লিংক, সংশোধনের বিবরণ এবং প্রাসঙ্গিক সূত্রসহ আমাদের জানান। আপনার পাঠানো তথ্য যাচাই করে প্রয়োজনীয় সংশোধন করা হবে।",en:"If you find a factual error, send the article title or link, the proposed correction and relevant sources. Submitted information will be checked and corrections made where needed."}
+};
+const footerInfoLabels={bn:{about:"আমাদের সম্পর্কে",advertising:"বিজ্ঞাপন",privacy:"গোপনীয়তা",terms:"নীতি ও শর্ত",contact:"যোগাযোগ",corrections:"সংশোধনী"},en:{about:"About us",advertising:"Advertising",privacy:"Privacy",terms:"Terms",contact:"Contact",corrections:"Corrections"}};
+function renderFooterInfo(){
+  const d=siteSettings||{};
+  $("footerName").textContent=lang==="bn"?"আমাদের সম্পর্কে":"About us";
+  $("footerFollow").textContent=lang==="bn"?"অনুসরণ করুন":"Follow us";
+  document.querySelectorAll("[data-footer-info]").forEach(btn=>{btn.textContent=footerInfoLabels[lang][btn.dataset.footerInfo];});
+  [["footerFacebook",d.facebook],["footerYoutube",d.youtube],["footerInstagram",d.instagram],["footerX",d.xLink]].forEach(([id,value])=>{const el=$(id);const valid=typeof value==="string" && /^https?:\/\//i.test(value) && safeUrl(value)!=="#";el.hidden=!valid;el.href=valid?safeUrl(value):"#";el.style.display=valid?"inline-flex":"none";});
+  $("footerLogo").onerror=function(){this.onerror=null;this.src="/site-logo.png";};
+  const logo=d.logoData||"/site-logo.png";if($("footerLogo").getAttribute("src")!==logo)$("footerLogo").src=logo;
+}
+function openFooterInfo(key){
+  const d=siteSettings||{};
+  $("footerInfoTitle").textContent=footerInfoLabels[lang][key];
+  let text="";
+  if(key==="about")text=d.about||d.tagline||(lang==="bn"?"হাইমচর ও চাঁদপুরের স্থানীয় সংবাদসহ দেশ ও বিশ্বের খবর নিয়ে হাইমচর নিউজ২৪বিডি।":"Haimchar News24BD covers local news from Haimchar and Chandpur, along with national and world news.");
+  else if(key==="contact")text=[d.address,d.phone,d.email].filter(Boolean).join("\n")||(lang==="bn"?"আমাদের সামাজিক যোগাযোগমাধ্যমে বার্তা পাঠান।":"Send us a message through our social channels.");
+  else text=d["footer"+key[0].toUpperCase()+key.slice(1)+(lang==="en"?"En":"")]||footerInfoDefaults[key][lang];
+  $("footerInfoText").textContent=text;
+  const contact=$("footerInfoContact");contact.replaceChildren();
+  [[d.email?"mailto:"+d.email:"",lang==="bn"?"ইমেইল করুন":"Email us"],[d.phone?"tel:"+d.phone:"",lang==="bn"?"ফোন করুন":"Call us"],[d.facebook?safeUrl(d.facebook):"","Facebook"]].forEach(([href,label])=>{if(href&&href!=="#"){const a=document.createElement("a");a.href=href;a.textContent=label;if(href.startsWith("http")){a.target="_blank";a.rel="noopener noreferrer";}contact.appendChild(a);}});
+  $("footerInfoDialog").showModal();
+}
+document.querySelectorAll("[data-footer-info]").forEach(btn=>btn.addEventListener("click",()=>openFooterInfo(btn.dataset.footerInfo)));
+$("footerInfoClose").onclick=()=>$("footerInfoDialog").close();
+$("footerInfoDialog").addEventListener("click",event=>{if(event.target===$("footerInfoDialog")){const r=event.target.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)event.target.close();}});
+
 function setLang(next){
   localStorage.setItem("haimchar_lang",next);
   
@@ -2186,7 +2264,7 @@ function setLang(next){
   document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(i18n[lang][k])el.textContent=i18n[lang][k]});
   document.querySelectorAll("[data-ph]").forEach(el=>el.placeholder=t(el.dataset.ph));
   $("bnBtn").classList.toggle("active",lang==="bn");$("enBtn").classList.toggle("active",lang==="en");
-  renderNav();updateDateLine();updateLiveClock();render(filtered());
+  renderNav();updateDateLine();updateLiveClock();render(filtered());renderFooterInfo();
 }
 $("bnBtn").onclick=()=>setLang("bn");$("enBtn").onclick=()=>setLang("en");
 
@@ -2587,6 +2665,8 @@ function applyFastSiteCache(d){
   document.documentElement.style.setProperty("--header-logo-size",logoSize+"%");
   document.documentElement.style.setProperty("--header-logo-size-pct",String(logoSize));
   document.documentElement.style.setProperty("--header-logo-max-px",Math.round(620*logoSize/100)+"px");
+  const footerLogo=$("footerLogo");
+  if(footerLogo)footerLogo.src=d.logoData||"/site-logo.png";
   const hLogo=$("headerLogo");
   if(hLogo&&d.logoData){
     hLogo.loading="eager"; hLogo.fetchPriority="high"; hLogo.src=d.logoData;
@@ -2669,21 +2749,22 @@ onSnapshot(doc(db,"siteSettings","general"),(snap)=>{
   }
   $("siteNamePrimary").textContent=primary;
   $("siteNameSecondary").textContent=secondary;
-  $("footerName").textContent=displayName;
+  $("footerName").textContent=lang==="bn"?"আমাদের সম্পর্কে":"About us";
   $("copyName").textContent=displayName;
   updateSiteIdentity();
   $("footerTag").textContent=d.tagline||"";
   if($("headerTagline")) $("headerTagline").textContent=d.tagline||"হাইমচরের কথা, মানুষের কণ্ঠে";
   $("footerAbout").textContent=d.about||"";
-  if($("footerEditor")) $("footerEditor").textContent=d.editorName||"—";
-  if($("footerPublisher")) $("footerPublisher").textContent=d.publisherName||"—";
-  if($("footerOwner")) $("footerOwner").textContent=d.ownerName||"—";
+  $("footerEditor").textContent=d.editorName||"";$("footerEditorRow").hidden=!d.editorName;
+  $("footerPublisher").textContent=d.publisherName||"";$("footerPublisherRow").hidden=!d.publisherName;
+  $("footerOwner").textContent=d.ownerName||"";$("footerOwnerRow").hidden=!d.ownerName;
   $("footerAddress").textContent=d.address||"";
   $("footerPhone").textContent=d.phone||"";$("footerPhone").href=d.phone?`tel:${d.phone}`:"#";
   $("footerEmail").textContent=d.email||"";$("footerEmail").href=d.email?`mailto:${d.email}`:"#";
   $("footerFacebook").style.display=d.facebook?"inline-flex":"none";$("footerFacebook").href=safeUrl(d.facebook||"");
   $("footerYoutube").style.display=d.youtube?"inline-flex":"none";$("footerYoutube").href=safeUrl(d.youtube||"");
   $("copyYear").textContent=new Date().getFullYear();
+  renderFooterInfo();
   if(d.customFontUrl){let fl=document.getElementById("customFontStylesheet");if(!fl){fl=document.createElement("link");fl.id="customFontStylesheet";fl.rel="stylesheet";document.head.appendChild(fl)}fl.href=safeUrl(d.customFontUrl)}
   const chosenFont=(d.customFontFamily||d.fontFamily||"Hind Siliguri").trim();
   document.documentElement.style.setProperty("--site-font",`"${chosenFont}","Hind Siliguri","Noto Sans Bengali",Arial,sans-serif`);

@@ -2651,7 +2651,7 @@ async function recordAdClick(id){
 }
 async function recordVisit(){
   try{
-    const key="haimchar_unique_visitor_v1";
+    const key="haimchar_unique_visitor_haimchar-news24bd_v1";
     const isNew=!localStorage.getItem(key);
     await setDoc(doc(db,"analytics","site"),{
       pageViews:increment(1),

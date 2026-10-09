@@ -944,6 +944,43 @@ html:not(.admin-scroll-locked) body{
   .sidebar .navGroup summary{padding-block:11px!important}
 }
 </style>
+<style id="v29-explicit-admin-submenu-fix">
+/* Explicit height-based submenu avoids native details/scrollable-grid clipping on phones. */
+.sidebar .navGroup{display:block!important;height:auto!important;min-height:0!important;flex:none!important;overflow:visible!important;align-self:stretch}
+.sidebar .navGroupTrigger{
+  display:flex!important;width:100%;min-height:46px;align-items:center;justify-content:space-between;
+  gap:8px;text-align:left;padding:12px 14px!important;border:0!important;border-radius:12px!important;
+  background:transparent!important;color:#d7e3ec!important;font-weight:800!important;
+  cursor:pointer;white-space:normal;line-height:1.45;
+}
+.sidebar .navGroupTrigger span{flex:0 0 auto;transition:transform .2s}
+.sidebar .navGroup.open .navGroupTrigger span{transform:rotate(180deg)}
+.sidebar .navGroup.open{border-color:rgba(255,255,255,.18)}
+.sidebar .navGroup .navSub{display:none!important;min-height:0!important;height:auto!important}
+.sidebar .navGroup.open .navSub{
+  display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:auto!important;
+  gap:4px!important;padding:3px 8px 9px!important;
+  visibility:visible!important;opacity:1!important;position:static!important;
+  overflow:visible!important;transform:none!important;
+}
+.sidebar .navSub button{
+  display:block!important;visibility:visible!important;min-width:0!important;width:100%!important;
+  min-height:42px;height:auto!important;margin:0!important;
+  padding:10px 12px!important;text-align:left!important;white-space:normal!important;
+  font-size:14px!important;line-height:1.4!important;
+}
+.sidebar .navSub button.active{background:rgba(255,255,255,.16)!important}
+@media(max-width:980px){
+  .sidebar .nav{
+    display:flex!important;flex-direction:column!important;align-items:stretch!important;
+    justify-content:flex-start!important;
+    width:100%;height:auto!important;min-height:0!important;max-height:none!important;
+    gap:8px!important;overflow:visible!important;
+  }
+  .sidebar .nav>*{flex:0 0 auto!important;min-height:0}
+  .sidebar .nav>.navPrimary,.sidebar .nav>.navLiveSite{min-height:46px}
+}
+</style>
 </head>
 <body>
 <div id="adminIntro" class="adminIntro v26Intro" aria-label="Admin loading">
@@ -1006,27 +1043,27 @@ html:not(.admin-scroll-locked) body{
     </div>
     <nav class="nav navSimple">
       <button data-page="dashboard" class="active navPrimary">⌂ হোম</button>
-      <details class="navGroup" open>
-        <summary>▤ সংবাদ <span>⌄</span></summary>
-        <div class="navSub">
+      <div class="navGroup open" data-nav-group="news">
+        <button type="button" class="navGroupTrigger" aria-expanded="true" aria-controls="adminNewsSub">▤ সংবাদ <span aria-hidden="true">⌄</span></button>
+        <div class="navSub" id="adminNewsSub">
           <button data-page="news">সকল সংবাদ</button>
           <button data-page="scheduled">নির্ধারিত সংবাদ</button>
           <button data-page="breaking">ব্রেকিং নিউজ</button>
           <button data-page="categories">ক্যাটাগরি</button>
           <button data-page="reporters">প্রতিবেদক</button>
         </div>
-      </details>
+      </div>
       <button data-page="ads" class="navPrimary">▭ বিজ্ঞাপন</button>
       <a class="navLiveSite" href="https://haimcharnews24bd.com/" target="_blank" rel="noopener">🌐 লাইভ ওয়েবসাইট</a>
-      <details class="navGroup">
-        <summary>⚙ সাইট সেটিংস <span>⌄</span></summary>
-        <div class="navSub">
+      <div class="navGroup" data-nav-group="settings">
+        <button type="button" class="navGroupTrigger" aria-expanded="false" aria-controls="adminSettingsSub">⚙ সাইট সেটিংস <span aria-hidden="true">⌄</span></button>
+        <div class="navSub" id="adminSettingsSub">
           <button data-page="site">লোগো / সাইট</button>
           <button data-page="typography">ফন্ট / স্টাইল</button>
           <button data-page="ownership">সম্পাদক / স্বত্বাধিকার</button>
           <button data-page="contact">যোগাযোগ</button>
         </div>
-      </details>
+      </div>
       <button id="reviewNav" data-page="review" class="navPrimary hide">✓ প্রকাশের অনুমোদন</button>
       <button id="readerNav" data-page="inbox" class="navPrimary hide">✉ পাঠকের বার্তা</button>
       <button id="backupNav" data-page="backup" class="navPrimary hide">↧ ব্যাকআপ</button>
@@ -1535,8 +1572,13 @@ document.addEventListener("keydown",event=>{if(event.key==="Escape"&&els.sidebar
 // on Dashboard a single Back does not immediately leave the Admin page.
 function setAdminPage(page){
   currentPage=page||"dashboard";
-  document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===currentPage));
-  const activeBtn=document.querySelector(`.nav button[data-page="${currentPage}"]`); activeBtn?.closest("details")?.setAttribute("open","");
+  document.querySelectorAll(".nav button[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===currentPage));
+  const activeBtn=document.querySelector(`.nav button[data-page="${currentPage}"]`);
+  const activeGroup=activeBtn?.closest(".navGroup");
+  if(activeGroup){
+    activeGroup.classList.add("open");
+    activeGroup.querySelector(".navGroupTrigger")?.setAttribute("aria-expanded","true");
+  }
   setAdminMenu(false);
   document.activeElement?.blur();
   render(true);
@@ -1561,8 +1603,22 @@ window.addEventListener("popstate",()=>{
   }catch(_){}
 });
 
-document.querySelectorAll(".nav button").forEach(btn=>{
+document.querySelectorAll(".nav button[data-page]").forEach(btn=>{
   btn.onclick=()=>setAdminPage(btn.dataset.page);
+});
+// Operable independently of the page-switch handlers; native <details> is not
+// reliable in some mobile WebViews when nested in scrollable navigation.
+document.querySelectorAll(".navGroupTrigger").forEach(trigger=>{
+  trigger.addEventListener("click",()=>{
+    const group=trigger.closest(".navGroup");
+    if(!group)return;
+    const show=!group.classList.contains("open");
+    group.classList.toggle("open",show);
+    trigger.setAttribute("aria-expanded",String(show));
+    if(show && innerWidth<=980){
+      requestAnimationFrame(()=>{group.scrollIntoView({block:"nearest",inline:"nearest",behavior:"auto"});});
+    }
+  });
 });
 
 els.newPostBtn.onclick = openNew;

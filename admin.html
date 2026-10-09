@@ -1833,9 +1833,11 @@ function ownershipSettingsHtml(){
   </form>`;
 }
 
+let footerContentDefaults={};
+fetch('https://haimcharnews24bd.com/footer-content.json').then(r=>r.json()).then(data=>{footerContentDefaults=data;if(currentPage==="contact"&&!document.querySelector('#contactForm input:focus,#footerTextForm textarea:focus'))render();}).catch(()=>{});
 function footerTextSettingsHtml(){
-  const fields=[["Advertising","বিজ্ঞাপন","Advertising"],["Privacy","গোপনীয়তা","Privacy"],["Terms","নীতি ও শর্ত","Terms"],["Corrections","সংশোধনী","Corrections"]];
-  return `<form id="footerTextForm" class="settingsCard"><h2>${lang==="bn"?"ফুটারের তথ্য ও নীতিমালা":"Footer information"}</h2><p class="settingsSectionNote">${lang==="bn"?"নিচের লেখা ফুটারের সংশ্লিষ্ট বোতামে দেখা যাবে। খালি রাখলে সংক্ষিপ্ত ডিফল্ট লেখা থাকবে। আমাদের সম্পর্কে ও লোগো সাইট সেটিংস থেকে; সম্পাদক–প্রকাশকের নাম স্বত্বাধিকার অংশ থেকে বদলাতে পারবেন।":"Edit the text shown by each footer button. Empty fields use the default text. Edit About and logo in Site Settings, and publication names in Editorial / Ownership."}</p>${fields.map(([key,bn,en])=>`<label class="field"><span>${lang==="bn"?bn:en} — বাংলা</span><textarea id="setFooter${key}" rows="3">${esc(settings['footer'+key]||'')}</textarea></label><label class="field"><span>${en} — English</span><textarea id="setFooter${key}En" rows="3">${esc(settings['footer'+key+'En']||'')}</textarea></label>`).join('')}<button class="btn btn-primary" type="submit">${lang==="bn"?"সংরক্ষণ করুন":"Save"}</button></form>`;
+  const fields=[["About","আমাদের সম্পর্কে — বিস্তারিত","About us"],["Contact","যোগাযোগ — বিস্তারিত","Contact"],["Advertising","বিজ্ঞাপন","Advertising"],["Privacy","গোপনীয়তা","Privacy"],["Terms","নীতি ও শর্ত","Terms"],["Corrections","সংশোধনী","Corrections"]];
+  return `<form id="footerTextForm" class="settingsCard"><h2>${lang==="bn"?"ফুটারের তথ্য ও নীতিমালা":"Footer information"}</h2><p class="settingsSectionNote">${lang==="bn"?"নিচের লেখা ফুটারের সংশ্লিষ্ট বোতামে দেখা যাবে। খালি রাখলে সংক্ষিপ্ত ডিফল্ট লেখা থাকবে। আমাদের সম্পর্কে ও লোগো সাইট সেটিংস থেকে; সম্পাদক–প্রকাশকের নাম স্বত্বাধিকার অংশ থেকে বদলাতে পারবেন।":"Edit the text shown by each footer button. Empty fields use the default text. Edit About and logo in Site Settings, and publication names in Editorial / Ownership."}</p>${fields.map(([key,bn,en])=>`<label class="field"><span>${lang==="bn"?bn:en} — বাংলা</span><textarea id="setFooter${key}" rows="3">${esc(settings['footer'+key]||footerContentDefaults[key.toLowerCase()]?.bn||'')}</textarea></label><label class="field"><span>${en} — English</span><textarea id="setFooter${key}En" rows="3">${esc(settings['footer'+key+'En']||footerContentDefaults[key.toLowerCase()]?.en||'')}</textarea></label>`).join('')}<button class="btn btn-primary" type="submit">${lang==="bn"?"সংরক্ষণ করুন":"Save"}</button></form>`;
 }
 function contactSettingsHtml(){
   return `<form id="contactForm" class="settingsCard">
@@ -2071,7 +2073,7 @@ function wireDynamic(){
   const ft=$("footerTextForm");
   if(ft) ft.onsubmit=async e=>{
     e.preventDefault();const next={};
-    ["Advertising","Privacy","Terms","Corrections"].forEach(key=>{next["footer"+key]=$("setFooter"+key).value.trim();next["footer"+key+"En"]=$("setFooter"+key+"En").value.trim();});
+    ["About","Contact","Advertising","Privacy","Terms","Corrections"].forEach(key=>{next["footer"+key]=$("setFooter"+key).value.trim();next["footer"+key+"En"]=$("setFooter"+key+"En").value.trim();});
     try{await setDoc(doc(db,"siteSettings","general"),next,{merge:true});Object.assign(settings,next);toast(t("settingsSaved"))}catch(err){console.error(err);toast(err.message,true)}
   };
   const cf=$("contactForm");

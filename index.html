@@ -1574,6 +1574,29 @@ footer #copyOwner{display:none!important}
 #footerInfoContact{display:flex;gap:16px;flex-wrap:wrap}
 #footerInfoContact a{color:#fff;overflow-wrap:anywhere}
 </style>
+<style id="theme-matched-footer">
+:root{--footer-text:#152335;--footer-muted:#546575}
+[data-theme="dark"]{--footer-text:#e8eef3;--footer-muted:#b9c7d2}
+footer{background:var(--card)!important;color:var(--footer-text)!important;border-top:3px solid var(--red);text-align:left}
+footer :is(h3,b,.footerInfoNav button,.footerSocialPremium a){color:var(--footer-text)!important}
+footer :is(.footerFollow,.footerEditorial,.copyright){color:var(--footer-muted)!important}
+footer .footerLinks>a{color:var(--blue)!important}
+[data-theme="dark"] footer .footerLinks>a{color:#c9dce9!important}
+footer :is(.footerInfoNav,.copyright){border-color:var(--line)!important}
+footer .footerSocialPremium a{border-color:var(--line)!important;background:var(--paper)}
+footer .footerInfoNav button:hover{color:var(--red)!important}
+footer .footerBrand img{background:transparent;padding:0}
+footer :is(a,button):focus-visible{outline-color:var(--red)}
+#footerInfoDialog{background:var(--card);color:var(--footer-text);border-color:var(--line);width:min(760px,calc(100% - 32px));padding:0;max-height:86vh}
+.footerDialogHeader{position:sticky;top:0;background:var(--card);padding:18px 24px;border-bottom:1px solid var(--line);z-index:1}
+.footerDialogHeader h2,#footerInfoClose{color:var(--footer-text)}
+#footerInfoText{padding:0 24px;font-size:16px;line-height:1.9;white-space:normal}
+#footerInfoText h3{font-size:19px;line-height:1.6;color:var(--footer-text);margin:24px 0 8px;border-left:3px solid var(--red);padding-left:10px}
+#footerInfoText p{white-space:pre-line;margin:0 0 16px}
+#footerInfoContact{padding:18px 24px;border-top:1px solid var(--line);background:var(--paper)}
+#footerInfoContact a{color:var(--footer-text);text-decoration:underline;text-underline-offset:4px}
+@media(max-width:420px){.footerDialogHeader,#footerInfoContact{padding:14px 18px}#footerInfoText{padding:0 18px;font-size:15px}}
+</style>
 </head>
 
 <style id="v24-push-notification">
@@ -1743,7 +1766,7 @@ footer #copyOwner{display:none!important}
         <p class="footerFollow" id="footerFollow">অনুসরণ করুন</p>
         <div class="footerSocialPremium">
           <a id="footerFacebook" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 21v-8h3l.5-4H14V7c0-1 .3-2 2-2h2V1.5A25 25 0 0 0 15 1c-3 0-5 2-5 5v3H7v4h3v8z"/></svg><span class="socialText">Facebook</span></a>
-          <a id="footerYoutube" href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="5" fill="currentColor"/><path d="m10 8 6 4-6 4z" fill="#041522"/></svg><span class="socialText">YouTube</span></a>
+          <a id="footerYoutube" href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="5" fill="currentColor"/><path d="m10 8 6 4-6 4z" fill="var(--card)"/></svg><span class="socialText">YouTube</span></a>
           <a id="footerInstagram" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg><span class="socialText">Instagram</span></a>
           <a id="footerX" href="#" target="_blank" rel="noopener noreferrer" aria-label="X" title="X" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h4l11 18h-4L5 3zm15 0L4 21" fill="none" stroke="currentColor" stroke-width="2"/></svg><span class="socialText">X</span></a>
         </div>
@@ -1767,7 +1790,7 @@ footer #copyOwner{display:none!important}
 </footer>
 <dialog id="footerInfoDialog" aria-labelledby="footerInfoTitle">
   <div class="footerDialogHeader"><h2 id="footerInfoTitle"></h2><button id="footerInfoClose" type="button" aria-label="বন্ধ করুন">×</button></div>
-  <p id="footerInfoText"></p>
+  <article id="footerInfoText"></article>
   <div id="footerInfoContact"></div>
 </dialog>
 
@@ -2232,6 +2255,7 @@ const footerInfoDefaults={
  corrections:{bn:"কোনো সংবাদে তথ্যগত ভুল দেখলে সংবাদটির শিরোনাম বা লিংক, সংশোধনের বিবরণ এবং প্রাসঙ্গিক সূত্রসহ আমাদের জানান। আপনার পাঠানো তথ্য যাচাই করে প্রয়োজনীয় সংশোধন করা হবে।",en:"If you find a factual error, send the article title or link, the proposed correction and relevant sources. Submitted information will be checked and corrections made where needed."}
 };
 const footerInfoLabels={bn:{about:"আমাদের সম্পর্কে",advertising:"বিজ্ঞাপন",privacy:"গোপনীয়তা",terms:"নীতি ও শর্ত",contact:"যোগাযোগ",corrections:"সংশোধনী"},en:{about:"About us",advertising:"Advertising",privacy:"Privacy",terms:"Terms",contact:"Contact",corrections:"Corrections"}};
+fetch('/footer-content.json').then(r=>{if(!r.ok)throw new Error('Footer content unavailable');return r.json();}).then(data=>{Object.assign(footerInfoDefaults,data);}).catch(()=>{});
 function renderFooterInfo(){
   const d=siteSettings||{};
   $("footerName").textContent=lang==="bn"?"আমাদের সম্পর্কে":"About us";
@@ -2245,13 +2269,16 @@ function openFooterInfo(key){
   const d=siteSettings||{};
   $("footerInfoTitle").textContent=footerInfoLabels[lang][key];
   let text="";
-  if(key==="about")text=d.about||d.tagline||(lang==="bn"?"হাইমচর ও চাঁদপুরের স্থানীয় সংবাদসহ দেশ ও বিশ্বের খবর নিয়ে হাইমচর নিউজ২৪বিডি।":"Haimchar News24BD covers local news from Haimchar and Chandpur, along with national and world news.");
-  else if(key==="contact")text=[d.address,d.phone,d.email].filter(Boolean).join("\n")||(lang==="bn"?"আমাদের সামাজিক যোগাযোগমাধ্যমে বার্তা পাঠান।":"Send us a message through our social channels.");
+  if(key==="about")text=d["footerAbout"+(lang==="en"?"En":"")]||footerInfoDefaults.about?.[lang]||d.about||d.tagline||(lang==="bn"?"হাইমচর ও চাঁদপুরের স্থানীয় সংবাদসহ দেশ ও বিশ্বের খবর নিয়ে হাইমচর নিউজ২৪বিডি।":"Haimchar News24BD covers local news from Haimchar and Chandpur, along with national and world news.");
+  else if(key==="contact")text=(d["footerContact"+(lang==="en"?"En":"")]||footerInfoDefaults.contact?.[lang]||"")+"\n\n"+[d.address,d.phone,d.email].filter(Boolean).join("\n");
   else text=d["footer"+key[0].toUpperCase()+key.slice(1)+(lang==="en"?"En":"")]||footerInfoDefaults[key][lang];
-  $("footerInfoText").textContent=text;
+  const body=$("footerInfoText");body.replaceChildren();
+  text.split(/\n\n+/).forEach(block=>{const lines=block.split("\n");if(lines[0].startsWith("## ")){const h=document.createElement("h3");h.textContent=lines.shift().slice(3);body.appendChild(h);}if(lines.length){const p=document.createElement("p");p.textContent=lines.join("\n");body.appendChild(p);}});
+  body.scrollTop=0;
   const contact=$("footerInfoContact");contact.replaceChildren();
   [[d.email?"mailto:"+d.email:"",lang==="bn"?"ইমেইল করুন":"Email us"],[d.phone?"tel:"+d.phone:"",lang==="bn"?"ফোন করুন":"Call us"],[d.facebook?safeUrl(d.facebook):"","Facebook"]].forEach(([href,label])=>{if(href&&href!=="#"){const a=document.createElement("a");a.href=href;a.textContent=label;if(href.startsWith("http")){a.target="_blank";a.rel="noopener noreferrer";}contact.appendChild(a);}});
   $("footerInfoDialog").showModal();
+  $("footerInfoDialog").scrollTop=0;
 }
 document.querySelectorAll("[data-footer-info]").forEach(btn=>btn.addEventListener("click",()=>openFooterInfo(btn.dataset.footerInfo)));
 $("footerInfoClose").onclick=()=>$("footerInfoDialog").close();

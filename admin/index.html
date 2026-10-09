@@ -868,6 +868,21 @@ button:disabled,.btn:disabled{opacity:.64!important;cursor:wait!important}
 <style id="news-workflow-controls">
 .workflowWide{max-width:none}.workflowEntry{padding:20px 0;border-bottom:1px solid var(--line)}.workflowEntry h3{margin:0 0 8px}.workflowEntry small{color:var(--muted);overflow-wrap:anywhere}.workflowEntry p{line-height:1.8}.workflowActions{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}.workflowNotice{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--red);border-radius:14px;padding:14px 18px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;gap:12px}.readerMessage{white-space:pre-wrap;overflow-wrap:anywhere}.readerAttachment{display:block;max-width:min(100%,360px);max-height:260px;object-fit:contain;margin:14px 0}.badge.pending{background:#fff0c9;color:#77500d}#forgotPasswordBtn{width:100%;margin-top:12px}#changePasswordForm .field{display:flex;flex-direction:column;gap:8px;margin:16px 0}#backupPreview,#backupStatus,#passwordStatus{line-height:1.8;overflow-wrap:anywhere}@media(max-width:760px){.workflowActions{display:grid;grid-template-columns:1fr 1fr}.workflowActions .btn{min-height:48px;padding:10px 12px;white-space:normal}.workflowNotice{align-items:stretch;flex-direction:column}#changePasswordForm button{width:100%;min-height:50px}.workflowEntry input{width:100%;font-size:16px}.workflowEntry .field{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}}
 </style>
+<style id="admin-scroll-navigation-fix">
+.sidebar{height:100vh;height:100dvh;bottom:auto;overflow:hidden!important}
+.sidebar .sideBrand{flex:0 0 auto;min-width:0}
+.sidebar .nav{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;align-content:start;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-bottom:max(20px,env(safe-area-inset-bottom))}
+.sidebar .sideBottom{flex:0 0 auto}
+.sidebarClose,.sidebarBackdrop{display:none}
+.modalCard{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+html.admin-scroll-locked,html.admin-scroll-locked body{overflow:hidden!important;overscroll-behavior:none}
+@media(max-width:980px){
+.sidebarClose{display:grid;place-items:center;margin-left:auto;flex:0 0 40px;width:40px;height:40px;background:transparent;border:1px solid #ffffff25;border-radius:10px;color:inherit;font-size:25px;cursor:pointer}
+.sidebarBackdrop.open{display:block;position:fixed;inset:0;z-index:39;background:#03101b66;border:0;padding:0;touch-action:none}
+.sidebar{padding-top:max(20px,env(safe-area-inset-top));max-width:calc(100vw - 40px)}
+}
+@supports not (height:100dvh){.sidebar{height:100vh}}
+</style>
 </head>
 <body>
 <div id="adminIntro" class="adminIntro v26Intro" aria-label="Admin loading">
@@ -926,6 +941,7 @@ button:disabled,.btn:disabled{opacity:.64!important;cursor:wait!important}
     <div class="sideBrand">
       <img id="sideLogo" class="sideLogo hide" alt="Logo">
       <div><b id="sideSiteName">হাইমচর নিউজ24BD</b><small>ADMIN PANEL</small></div>
+      <button id="sidebarClose" class="sidebarClose" type="button" aria-label="মেনু বন্ধ করুন">×</button>
     </div>
     <nav class="nav navSimple">
       <button data-page="dashboard" class="active navPrimary">⌂ হোম</button>
@@ -960,6 +976,7 @@ button:disabled,.btn:disabled{opacity:.64!important;cursor:wait!important}
     <div class="sideBottom"></div>
   </aside>
 
+  <button id="sidebarBackdrop" class="sidebarBackdrop" type="button" aria-label="মেনু বন্ধ করুন" tabindex="-1"></button>
   <main class="main">
     <header class="topbar">
       <button id="menuBtn" class="iconbtn menuBtn" type="button">☰</button>
@@ -1431,14 +1448,23 @@ els.loginForm.addEventListener("submit", async (e)=>{
 });
 
 els.logoutBtn.onclick = ()=>signOut(auth);
-els.menuBtn.onclick = ()=>els.sidebar.classList.toggle("open");
-document.querySelectorAll(".navLiveSite").forEach(a=>a.addEventListener("click",()=>els.sidebar.classList.remove("open")));
-document.addEventListener("click",(e)=>{
-  if(innerWidth<=980 && els.sidebar.classList.contains("open") && !els.sidebar.contains(e.target) && e.target!==els.menuBtn){
-    els.sidebar.classList.remove("open");
-  }
-});
-
+function syncAdminScrollLock(){
+  const locked=(innerWidth<=980&&els.sidebar.classList.contains("open"))||!els.newsModal.classList.contains("hide");
+  document.documentElement.classList.toggle("admin-scroll-locked",locked);
+}
+function setAdminMenu(open){
+  els.sidebar.classList.toggle("open",open);
+  $("sidebarBackdrop").classList.toggle("open",open);
+  els.menuBtn.setAttribute("aria-expanded",String(open));
+  syncAdminScrollLock();
+}
+els.menuBtn.setAttribute("aria-controls","sidebar");
+els.menuBtn.setAttribute("aria-expanded","false");
+els.menuBtn.onclick=()=>setAdminMenu(!els.sidebar.classList.contains("open"));
+$("sidebarClose").onclick=$("sidebarBackdrop").onclick=()=>setAdminMenu(false);
+document.querySelectorAll(".navLiveSite").forEach(a=>a.addEventListener("click",()=>setAdminMenu(false)));
+window.addEventListener("resize",()=>{if(innerWidth>980)setAdminMenu(false);else syncAdminScrollLock();});
+document.addEventListener("keydown",event=>{if(event.key==="Escape"&&els.sidebar.classList.contains("open"))setAdminMenu(false);});
 
 // v17.8 — mobile Back protection for Admin.
 // Back closes an open editor/menu first; from another section it returns to Dashboard;
@@ -1447,8 +1473,10 @@ function setAdminPage(page){
   currentPage=page||"dashboard";
   document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===currentPage));
   const activeBtn=document.querySelector(`.nav button[data-page="${currentPage}"]`); activeBtn?.closest("details")?.setAttribute("open","");
-  els.sidebar.classList.remove("open");
+  setAdminMenu(false);
+  document.activeElement?.blur();
   render();
+  window.scrollTo({top:0,left:0,behavior:"auto"});
 }
 (function initAdminBackGuard(){
   try{
@@ -1460,7 +1488,7 @@ window.addEventListener("popstate",()=>{
   if(!els.newsModal.classList.contains("hide")){
     closeModal();
   }else if(els.sidebar.classList.contains("open")){
-    els.sidebar.classList.remove("open");
+    setAdminMenu(false);
   }else if(currentPage!=="dashboard"){
     setAdminPage("dashboard");
   }
@@ -1564,10 +1592,12 @@ function openNew(){
   if(typeof els.statusSelect._customRebuild==="function") els.statusSelect._customRebuild();
   els.formTitle.textContent=t("newNewsTitle");
   els.newsModal.classList.remove("hide");
+  els.newsModal.querySelector(".modalCard").scrollTop=0;
+  syncAdminScrollLock();
   enhanceSelects(els.newsModal);
   setTimeout(()=>els.titleInput.focus(),50);
 }
-function closeModal(){ els.newsModal.classList.add("hide"); }
+function closeModal(){ els.newsModal.classList.add("hide"); syncAdminScrollLock(); }
 
 function formPreviewData(){
   return {
@@ -1613,6 +1643,8 @@ function editNews(id){
   if(els.facebookPostInput) els.facebookPostInput.value=x.facebookPost||"";
   els.formTitle.textContent=t("editNewsTitle");
   els.newsModal.classList.remove("hide");
+  els.newsModal.querySelector(".modalCard").scrollTop=0;
+  syncAdminScrollLock();
   enhanceSelects(els.newsModal);
 }
 
@@ -1918,7 +1950,9 @@ function showPreview(x){
 function previewNews(id){const x=items.find(n=>n.id===id);if(x)showPreview(x)}
 
 function render(){
-  if(["accounts","security","backup","review","inbox"].includes(currentPage) && (accountBusy || workflowBusy || document.querySelector("#content input:focus,#content textarea:focus"))) return;
+  const samePage=els.content.dataset.page===currentPage;
+  if(samePage&&(accountBusy||workflowBusy||document.querySelector("#content input:focus,#content textarea:focus,#content select:focus,#content [contenteditable]:focus")))return;
+  const previousScroll=samePage?window.scrollY:0;
   if(!els.appView || els.appView.classList.contains("hide")) return;
   roleControls();
   const pageLabels={
@@ -1969,7 +2003,9 @@ function render(){
   }else{
     els.content.innerHTML=siteSettingsHtml();
   }
+  els.content.dataset.page=currentPage;
   wireDynamic();
+  if(samePage&&previousScroll>0)window.scrollTo({top:previousScroll,left:0,behavior:"auto"});
 }
 
 function enhanceSelects(root=document){
@@ -1999,7 +2035,7 @@ function wireDynamic(){
   wireAccountControls();
   const add=$("panelAdd"); if(add) add.onclick=openNew;
   document.querySelector("[data-quick-new]")?.addEventListener("click",openNew);
-  document.querySelectorAll("[data-quick-page]").forEach(b=>b.onclick=()=>{currentPage=b.dataset.quickPage;document.querySelectorAll("[data-page]").forEach(n=>n.classList.toggle("active",n.dataset.page===currentPage));render()});
+  document.querySelectorAll("[data-quick-page]").forEach(b=>b.onclick=()=>{setAdminPage(b.dataset.quickPage)});
   const search=$("tableSearch"), filter=$("statusFilter"), categoryFilter=$("categoryFilter"), sortFilter=$("sortFilter"), body=$("tableBody");
   if(search && filter && body){
     const apply=()=>{

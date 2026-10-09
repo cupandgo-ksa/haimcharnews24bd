@@ -4,7 +4,7 @@ service cloud.firestore {
     function owner() {
       return request.auth != null
         && request.auth.token.email == 'islamiclibrary2.0@gmail.com'
-        && request.auth.token.email_verified == true;
+        && request.auth.uid == '9sdi8QAVckMYQyly8nE9adHC58W2';
     }
     function admin() {
       return owner() || (request.auth != null

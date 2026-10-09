@@ -845,6 +845,12 @@ button:disabled,.btn:disabled{opacity:.64!important;cursor:wait!important}
 <style id="mobile-team-controls">
 /* Comfortable account and sign-in controls on phones. */
 @media(max-width:760px){
+  .loginTop{flex-wrap:wrap}
+  .loginTop .brand{flex:1 1 100%;min-width:0}
+  .loginTop .brand>div{min-width:0}
+  .loginTop>div:last-child{width:100%;justify-content:flex-end}
+  .loginTop .brand img{flex-shrink:0}
+  #loginBrandName{font-size:22px!important;white-space:normal;overflow-wrap:anywhere}
   .accountColumns{grid-template-columns:minmax(0,1fr);gap:14px}
   .accountColumns .settingsCard{width:100%;min-width:0;padding:18px}
   .accountColumns input,.loginCard input{font-size:16px!important;min-height:52px}
@@ -2136,6 +2142,7 @@ function wireRows(){
 
 
 const OWNER_EMAIL = "islamiclibrary2.0@gmail.com";
+const OWNER_UID = "9sdi8QAVckMYQyly8nE9adHC58W2";
 let teamAccounts=[], teamUnsub=null, accessUnsub=null, authStateVersion=0, accountBusy=false;
 function teamAccountHtml(){
   if(!isNewsOwner(auth.currentUser))return `<div class="empty">${lang==="bn"?"শুধু মালিক অ্যাকাউন্ট পরিচালনা করতে পারবেন।":"Only the owner can manage accounts."}</div>`;
@@ -2223,7 +2230,7 @@ async function canUseNewsAdmin(user){
   return profile.exists()&&profile.data().enabled===true&&profile.data().role==="editor"&&profile.data().email===user.email?.toLowerCase();
 }
 
-function isNewsOwner(user){return !!user && user.emailVerified && user.email?.toLowerCase() === OWNER_EMAIL;}
+function isNewsOwner(user){return !!user && user.uid === OWNER_UID && user.email?.toLowerCase() === OWNER_EMAIL;}
 function decodeMigrationValue(value){
   if("stringValue" in value)return value.stringValue;
   if("integerValue" in value)return Number(value.integerValue);
@@ -2268,17 +2275,27 @@ $("googleLogin").onclick=async()=>{
     els.loginError.classList.remove("hide");endLoad();
   }finally{button.disabled=false;}
 };
+function resetLoginControls(){
+  loginTransitionPending=false;
+  els.loginSubmit.disabled=false;
+  els.loginSubmit.classList.remove("loginBusy","loginOk");
+  els.loginSubmit.textContent=t("secureLogin");
+  $("googleLogin").disabled=false;
+  endLoad();
+}
 onAuthStateChanged(auth,async(user)=>{
   const version=++authStateVersion;
   if(accessUnsub){accessUnsub();accessUnsub=null;}
   if(teamUnsub){teamUnsub();teamUnsub=null;}
   if(user){
-    let allowed=false;
-    try{allowed=await canUseNewsAdmin(user);}catch(error){console.error("Access check failed",error.code);}
+    let allowed=false,accessError=null;
+    try{allowed=await canUseNewsAdmin(user);}catch(error){accessError=error;console.error("Access check failed",error.code);}
     if(version!==authStateVersion)return;
     if(!allowed){
-      loginTransitionPending=false;await signOut(auth);
-      els.loginError.textContent=lang==="bn"?"এই অ্যাকাউন্টের অ্যাডমিন অনুমতি নেই। মালিকের সঙ্গে যোগাযোগ করুন।":"This account has no admin access. Contact the owner.";
+      resetLoginControls();await signOut(auth);
+      els.loginError.textContent=accessError
+        ?(lang==="bn"?"সংযোগের কারণে অ্যাকাউন্টের অনুমতি যাচাই করা যায়নি। আবার চেষ্টা করুন।":"Could not check account access. Check your connection and try again.")
+        :(lang==="bn"?"এই অ্যাকাউন্টের অ্যাডমিন অনুমতি নেই। মালিকের সঙ্গে যোগাযোগ করুন।":"This account has no admin access. Contact the owner.");
       els.loginError.classList.remove("hide");endLoad();return;
     }
     if(isNewsOwner(user)&&loginTransitionPending){
@@ -2306,6 +2323,7 @@ onAuthStateChanged(auth,async(user)=>{
       loginTransitionPending=false; endLoad();render();
     },850);
   }else{
+    resetLoginControls();
     gate?.classList.add("hideGate");
     els.loginView.classList.remove("hide");
     els.appView.classList.add("hide");

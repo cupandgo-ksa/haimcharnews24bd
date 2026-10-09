@@ -1617,6 +1617,41 @@ footer .footerEditorial{align-items:center;text-align:center}
 <style id="reader-submission-controls">
 .readerLaunchWrap{margin-top:24px;text-align:center}#readerSubmitLaunch,.readerInlineAction{font:inherit;cursor:pointer;padding:11px 20px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--footer-text);min-height:48px;font-weight:700}#readerSubmissionDialog{width:min(620px,calc(100% - 24px));max-height:88dvh;border:1px solid var(--line);padding:0;border-radius:16px;background:var(--card);color:var(--text);font-family:inherit;box-shadow:0 20px 80px #0006}#readerSubmissionDialog::backdrop{background:#0008}#readerSubmissionForm{padding:20px 24px}#readerSubmissionForm>label{display:flex;flex-direction:column;gap:7px;margin:14px 0;font-size:15px;font-weight:600}#readerSubmissionForm :is(input:not([type="checkbox"]),textarea,select){width:100%;max-width:100%;box-sizing:border-box;background:var(--paper);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px;font:inherit;font-size:16px}#readerSubmissionForm .readerConsent{flex-direction:row;align-items:flex-start;line-height:1.7}#readerSubmissionForm .readerConsent input{width:20px;height:20px;flex-shrink:0;margin-top:4px}.readerHoney{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}.readerFormIntro,#readerSubmitStatus{font-size:15px;line-height:1.8}.readerSend{width:100%;min-height:50px;border:0;border-radius:11px;background:var(--red);color:#fff;font:inherit;font-weight:700;cursor:pointer}.readerSend:disabled{opacity:.6;cursor:wait}#readerClose{border:0;background:transparent;color:var(--text);font-size:28px;min-width:44px;min-height:44px;cursor:pointer}@media(max-width:620px){#readerSubmissionForm{padding:16px 18px}#readerSubmissionDialog{max-height:calc(100dvh - 24px)}#readerSubmissionDialog .footerDialogHeader{padding:16px 18px}}
 </style>
+<style id="v25-compact-editorial-footer">
+/* Compact editorial footer: one contact entry in the information navigation. */
+footer{padding:26px 0 16px!important}
+footer>.wrap{width:min(calc(100% - 32px),1040px)!important}
+footer .footerBrand{margin-bottom:12px!important}
+footer .footerBrand img{width:min(240px,100%)!important;max-height:76px!important}
+footer .footerGrid{display:block!important;max-width:740px;margin:0 auto!important}
+footer .footerGrid h3{font-size:20px!important;line-height:1.4!important;margin:0 0 5px!important}
+footer #footerTag,footer #footerAbout{font-size:14px!important;line-height:1.65!important;max-width:65ch;margin:3px auto 0!important}
+footer .footerSocialBar{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px;margin:16px auto 0}
+footer .footerFollow{margin:0!important;line-height:1.4!important;font-size:13px!important}
+footer .footerSocialPremium{margin:0!important;gap:8px!important;justify-content:center!important}
+footer .footerSocialPremium a{width:38px!important;height:38px!important;padding:8px!important}
+footer .footerSocialPremium a[hidden]{display:none!important}
+footer .footerSocialPremium svg{width:20px;height:20px}
+footer .readerLaunchWrap{margin-top:15px!important}
+footer #readerSubmitLaunch{min-height:42px!important;padding:8px 18px!important;border-radius:10px!important;font-size:14px!important}
+footer .footerInfoNav{max-width:880px;margin:18px auto 0!important;padding:12px 0!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:8px!important}
+footer .footerInfoNav button{min-height:42px!important;border:1px solid var(--line)!important;border-radius:10px!important;background:var(--paper)!important;padding:7px 4px!important;font-size:13px!important;line-height:1.4!important;transition:background .2s ease,border-color .2s ease!important}
+footer .footerInfoNav button:hover,footer .footerInfoNav button:focus-visible{background:var(--card)!important;border-color:var(--red)!important;color:var(--red)!important;text-decoration:none!important}
+footer .footerEditorial{margin-top:12px!important;gap:4px 16px!important}
+footer .footerEditorial p{font-size:12px!important;line-height:1.55!important}
+footer .copyright{margin-top:12px!important;padding-top:10px!important}
+@media(max-width:700px){
+  footer{padding:22px 0 14px!important}
+  footer .footerBrand{margin-bottom:10px!important}
+  footer .footerGrid{grid-template-columns:minmax(0,1fr)!important;gap:0!important}
+  footer .footerInfoNav{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important;margin-top:16px!important;padding:12px 0!important}
+  footer .footerInfoNav button{min-height:42px!important;font-size:13px!important}
+  footer .footerSocialBar{gap:9px;margin-top:14px}
+  footer .footerSocialPremium a{width:36px!important;height:36px!important}
+  footer .copyright{line-height:1.6!important}
+}
+@media(max-width:365px){footer .footerInfoNav button{font-size:12px!important;padding:6px 2px!important}}
+</style>
 </head>
 
 <style id="v24-push-notification">
@@ -1773,23 +1808,19 @@ footer .footerEditorial{align-items:center;text-align:center}
     </a>
 
     <div class="footerGrid">
-      <div>
+      <div class="footerIntro">
         <h3 id="footerName">আমাদের সম্পর্কে</h3>
         <p id="footerTag">হাইমচর ও চাঁদপুরের মানুষের নির্ভরযোগ্য ডিজিটাল সংবাদমাধ্যম</p>
         <p id="footerAbout"></p>
       </div>
-      <div class="footerLinks">
-        <h3 data-i18n="contact">যোগাযোগ</h3>
-        <p id="footerAddress"></p>
-        <a id="footerPhone" href="#"></a>
-        <a id="footerEmail" href="#"></a>
-        <p class="footerFollow" id="footerFollow">অনুসরণ করুন</p>
-        <div class="footerSocialPremium">
-          <a id="footerFacebook" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 21v-8h3l.5-4H14V7c0-1 .3-2 2-2h2V1.5A25 25 0 0 0 15 1c-3 0-5 2-5 5v3H7v4h3v8z"/></svg><span class="socialText">Facebook</span></a>
-          <a id="footerYoutube" href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="5" fill="currentColor"/><path d="m10 8 6 4-6 4z" fill="var(--card)"/></svg><span class="socialText">YouTube</span></a>
-          <a id="footerInstagram" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg><span class="socialText">Instagram</span></a>
-          <a id="footerX" href="#" target="_blank" rel="noopener noreferrer" aria-label="X" title="X" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h4l11 18h-4L5 3zm15 0L4 21" fill="none" stroke="currentColor" stroke-width="2"/></svg><span class="socialText">X</span></a>
-        </div>
+    </div>
+    <div class="footerSocialBar">
+      <span class="footerFollow" id="footerFollow">অনুসরণ করুন</span>
+      <div class="footerSocialPremium">
+        <a id="footerFacebook" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 21v-8h3l.5-4H14V7c0-1 .3-2 2-2h2V1.5A25 25 0 0 0 15 1c-3 0-5 2-5 5v3H7v4h3v8z"/></svg><span class="socialText">Facebook</span></a>
+        <a id="footerYoutube" href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="5" fill="currentColor"/><path d="m10 8 6 4-6 4z" fill="var(--card)"/></svg><span class="socialText">YouTube</span></a>
+        <a id="footerInstagram" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg><span class="socialText">Instagram</span></a>
+        <a id="footerX" href="#" target="_blank" rel="noopener noreferrer" aria-label="X" title="X" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h4l11 18h-4L5 3zm15 0L4 21" fill="none" stroke="currentColor" stroke-width="2"/></svg><span class="socialText">X</span></a>
       </div>
     </div>
     <div class="readerLaunchWrap"><button id="readerSubmitLaunch" type="button">খবর বা সংশোধনী পাঠান</button></div>
@@ -2830,9 +2861,6 @@ onSnapshot(doc(db,"siteSettings","general"),(snap)=>{
   $("footerEditor").textContent=d.editorName||"";$("footerEditorRow").hidden=!d.editorName;
   $("footerPublisher").textContent=d.publisherName||"";$("footerPublisherRow").hidden=!d.publisherName;
   $("footerOwner").textContent=d.ownerName||"";$("footerOwnerRow").hidden=!d.ownerName;
-  $("footerAddress").textContent=d.address||"";
-  $("footerPhone").textContent=d.phone||"";$("footerPhone").href=d.phone?`tel:${d.phone}`:"#";
-  $("footerEmail").textContent=d.email||"";$("footerEmail").href=d.email?`mailto:${d.email}`:"#";
   $("footerFacebook").style.display=d.facebook?"inline-flex":"none";$("footerFacebook").href=safeUrl(d.facebook||"");
   $("footerYoutube").style.display=d.youtube?"inline-flex":"none";$("footerYoutube").href=safeUrl(d.youtube||"");
   $("copyYear").textContent=new Date().getFullYear();
